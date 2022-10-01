@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import Navbar from '../NavbarComponent/Navbar';
 import {
     Button, CardActionArea, CardActions, Typography, Box, Card, CardContent,
     CardMedia
 } from "@mui/material"
+
+import VizCardLayout from "./Components/VizCards/VizCardLayout";
 
 
 export default function Homepage(){
@@ -46,12 +48,17 @@ export default function Homepage(){
                     { /* On changes to navbar, the values xAxis, yAxis, region are being updated and are ready to pass to children components.  */}
                     { /* Next step is to pass this data to Child Card Components and so on.... */}
 
+                    {/* Francisco Contreras 9/30/22  */}
+                    {/* Added visualization cards into homepage */}
+                    <VizCardLayout />
+                    
+                    {/* <br/>
                     <Card sx={{ maxWidth: 345 }}>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image="/static/images/cards/contemplative-reptile.jpg"
+                                image="images\\horizontal-bars-confirmed-cases-in-us-states.png"
                                 alt="green iguana"
                             />
                             <CardContent>
@@ -69,34 +76,7 @@ export default function Homepage(){
                                 Share
                             </Button>
                         </CardActions>
-                    </Card>
-
-                    <br/>
-                    <Card sx={{ maxWidth: 345 }}>
-                        <CardActionArea>
-                            <CardMedia
-                                component="img"
-                                height="140"
-                                image="/static/images/cards/contemplative-reptile.jpg"
-                                alt="green iguana"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Share
-                            </Button>
-                        </CardActions>
-                    </Card>
-                
+                    </Card> */}
                 </Box>
             </Box>
 
