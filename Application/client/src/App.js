@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import Footer from './components/FooterComponent/Footer';
-import Navbar from './components/NavbarComponent/Navbar';
 import Homepage from './components/HomepageComponent/Homepage';
 
 
@@ -18,6 +17,7 @@ Packages added so far: (NPM)
 -@mui/material 
 -@emotion/react 
 -@emotion/styled
+-@mui/icons-material 9/30/2022
 -react-bootstrap bootstrap
 
 */
@@ -28,9 +28,7 @@ function App() {
   return (
     <>
         <div className="App">
-            <Navbar />
             <Homepage />
-            <Footer />
         </div>
     </>
   );
