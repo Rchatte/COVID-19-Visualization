@@ -6,6 +6,7 @@ import {
 } from "@mui/material"
 
 import VizCardLayout from "./Components/VizCards/VizCardLayout";
+import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 
 
 export default function Homepage(){
@@ -36,6 +37,8 @@ export default function Homepage(){
 
     return(
         <>
+            <h1> Line Graph Example </h1>
+            <LineChartWithZoom height={500} width={1000}></LineChartWithZoom>
             <Box sx={{ display: 'flex' }}>
                 { /* Toolbar component is being imported from here.*/ }
                 <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange} />
@@ -78,7 +81,9 @@ export default function Homepage(){
                         </CardActions>
                     </Card> */}
                 </Box>
+
             </Box>
+
 
         </>
     )
