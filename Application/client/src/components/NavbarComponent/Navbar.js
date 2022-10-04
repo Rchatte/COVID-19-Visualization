@@ -10,18 +10,18 @@ const drawerWidth = 270;
 const navBarTitle = "Navbar Title";
 
 const yAxis = [
-    'Covid Cases',
-    'Covid deaths',
+    'COVID Cases',
+    'COVID Deaths',
     'Vaccinations',
-    'Covid survival cases',
+    'COVID Survival Cases',
     'Age'
 ];
 
 const xAxis = [
-    'Covid Cases',
-    'Covid deaths',
+    'COVID Cases',
+    'COVID Deaths',
     'Vaccinations',
-    'Covid survival cases',
+    'COVID Survival Cases',
     'Age'
 ];
 
