@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import Navbar from '../NavbarComponent/Navbar';
 import {
     Button, CardActionArea, CardActions, Typography, Box, Card, CardContent,
-    CardMedia
+    CardMedia,
+    Grid
 } from "@mui/material"
 
 import VizCardLayout from "./Components/VizCards/VizCardLayout";
+import VizCard from "./Components/VizCards/VizCard";
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 
 
@@ -14,7 +16,6 @@ export default function Homepage(){
     const [xAxis, setXaxis] = useState([]);
     const [yAxis, setYaxis] = useState([]);
     const [region, setRegion] = useState();
-
 
     { /* Functions are being passed to child component -> Navbar  */ }
     const handleXChange = (value) => {
@@ -35,6 +36,10 @@ export default function Homepage(){
         console.log(region)
     },[xAxis, yAxis, region])
 
+    function test(){
+        return console.log("hello");
+    }
+
     return(
         <>
             <h1> Line Graph Example </h1>
@@ -53,38 +58,10 @@ export default function Homepage(){
 
                     {/* Francisco Contreras 9/30/22  */}
                     {/* Added visualization cards into homepage */}
-                    <VizCardLayout />
+                    <VizCardLayout/>
                     
-                    {/* <br/>
-                    <Card sx={{ maxWidth: 345 }}>
-                        <CardActionArea>
-                            <CardMedia
-                                component="img"
-                                height="140"
-                                image="images\\horizontal-bars-confirmed-cases-in-us-states.png"
-                                alt="green iguana"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Share
-                            </Button>
-                        </CardActions>
-                    </Card> */}
                 </Box>
-
             </Box>
-
-
         </>
     )
 }

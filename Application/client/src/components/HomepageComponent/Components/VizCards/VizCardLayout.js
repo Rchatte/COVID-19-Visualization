@@ -1,59 +1,63 @@
 import React, { useState } from "react" 
 import VizCards from "./VizCards";
+import {
+  Button, CardActionArea, CardActions, Typography, Box, Card, CardContent,
+  CardMedia
+} from "@mui/material"
 import Grid from '@mui/material/Grid';
 
+// Vizualisation imports
+import LineChartWithZoom from "../../../Visualizations/LineChartWithZoom";
    
-const VizCardLayout = () => {
-    const [showCards, setShowCards] = useState(true); // useState to show and hide viz cards
-    // variables to set the size of the images as a placeholder for the visualizations
-    const imgMinWidth = 250;
-    const imgMinHeight =  150;
+const VizCardLayout = ({graph}) => {
+  // Starting visualization cards
+  // For now all of them are the line chart but once we get more graphs, we can replace some with those
+  // NOTE: for the other src ones, replace them with other graph components once we get those
+  const [visuals, setVisuals] = useState([
+      {
+      id: 1,
+      src: <LineChartWithZoom height={500} width={600}/>,
+      visualization: "Line Chart",
+      description: "U.S COVID-19 deaths since 2020"
+      },
+      {
+      id: 1,
+      src: "A visualization",
+      visualization: "A Visualization Type",
+      description: "A Description"
+      },
+      {
+      id: 3,
+      src: "A visualization",
+      visualization: "A Visualization Type",
+      description: "A Description"
+      },
+      {
+      id: 4,
+      src: "A visualization",
+      visualization: "A Visualization Type",
+      description: "A Description"
+      },
+  ]);
+  
 
-    var imgShown = true;
+  // split the visuals in half to show them evenly column by column
+  var middle = Math.floor(visuals.length / 2);
+  var leftVisuals = visuals.slice(0, middle);
+  var rightVisuals = visuals.slice(middle); 
 
-    // Testers for the visualization cards
-    const [visuals, setVisuals] = useState([
-        {
-        id: 1,
-        link: 'images\\horizontal-bars-confirmed-cases-in-us-states.png',
-        viz: 'Horizontal Bars',
-        desc: 'Cases in U.S States',
-        },
-        {
-        id: 2,
-        link: 'images\\map-highest-us-cases-counties.png',
-        viz: 'Map',
-        desc: 'U.S Confirmed cases',
-        },
-        {
-        id: 3,
-        link: 'images\\map-highest-confirmed-cases-globally.png',
-        viz: 'Map',
-        desc: 'Global Confirmed Cases',
-        },
-        {
-        id: 4,
-        link: 'images\\map-confirmed-recoveries-globally.png',
-        viz: 'Map',
-        desc: 'Global Confirmed Recoveries',
-        },
-    ]);
-    
   return (
     // By using the mui grid layout, it gives the cards a nice layout
     <>
-      <Grid container>
-        {/* First grid item conntains first 2 cards */}
+      <Grid container spacing={0.5}>
         <Grid item xs={6}>
-            <VizCards visuals={visuals.slice(0, 1 + 1)}/>   
+          {/* First half of the visuals */}
+          <VizCards visuals={leftVisuals}/> 
         </Grid>
-        {/* Second grid item contains last 2 cards */}
         <Grid item xs={6}>
-            <VizCards visuals={visuals.slice(2, 3 + 1)}/>   
+          {/* Second half of the visuals */}
+          <VizCards visuals={rightVisuals}/>
         </Grid>
-        <Grid item xs={12}>
-          <span><img className="testImg"></img></span>
-        </Grid> 
       </Grid>
     </>
   )
