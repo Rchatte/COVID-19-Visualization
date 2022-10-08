@@ -5,7 +5,7 @@ import {
     OutlinedInput, MenuItem, Select, InputLabel, Box, IconButton, 
 } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
-import VizCardLayout from '../HomepageComponent/Components/VizCards/VizCardLayout';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 
 const drawerWidth = 270;
 const navBarTitle = "Navbar Title";
@@ -38,13 +38,13 @@ const region = [
 ];
 
 const tabs = [
-    'Home Page',
+    'COVID-19-Visualization',
     'Deaths', 
     'Vaccinations', 
     'Total'
 ];
 
-export default function Navbar({ handleXChangeParent, handleYChangeParent, handleRegionChangeParent, goToHomePage}) {
+export default function Navbar({ handleXChangeParent, handleYChangeParent, handleRegionChangeParent}) {
 
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [color, setColor] = React.useState('NONE');
@@ -115,6 +115,13 @@ export default function Navbar({ handleXChangeParent, handleYChangeParent, handl
         console.log(selectedY)
     }, [selectedIndex])
 
+    const navigate = useNavigate()
+    function checkButton(name){
+        if(name === 'Home Page'){
+            Navigate("/COVID-19-Visualization");
+        }
+    }
+
     return (
         <>
             <CssBaseline />
@@ -132,9 +139,12 @@ export default function Navbar({ handleXChangeParent, handleYChangeParent, handl
 
                     <Box sx={{ ml:130, pr: 5 }}>
                         {tabs.map((name) => (
-                            <button class="navbutton"> 
-                                {name}
-                            </button>
+                            // Wrapped with link tag to take page to desired component
+                            <Link to={'/' + name}>
+                                <button class="navbutton"> 
+                                    {name}
+                                </button>
+                            </Link>
                         ))}
                     </Box>
                         

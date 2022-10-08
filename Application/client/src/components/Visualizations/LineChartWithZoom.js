@@ -1,15 +1,13 @@
 import React, { Component }  from 'react';
 import * as d3 from 'd3';
-
+import Grid from '@mui/material/Grid';
 
 // Using Fetch if needed
 let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
 export default function LineChartWithZoom(props){
     return(
-        <svg id={"my_dataviz"} ref={createLineGraph(url_value,props.width,props.height)} >
-        </svg>
-
-
+        <svg id={"my_dataviz"} ref={createLineGraph(url_value,props.width,props.height)}>
+        </svg> 
     )
 
 

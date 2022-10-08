@@ -57,7 +57,7 @@ const VizCardLayout = () => {
     <>
       {/* Checks if the currentVisual is set to default then it will show the default card view. If not, it'll show the visualization the user clicks on */}
       {currentVisual === 'home' ? 
-      <Grid container spacing={0.5}>
+      <Grid container spacing={0}>
         <Grid item xs={6}>
           {/* First half of the visuals */}
           <VizCards visuals={leftVisuals} changeVisualization={changeVisualization}/> 
