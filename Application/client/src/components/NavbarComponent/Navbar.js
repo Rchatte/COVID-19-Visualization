@@ -5,6 +5,7 @@ import {
     OutlinedInput, MenuItem, Select, InputLabel, Box, IconButton, 
 } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
+import VizCardLayout from '../HomepageComponent/Components/VizCards/VizCardLayout';
 
 const drawerWidth = 270;
 const navBarTitle = "Navbar Title";
@@ -37,12 +38,13 @@ const region = [
 ];
 
 const tabs = [
+    'Home Page',
     'Deaths', 
     'Vaccinations', 
     'Total'
 ];
 
-export default function Navbar({ handleXChangeParent, handleYChangeParent, handleRegionChangeParent }) {
+export default function Navbar({ handleXChangeParent, handleYChangeParent, handleRegionChangeParent, goToHomePage}) {
 
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [color, setColor] = React.useState('NONE');
@@ -130,7 +132,7 @@ export default function Navbar({ handleXChangeParent, handleYChangeParent, handl
 
                     <Box sx={{ ml:130, pr: 5 }}>
                         {tabs.map((name) => (
-                            <button class="navbutton">
+                            <button class="navbutton"> 
                                 {name}
                             </button>
                         ))}

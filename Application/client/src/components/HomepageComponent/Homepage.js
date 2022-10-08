@@ -7,7 +7,6 @@ import {
 } from "@mui/material"
 
 import VizCardLayout from "./Components/VizCards/VizCardLayout";
-import VizCard from "./Components/VizCards/VizCard";
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 
 
@@ -36,21 +35,18 @@ export default function Homepage(){
         console.log(region)
     },[xAxis, yAxis, region])
 
-    function test(){
-        return console.log("hello");
-    }
-
     return(
         <>
             <h1> Line Graph Example </h1>
             <LineChartWithZoom height={500} width={1000}></LineChartWithZoom>
             <Box sx={{ display: 'flex' }}>
                 { /* Toolbar component is being imported from here.*/ }
-                <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange} />
+                <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange}/>
                 <Box
                     component="main"
                     sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
                 >
+
                     { /* Luis Gonzalez 9/30/22 */}
                     { /* This is the main dashboard section of the webpage */}
                     { /* On changes to navbar, the values xAxis, yAxis, region are being updated and are ready to pass to children components.  */}
@@ -58,8 +54,7 @@ export default function Homepage(){
 
                     {/* Francisco Contreras 9/30/22  */}
                     {/* Added visualization cards into homepage */}
-                    <VizCardLayout/>
-                    
+                    <VizCardLayout/>             
                 </Box>
             </Box>
         </>
