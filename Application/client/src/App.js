@@ -59,7 +59,7 @@ function App() {
     <>
       <div className='App'>
       <Box sx={{display: 'flex'}}>
-        <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange} sticky="top"/>
+        <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange}/>
         <Routes>
           <Route path="/COVID-19-Visualization" element={<Homepage/>}/>
           <Route path="/LineChart" element={<LineChart/>}/>

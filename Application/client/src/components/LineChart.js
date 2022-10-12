@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 
 const LineChart = () => {
     var lineChartWidth = 1000;
-    var lineChartHeight = 500;
+    var lineChartHeight = 800;
   return (
     <Box
     component="main"
