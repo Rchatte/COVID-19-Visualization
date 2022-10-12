@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
 export default function LineChartWithZoom(props){
     return(
-        <svg id={"my_dataviz"} ref={createLineGraph(url_value,props.width,props.height)}>
+        <svg id={"my_dataviz"} ref={createLineGraph(url_value,props.width,props.height,props.is_interactable)}>
         </svg> 
     )
 
@@ -14,7 +14,13 @@ export default function LineChartWithZoom(props){
 }
 
 
-const createLineGraph = function(url_value,width,height) {
+const createLineGraph = function(url_value,width,height,is_interactable) {
+
+    if(is_interactable == null){
+        is_interactable = true
+    }
+
+
     d3.csv(url_value).then(data => {
 
         const dates = data.columns.splice(4)
@@ -36,13 +42,13 @@ const createLineGraph = function(url_value,width,height) {
         // append the svg object to the body of the page
 
 
-        draw_linegraph_over_time(id, tagName, sorted_data, width, height)
+        draw_linegraph_over_time(id, tagName, sorted_data, width, height,is_interactable)
 
     });
 }
 
 
-const draw_linegraph_over_time = function(id,tagName,data,width,height) {
+const draw_linegraph_over_time = function(id,tagName,data,width,height,is_interactable) {
 
     const margin = {top: 10, right: 30, bottom: 30, left: 60}
     width = width - margin.left - margin.right;
@@ -84,9 +90,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         .attr("y", 0);
 
     // Add brushing
-    const brush = d3.brushX()                   // Add the brush feature using the d3.brush function
-        .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-        .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
+
 
     // Create the line variable: where both the line and the brush take place
     const line = svg.append('g')
@@ -105,41 +109,14 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         )
 
     // Add the brushing
-    line
-        .append("g")
-        .attr("class", "brush")
-        .call(brush);
+
 
     // A function that set idleTimeOut to null
     let idleTimeout
     function idled() { idleTimeout = null; }
 
     // A function that update the chart for given boundaries
-    function updateChart(event,d) {
 
-        // What are the selected boundaries?
-        let extent = event.selection
-
-        // If no selection, back to initial coordinate. Otherwise, update X axis domain
-        if(!extent){
-            if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-            x.domain([ 4,8])
-        }else{
-            x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
-            line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
-        }
-
-        // Update axis and line position
-        xAxis.transition().duration(1000).call(d3.axisBottom(x))
-        line
-            .select('.line')
-            .transition()
-            .duration(1000)
-            .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.sum_to_date) })
-            )
-    }
 
     // If user double click, reinitialize the chart
     svg.on("dblclick",function(){
@@ -154,12 +131,6 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             )
     });
 
-    console.log(svg)
-    //Hovering
-
-    svg.on('mouseover', mouseover)
-        .on('mousemove', mousemove)
-        .on('mouseout', mouseout)
 
 
 
@@ -183,33 +154,82 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         .attr("alignment-baseline", "middle")
 
 
-    var bisect = d3.bisector(function(d) { return d.date; }).right;
+    if(is_interactable){
+        //brush setting
+                          // Add the brush feature using the d3.brush function
+        const brush = d3.brushX().extent( [ [0,0], [width,height] ] )   .on("end", updateChart)          // Add the brush feature using the d3.brush function
+        line
+            .append("g")
+            .attr("class", "brush")
+            .call(brush);
+            // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
 
-    function mouseover() {
-        focus.style("opacity", 1)
-        focusText.style("opacity",1)
+
+        function updateChart(event,d) {
+
+            // What are the selected boundaries?
+            let extent = event.selection
+
+            // If no selection, back to initial coordinate. Otherwise, update X axis domain
+            if(!extent){
+                if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
+                x.domain([ 4,8])
+            }else{
+                x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
+                line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
+            }
+
+            // Update axis and line position
+            xAxis.transition().duration(1000).call(d3.axisBottom(x))
+            line
+                .select('.line')
+                .transition()
+                .duration(1000)
+                .attr("d", d3.line()
+                    .x(function(d) { return x(d.date) })
+                    .y(function(d) { return y(d.sum_to_date) })
+                )
+        }
+
+
+
+
+
+        //Hovering
+
+        svg.on('mouseover', mouseover)
+            .on('mousemove', mousemove)
+            .on('mouseout', mouseout)
+
+
+        var bisect = d3.bisector(function(d) { return d.date; }).right;
+
+        function mouseover() {
+            focus.style("opacity", 1)
+            focusText.style("opacity",1)
+        }
+
+        function mousemove(event) {
+            // recover coordinate we need
+            var x0 = x.invert(d3.pointer(event)[0]);
+
+            var i = bisect(data, x0, 1);
+
+            let selectedData = data[i]
+            focus
+                .attr("cx", x(selectedData.date))
+                .attr("cy", y(selectedData.sum_to_date))
+            focusText
+                .html("x:" + zeroPad(selectedData.date.getDate() , 2)+ "/" +zeroPad((selectedData.date.getMonth(), 2))+"/"+ selectedData.date.getFullYear() + " | " + selectedData.sum_to_date)
+                .attr("x", 0)
+                .attr("y", 1)
+        }
+        function mouseout() {
+            focus.style("opacity", 0)
+            focusText.style("opacity", 0)
+        }
+
     }
-
-    function mousemove(event) {
-        // recover coordinate we need
-        var x0 = x.invert(d3.pointer(event)[0]);
-
-        var i = bisect(data, x0, 1);
-
-        let selectedData = data[i]
-        focus
-            .attr("cx", x(selectedData.date))
-            .attr("cy", y(selectedData.sum_to_date))
-        focusText
-            .html("x:" + zeroPad(selectedData.date.getDate() , 2)+ "/" +zeroPad((selectedData.date.getMonth(), 2))+"/"+ selectedData.date.getFullYear() + " | " + selectedData.sum_to_date)
-            .attr("x", 0)
-            .attr("y", 1)
-    }
-    function mouseout() {
-        focus.style("opacity", 0)
-        focusText.style("opacity", 0)
-    }
-
 
 
 
