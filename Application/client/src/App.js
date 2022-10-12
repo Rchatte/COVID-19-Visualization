@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import {Route, Routes, Router} from "react-router-dom";
 import {Box} from "@mui/material";
 import VizCardLayout from './components/HomepageComponent/Components/VizCards/VizCardLayout';
-import LineChartWithZoom from './components/Visualizations/LineChartWithZoom';
+import LineChart from './components/LineChart';
 
 
 /* Folder structure is divided as follows: client (Front end) and server (Backend) */
@@ -59,10 +59,10 @@ function App() {
     <>
       <div className='App'>
       <Box sx={{display: 'flex'}}>
-        <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange}/>
+        <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange} sticky="top"/>
         <Routes>
           <Route path="/COVID-19-Visualization" element={<Homepage/>}/>
-          <Route path="/LineChartWithZoom" element={<LineChartWithZoom height={500} width={1000}/>}/>
+          <Route path="/LineChart" element={<LineChart/>}/>
         </Routes>
       </Box>
       </div>

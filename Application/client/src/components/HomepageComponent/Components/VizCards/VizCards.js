@@ -14,7 +14,7 @@ const VizCards = ({ visuals, changeVisualization}) => {
     {/* This file maps all the visualizations into a visualization card component */}
       {visuals.map((visuals) =>(
         // Card is wrapped with link tag so that the card can take user to desired visualization
-        <Link to="/LineChartWithZoom" style={{textDecoration: 'none'}}>
+        <Link to="/LineChart" style={{textDecoration: 'none'}}>
           {/* <VizCard key={visuals.id} visual={visuals} changeCurrentVisualization={changeCurrentVisualization}/> */}
           <Card variant="outlined" sx={{ maxWidth: 700, m: 6, borderRadius: 1 , borderColor: 'text.primary', backgroundColor: "lightgrey"}}>
           <CardActionArea>
