@@ -14,11 +14,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/ChevronRight';
 
-<<<<<<< HEAD
 import VizCard from "./Components/VizCards/VizCard";
-=======
-import VizCardLayout from "./Components/VizCards/VizCardLayout";
->>>>>>> c66b8494384728f432c57795fdebd4e439da401f
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Sidebar from "../NavbarComponent/Sidebar";
 
@@ -93,7 +89,6 @@ export default function Homepage(){
         justifyContent: 'flex-end',
     }));
 
-<<<<<<< HEAD
     const handleDrawerOpen = () => {
         setOpen(true);
     }
@@ -163,30 +158,6 @@ export default function Homepage(){
 
         </Main>
         </Box>  
-=======
-    return(
-        <>
-            <h1> Line Graph Example </h1>
-            <LineChartWithZoom height={500} width={1000}></LineChartWithZoom>
-            <Box sx={{ display: 'flex' }}>
-                { /* Toolbar component is being imported from here.*/ }
-                <Navbar handleXChangeParent={handleXChange} handleYChangeParent={handleYChange} handleRegionChangeParent={handleRegionChange}/>
-                <Box
-                    component="main"
-                    sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-                >
-
-                    { /* Luis Gonzalez 9/30/22 */}
-                    { /* This is the main dashboard section of the webpage */}
-                    { /* On changes to navbar, the values xAxis, yAxis, region are being updated and are ready to pass to children components.  */}
-                    { /* Next step is to pass this data to Child Card Components and so on.... */}
-
-                    {/* Francisco Contreras 9/30/22  */}
-                    {/* Added visualization cards into homepage */}
-                    <VizCardLayout/>             
-                </Box>
-            </Box>
->>>>>>> c66b8494384728f432c57795fdebd4e439da401f
         </>
     )
 }
