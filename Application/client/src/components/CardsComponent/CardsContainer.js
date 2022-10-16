@@ -48,6 +48,10 @@ export default function CardsContainer(props) {
            justifyContent="center"
            alignItems="center"
            >
+
+
+
+
                 <Grid item xs={6}>
                     <Card setCardView={onButtonClick} image={img1} body={"Visualizations from World Health Organization Data"} title={"World Health Organization"} />
                 </Grid>

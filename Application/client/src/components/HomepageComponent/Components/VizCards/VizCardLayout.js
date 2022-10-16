@@ -21,7 +21,7 @@ const VizCardLayout = ({graph}) => {
       description: "U.S COVID-19 deaths since 2020"
       },
       {
-      id: 1,
+      id: 2,
       src: "A visualization",
       visualization: "A Visualization Type",
       description: "A Description"

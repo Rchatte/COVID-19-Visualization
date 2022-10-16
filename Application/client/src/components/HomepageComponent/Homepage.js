@@ -14,10 +14,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/ChevronRight';
 
-<<<<<<< HEAD
+
 import VizCard from "./Components/VizCards/VizCard";
-=======
->>>>>>> eb85cf22dfabdc3f6e06d12f8e3a8e2e9d08e151
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Sidebar from "../NavbarComponent/Sidebar";
 
@@ -109,7 +107,9 @@ export default function Homepage(){
         <>
  
         <Box sx={{ display: 'flex' }}>
+            <></>
         <CssBaseline />
+
             <AppBar position="fixed" open={open}>
                 { /* Upper Toolbar */}
                 <Toolbar>
@@ -160,12 +160,8 @@ export default function Homepage(){
 
 
         </Main>
-<<<<<<< HEAD
-        </Box>  
+        </Box>
         </>
-=======
-        </Box> 
-        </> 
->>>>>>> eb85cf22dfabdc3f6e06d12f8e3a8e2e9d08e151
+
     )
 }

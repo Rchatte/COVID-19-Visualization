@@ -4,15 +4,16 @@ import * as d3 from 'd3';
 
 // Using Fetch if needed
 let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
+
+
 export default function LineChartWithZoom(props){
     const handleButtonClose = () => {
         props.close(true);
     }
-    
+
     return(
         <g>
-            <svg id={"my_dataviz"} ref={createLineGraph(url_value,props.width,props.height)} >
-            </svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height)} ></svg>
             <Button size="small" onClick={handleButtonClose}>Return to Visualizations</Button>
         </g>
     )
@@ -24,12 +25,13 @@ export default function LineChartWithZoom(props){
 const createLineGraph = function(url_value,width,height) {
     d3.csv(url_value).then(data => {
 
+
         const dates = data.columns.splice(4)
 
         let sorted_data = []
 
         let id = "lineGraph"
-        let tagName = "my_dataviz"
+        let tagName = "my_dataviz_line"
 
         //TODO: Modify to make more effecent Later
         dates.forEach(date => {
@@ -51,6 +53,7 @@ const createLineGraph = function(url_value,width,height) {
 
 const draw_linegraph_over_time = function(id,tagName,data,width,height) {
 
+
     const margin = {top: 10, right: 30, bottom: 30, left: 60}
     width = width - margin.left - margin.right;
     height = height - margin.top - margin.bottom;
@@ -58,7 +61,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
 
     // d3.select("#"+id).remove(); //What does this do?
     const svg = d3.select("#"+tagName)
-        // .append("svg")
+        .append("svg")
         .attr("id", id)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)

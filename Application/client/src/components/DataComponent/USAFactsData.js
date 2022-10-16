@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { Grid, Button } from "@mui/material"
 import Card from "../ContentComponent/Cards"
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
+import Treemap from "../Visualizations/TreeMap";
 
 const USAFactsData = () => {
     //------------------------------------------
@@ -35,10 +36,10 @@ const USAFactsData = () => {
         description: "U.S COVID-19 deaths since 2020"
         },
         {
-        id: 1,
-        src: "A visualization",
-        visualization: "A Visualization Type",
-        description: "A Description"
+            id: 2,
+            src: <Treemap close={handleClose} height={1000} width={1000} />,
+            visualization: "Tree Map",
+            description: "U.S COVID-19 deaths since 2020 Tree Map"
         },
         {
         id: 3,
