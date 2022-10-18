@@ -2,7 +2,7 @@ import React, { useState, useEffect, } from 'react';
 import {
     Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem,
     ListItemText, Radio, RadioGroup, FormControlLabel, FormControl, Label, Checkbox,
-    OutlinedInput, MenuItem, Select, InputLabel, Box, IconButton, 
+    OutlinedInput, MenuItem, Select, InputLabel, Box, IconButton, Button, Stack, Slide
 } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import { Navigate, useNavigate, Link } from 'react-router-dom';
@@ -51,6 +51,14 @@ export default function Navbar({ handleXChangeParent, handleYChangeParent, handl
     const [selectedY, setSelectedY] = useState([]);
     const [selectedX, setSelectedX] = useState([]);
     const [selectedRegion, setRegion] = useState("");
+
+    const [menu, setMenu] = useState(false);
+    const containerRef = React.useRef(null);
+
+    function switchMenu() {
+        if(menu == false){setMenu(true);}
+        else{setMenu(false);}
+    }
 
     const handleChange = (event) => {
         setColor(event.target.value);
@@ -126,33 +134,41 @@ export default function Navbar({ handleXChangeParent, handleYChangeParent, handl
         <>
             <CssBaseline />
             
-            <AppBar
-                position="fixed"
-                    /*sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} 
-                      ^ This is the old sx for the Appbar, temporarily removing this. */
-                sx={{ width: `100%` }}
+            <AppBar 
+              position="fixed"
+              /*sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} 
+                ^ This is the old sx for the Appbar, temporarily removing this. */
+              sx={{ width: `100%`, overflow: 'hidden' }}
+              ref={containerRef}
             >
                 <Toolbar>
                     <Typography variant="h6" component="div" noWrap to="/">
                         {navBarTitle}
                     </Typography>
 
-                    <Box sx={{ ml:130, pr: 5 }}>
-                        {tabs.map((name) => (
-                            // Wrapped with link tag to take page to desired component
-                            <Link to={'/' + name}>
-                                <button class="navbutton"> 
+                    <Slide direction="up" in={menu} container={containerRef.current}>
+                        <Stack direction="row" sx={{ ml:102, pr: 4 }}>
+                            {tabs.map((name) => (
+                                // Replaced the Link elemenet as a Link component for the Button specifically. This achieves the same goal.
+                                <Button 
+                                  variant="text"
+                                  href={"/" + name}
+                                  component={Link}
+                                  to={'/' + name} 
+                                  sx={{ my: 1, color: 'white', display: 'block', fontSize:14 }}
+                                > 
                                     {name}
-                                </button>
-                            </Link>
-                        ))}
-                    </Box>
+                                </Button>
+                            ))}
+                        </Stack>
+                    </Slide>
                         
                     <IconButton
                       size="large"
                       edge="start"
                       color="inherit"
                       aria-label="menu"
+                      onClick={switchMenu}
                       sx={{ mr: 2 }}
                     >
                         <MenuIcon />
@@ -160,7 +176,6 @@ export default function Navbar({ handleXChangeParent, handleYChangeParent, handl
 
                 </Toolbar>
             </AppBar>
-
 
             <IconButton
               size="large"

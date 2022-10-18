@@ -9,7 +9,6 @@ import {Box} from "@mui/material";
 import VizCardLayout from './components/HomepageComponent/Components/VizCards/VizCardLayout';
 import LineChart from './components/LineChart';
 
-
 /* Folder structure is divided as follows: client (Front end) and server (Backend) */
 /* We might not need a backend so ignore for now. */
 
