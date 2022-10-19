@@ -13,17 +13,11 @@ export default function Treemap(props){
     }
 
     return(
-
-
         <g>
-
-
-            <div id={"my_dataviz_tree_map"} ></div>
+            <div id={"my_dataviz_tree_map"}></div>
             <svg ref={drawTreeMap()}></svg>
-
             <Button size="small" onClick={handleButtonClose}>Return to Visualizations</Button>
         </g>
-
     )
 
 

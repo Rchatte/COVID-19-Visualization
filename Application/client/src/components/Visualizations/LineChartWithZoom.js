@@ -61,7 +61,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
 
     // d3.select("#"+id).remove(); //What does this do?
     const svg = d3.select("#"+tagName)
-        .append("svg")
+        //.append("svg")
         .attr("id", id)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
