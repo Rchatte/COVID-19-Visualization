@@ -8,12 +8,11 @@ import CardsContainer from "../CardsComponent/CardsContainer.js"
 import {
     Button, CardActionArea, CardActions, Typography, Box, Card, CardContent,
     CardMedia, List, ListItem, Toolbar, Grid, Divider, ListItemText, ListItemButton, IconButton,
-    CssBaseline, ListItemIcon
+    CssBaseline, ListItemIcon, Slide, Stack, Link
 } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/ChevronRight';
-
 
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Sidebar from "../NavbarComponent/Sidebar";
@@ -21,6 +20,12 @@ import Sidebar from "../NavbarComponent/Sidebar";
 
       
 const drawerWidth = 260;
+const tabs = [
+    'World Health Organization',
+    'USA Facts', 
+    'CDC', 
+    'CDPH'
+];
   
 
 export default function Homepage(){
@@ -31,8 +36,15 @@ export default function Homepage(){
     const [yAxis, setYaxis] = useState([]);
     const [region, setRegion] = useState();
     const [selectedCard, setSelectedCard] = useState('');
+    const [menu, setMenu] = useState(true);
+    const containerRef = React.useRef(null);
 
     { /* Functions are being passed to child component -> Navbar  */ }
+
+    function switchMenu() {
+        if(menu == false){setMenu(true);}
+        else{setMenu(false);}
+    }
 
     const handleYChange = (value) => {
         setYaxis(value)
@@ -109,7 +121,7 @@ export default function Homepage(){
             <></>
         <CssBaseline />
 
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" open={open} sx={{ overflow: 'hidden' }} ref={containerRef}>
                 { /* Upper Toolbar */}
                 <Toolbar>
                 <IconButton
@@ -124,6 +136,35 @@ export default function Homepage(){
                 <Typography variant="h6" noWrap component="div">
                     Dashboard
                 </Typography>
+
+                <Slide direction="up" in={menu} container={containerRef.current}>
+                    <Stack direction="row" sx={{ ml:95, pr: 4 }}>
+                        {tabs.map((name) => (
+                            // Replaced the Link elemenet as a Link component for the Button specifically. This achieves the same goal.
+                            <Button 
+                              variant="text"
+                              href={"/" + name}
+                              component={Link}
+                              to={'/' + name} 
+                              sx={{ my: 1, color: 'white', display: 'block', fontSize:14 }}
+                            > 
+                                {name}
+                            </Button>
+                        ))}
+                    </Stack>
+                </Slide>
+                        
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={switchMenu}
+                  sx={{ mr: 2 }}
+                >
+                    <MenuIcon />
+                </IconButton>
+
                 </Toolbar>
             </AppBar>
                 <Drawer
