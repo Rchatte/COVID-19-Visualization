@@ -80,6 +80,7 @@ const USAFactsData = () => {
         visuals.map((visuals) => (
             currentCard === visuals.visualization ?
             <Grid item xs={6}>
+                {/* Send visualization to component which contains button to also close it */}
                 <ShowVisualization close={handleClose} visual={visuals.src} />
             </Grid>
             : null
