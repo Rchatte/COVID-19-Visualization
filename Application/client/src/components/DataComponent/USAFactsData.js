@@ -40,7 +40,7 @@ const USAFactsData = () => {
         },
         {
         id: 2,
-        src: <Treemap close={handleClose} height={1000} width={1000} />,
+        src: <Treemap close={handleClose} height={400} width={800} />,
         visualization: "Tree Map",
         description: "U.S COVID-19 deaths since 2020 Tree Map"
         },

@@ -9,7 +9,7 @@ let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_u
 export default function LineChartWithZoom(props){
     return(
         <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height)} ></svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height,props.isInteractive)} ></svg>
             {/* <Button size="small" onClick={handleButtonClose}>Return to Visualizations</Button> */}
         </g>
     )
@@ -18,8 +18,9 @@ export default function LineChartWithZoom(props){
 }
 
 
-const createLineGraph = function(url_value,width,height) {
+const createLineGraph = function(url_value,width,height,isInteractive=true) {
     d3.csv(url_value).then(data => {
+
 
 
         const dates = data.columns.splice(4)
@@ -41,18 +42,19 @@ const createLineGraph = function(url_value,width,height) {
         // append the svg object to the body of the page
 
 
-        draw_linegraph_over_time(id, tagName, sorted_data, width, height)
+        draw_linegraph_over_time(id, tagName, sorted_data, width, height,isInteractive)
 
     });
 }
 
 
-const draw_linegraph_over_time = function(id,tagName,data,width,height) {
+const draw_linegraph_over_time = function(id,tagName,data,width,height,is_Interactive) {
 
 
     const margin = {top: 10, right: 30, bottom: 30, left: 60}
     width = width - margin.left - margin.right;
     height = height - margin.top - margin.bottom;
+
 
 
     // d3.select("#"+id).remove(); //What does this do?
@@ -89,14 +91,12 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         .attr("x", 0)
         .attr("y", 0);
 
-    // Add brushing
-    const brush = d3.brushX()                   // Add the brush feature using the d3.brush function
-        .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-        .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
+
 
     // Create the line variable: where both the line and the brush take place
     const line = svg.append('g')
         .attr("clip-path", "url(#clip)")
+
 
     // Add the line
     line.append("path")
@@ -109,6 +109,14 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             .x(function(d) { return x(d.date) })
             .y(function(d) { return y(d.sum_to_date) })
         )
+
+
+
+    if(is_Interactive){
+    // Add brushing
+    const brush = d3.brushX()                   // Add the brush feature using the d3.brush function
+        .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+        .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
 
     // Add the brushing
     line
@@ -147,6 +155,9 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             )
     }
 
+
+
+
     // If user double click, reinitialize the chart
     svg.on("dblclick",function(){
         x.domain(d3.extent(data, function(d) { return d.date; }))
@@ -160,12 +171,15 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             )
     });
 
-    console.log(svg)
-    //Hovering
+
 
     svg.on('mouseover', mouseover)
         .on('mousemove', mousemove)
         .on('mouseout', mouseout)
+
+
+
+
 
 
 
@@ -217,6 +231,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
     }
 
 
+    }
 
 
 }
