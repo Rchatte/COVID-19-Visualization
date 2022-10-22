@@ -4,7 +4,6 @@ import {
   CardMedia
 } from "@mui/material"
 import { borders } from '@mui/system';
-import LineChartWithZoom from "../../../Visualizations/LineChartWithZoom";
 
 // This is the visualization card component which contains the small visualization preview
 // with the option to click on it to fully show it

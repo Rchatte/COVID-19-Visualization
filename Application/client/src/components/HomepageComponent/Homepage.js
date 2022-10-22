@@ -15,7 +15,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/ChevronRight';
 
 
-import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Sidebar from "../NavbarComponent/Sidebar";
 
 

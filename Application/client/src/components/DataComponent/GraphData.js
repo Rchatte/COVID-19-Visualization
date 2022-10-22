@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Paper, Container , Box, Card, Typography, Button, CardContent, CardActions, CardMedia } from "@mui/material"
 import USAFactsData from "./USAFactsData";
+import CDCData from "./CDCData";
+import WHOData from "./WHOData";
 
 export default function GraphData({close, viz}) {
 
@@ -17,9 +19,9 @@ export default function GraphData({close, viz}) {
             case "USA Facts":
                 return <USAFactsData/>
             case "World Health Organization":
-                return "World Health Organization"
+                return <WHOData/>
             case "CDC":
-                 return "CDC"
+                 return <CDCData/>
             case "California Department of Public Health":
                 return "California Department of Public Health"
             default:

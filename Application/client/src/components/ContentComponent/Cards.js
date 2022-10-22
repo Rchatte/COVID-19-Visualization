@@ -10,16 +10,25 @@ export default function Cards({setCardView, title, image, body}) {
         var t = title
         setCardView(t)
     }
-
+    console.log(typeof(image))
     return(
         <>
             <Card>
+                {/* Checks if image type is a string and if so, it will show cardmedia which is one 
+                of the logos of our data sources */}
+                {typeof(image) === 'string' ?
                 <CardMedia
                     component="img"
                     height="140"
                     image={image}
-                    alt="green iguana"
+                    alt={image}
                 />
+                :
+                // if it's not a string type, then it is our visualization component
+                <div>
+                    {image}
+                </div>
+                }
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                     {title}

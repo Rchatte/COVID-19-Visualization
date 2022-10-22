@@ -3,6 +3,7 @@ import { Grid, Button } from "@mui/material"
 import Card from "../ContentComponent/Cards"
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Treemap from "../Visualizations/TreeMap";
+import ShowVisualization from './ShowVisualization';
 
 const USAFactsData = () => {
     //------------------------------------------
@@ -29,17 +30,19 @@ const USAFactsData = () => {
 
     // Contains viz component with prop info such as viz type and description
     const [visuals, setVisuals] = useState([
+        // view section is a component which contains the visualization along with the button to return to the main viz cards
+        // src section is the visualization component which goes to the card component to display a preview of the visualization
         {
         id: 1,
-        src: <LineChartWithZoom close={handleClose} height={500} width={800} />,
+        src: <LineChartWithZoom height={400} width={800} />,
         visualization: "Line Chart",
         description: "U.S COVID-19 deaths since 2020"
         },
         {
-            id: 2,
-            src: <Treemap close={handleClose} height={1000} width={1000} />,
-            visualization: "Tree Map",
-            description: "U.S COVID-19 deaths since 2020 Tree Map"
+        id: 2,
+        src: <Treemap close={handleClose} height={1000} width={1000} />,
+        visualization: "Tree Map",
+        description: "U.S COVID-19 deaths since 2020 Tree Map"
         },
         {
         id: 3,
@@ -73,11 +76,11 @@ const USAFactsData = () => {
             </Grid>
         ))
         :
-        // Else, go through the visuals and show the visualization the card was clicked on
+        // Else, go through the visuals and pass the visual to a component which will show the visual and include a button to return to the card view
         visuals.map((visuals) => (
             currentCard === visuals.visualization ?
             <Grid item xs={6}>
-                {visuals.src}
+                <ShowVisualization close={handleClose} visual={visuals.src} />
             </Grid>
             : null
         ))
