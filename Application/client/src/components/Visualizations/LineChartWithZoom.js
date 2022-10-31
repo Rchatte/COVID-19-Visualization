@@ -9,7 +9,7 @@ let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_u
 export default function LineChartWithZoom(props){
     return(
         <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height,props.isInteractive)} ></svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url,props.width,props.height,props.isInteractive)} ></svg>
             {/* <Button size="small" onClick={handleButtonClose}>Return to Visualizations</Button> */}
         </g>
     )
