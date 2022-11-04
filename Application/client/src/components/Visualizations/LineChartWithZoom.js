@@ -18,7 +18,6 @@ export default function LineChartWithZoom(props){
     return(
         <g>
             <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height)} ></svg>
-            <Button size="small" onClick={handleButtonClose}>Return to Visualizations</Button>
         </g>
     )
 
