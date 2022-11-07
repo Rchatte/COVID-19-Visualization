@@ -1,6 +1,10 @@
 import React, { useState, useEffect}  from 'react'
 import { Grid, Button } from "@mui/material"
 import Card from "../ContentComponent/Cards"
+import ShowVisualization from './ShowVisualization';
+
+// visualization imports
+import PieChartContinentVaccines from '../Visualizations/PieChartContinentVaccines';
 
 const WHOData = () => {
     //------------------------------------------
@@ -29,9 +33,9 @@ const WHOData = () => {
     const [visuals2, setVisuals] = useState([
         {
         id: 1,
-        src: "A visualization",
-        visualization: "A Visualization Type",
-        description: "A Description"
+        src: <PieChartContinentVaccines  width="900" height="900"/>,
+        visualization: "Donut Chart",
+        description: "Total Continent Vaccinations Per 100 Thousand by WHO region"
         },
         {
           id: 2,

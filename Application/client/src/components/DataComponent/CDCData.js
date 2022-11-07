@@ -1,6 +1,10 @@
 import React, { useState, useEffect}  from 'react'
 import { Grid, Button } from "@mui/material"
 import Card from "../ContentComponent/Cards"
+import ShowVisualization from './ShowVisualization';
+
+// visualization imports
+import PieChartTotalContinentCases from '../Visualizations/PieChartTotalContinentCases'
 
 const CDCData = () => {
     //------------------------------------------
@@ -29,9 +33,9 @@ const CDCData = () => {
     const [visuals2, setVisuals] = useState([
         {
         id: 1,
-        src: "A visualization",
-        visualization: "A Visualization Type",
-        description: "A Description"
+        src: <PieChartTotalContinentCases height={900} width={900}/>,
+        visualization: "Donut Chart",
+        description: "Total Cases of each continent"
         },
         {
           id: 2,
@@ -75,7 +79,8 @@ const CDCData = () => {
         visuals2.map((visuals) => (
             currentCard === visuals.visualization ?
             <Grid item xs={6}>
-                {visuals.src}
+                {/* Send visualization to component which contains button to also close it */}
+                <ShowVisualization close={handleClose} visual={visuals.src} />
             </Grid>
             : null
         ))

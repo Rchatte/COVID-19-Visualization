@@ -3,6 +3,7 @@ import { Paper, Container , Box, Card, Typography, Button, CardContent, CardActi
 import USAFactsData from "./USAFactsData";
 import CDCData from "./CDCData";
 import WHOData from "./WHOData";
+import CDPHData from "./CDPHData";
 
 export default function GraphData({close, viz}) {
 
@@ -23,7 +24,7 @@ export default function GraphData({close, viz}) {
             case "CDC":
                  return <CDCData/>
             case "California Department of Public Health":
-                return "California Department of Public Health"
+                return <CDPHData/>
             default:
                 return null
         }

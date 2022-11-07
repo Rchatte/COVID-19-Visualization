@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
 import { csv, sort, svg, tsvParse } from 'd3';
 import React, { useState, useRef, useEffect} from 'react'
+import PieChartTotalContinentCases from './PieChartTotalContinentCases';
 
-// url with raw version of the data set
-// doesn't need to be updated since the publishers keep this csv link updated
-const csvUrl = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv';
+// needs to be reupdated once we are close to presenting
+const csvUrl = 'https://gist.githubusercontent.com/Fran-cis-co/5e79b46342a561fa7a39a3793892e354/raw/e9c26a280e62c15ca09a27aa5e826cac362a3b1b/vaccination-data.csv';
 
-const PieChartTotalContinentCases = ({width, height}) => {
+const PieChartContinentVaccines = ({width, height}) => {
     const svgRef = useRef();
 
     useEffect(() => {
@@ -19,14 +19,11 @@ const PieChartTotalContinentCases = ({width, height}) => {
       var g = svg.append('g')
           .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
       // color scaled used to have different colors for each slice
-      var color = d3.scaleOrdinal(['#C7CEEA','#B5EAD7','#FFDAC1', '#FF9AA2', ])
-      const continents = []
-      const cases = []
-      const totalCases = []
-      var latestUpdated;
+      var color = d3.scaleOrdinal(d3.schemePastel1)
+
       // variable which returns a specified data value to translate to the pie chart
       var pie = d3.pie().value(function(d){
-        return d.totalCases;
+        return d.vaccinationsPer100k;
       })
 
       // variables which create the skeleton perimiter of the pie chart
@@ -40,30 +37,28 @@ const PieChartTotalContinentCases = ({width, height}) => {
       // d3 csv 
       d3.csv(csvUrl).then(
         function(data){
-        const continents = []
-        const cases = []
-        const totalCases = []
-        
-        // for each row not containing the ISO code OWID, grab the continent names and not include the duplicates
+        const WHORegion = []
+        const vaccinations = []
+        const totalVaccinations = []
+ 
+        // For each row grab the WHO region and avoid duplicates
         for(var i = 0; i < data.length; i++){
-          if(!data[i].iso_code.includes("OWID")){
-            if(!continents.includes(data[i].continent)){
-              continents.push(data[i].continent)
+            if(!WHORegion.includes(data[i].WHO_REGION)){
+                WHORegion.push(data[i].WHO_REGION)
             }
-            // match each countries total cases with the continent it's in
-            cases.push({continent: data[i].continent, totalCases: +data[i].total_cases})
-          }
+            // match each countries total vaccinations with the WHO region it's in
+            vaccinations.push({region: data[i].WHO_REGION, vaccinationsPer100k: +data[i].TOTAL_VACCINATIONS_PER100})
         }
 
-        // for each continent, add up the total cases for each country
-        for(var i = 0; i < continents.length; i++){
+        // for each WHO Region, add up the total vaccinations per 100k for each country
+        for(var i = 0; i < WHORegion.length; i++){
           var sum = 0;
-          cases.forEach((d) =>{
-            if(d.continent === continents[i]){
-              sum += d.totalCases;
+          vaccinations.forEach((d) =>{
+            if(d.region === WHORegion[i]){
+              sum += Math.ceil(d.vaccinationsPer100k);
             }
           })
-          totalCases.push({continent: continents[i], totalCases: sum})
+          totalVaccinations.push({region: WHORegion[i], vaccinationsPer100k: sum})
         }
 
         // variable which creats the tooltip to hover over each slice
@@ -75,18 +70,18 @@ const PieChartTotalContinentCases = ({width, height}) => {
 
         // Variable which sets the data for the pie
         var arc = g.selectAll('.arc')
-        .data(pie(totalCases))
+        .data(pie(totalVaccinations))
         .enter().append('g')
         .attr('class', 'arc')
 
         // allows to hover over the mouse to see a tooltip which shows the continent name along with the total cases
         arc.append('path')
           .attr('d', path)
-          .attr('fill', function(d){return color(d.data.continent);})
+          .attr('fill', function(d){return color(d.data.region);})
           .attr('stroke', 'white')
           .on('mouseover', (e,d) => {
             tooldiv.style('visibility', 'visible')
-                    .text(`${d.data.continent}'s` + ` Total Cases: ` + `${d.data.totalCases.toLocaleString("en-US")}`)
+                    .text(`${d.data.region}'s` + ` Total Vaccinations: ` + `${d.data.vaccinationsPer100k.toLocaleString("en-US")}`)
           })
           .on('mousemove', (e,d) => {
               tooldiv.style('top', (e.pageY-50) + 'px')
@@ -99,7 +94,7 @@ const PieChartTotalContinentCases = ({width, height}) => {
         // Adds the text on the slices; in this case it's the continent
         arc.append('text')
           .attr('transform', function(d){return 'translate(' + label.centroid(d) + ')';})
-          .text(function(d){return d.data.continent});
+          .text(function(d){return d.data.region});
         
         // This was the title, we can include this elsewhere maybe
         // svg.append('g')
@@ -115,8 +110,17 @@ const PieChartTotalContinentCases = ({width, height}) => {
   return (
     <div id='chartArea'>
       <svg ref={svgRef} width={width} height={height}></svg>
+      <ul>
+        <li>AFRO: African Region</li>
+        <li>EMRO: Eastern Mediterranean Region</li>
+        <li>SEARO: South-East Asian Region</li>
+        <li>EURO: European Region</li>
+        <li>AMRO: Region of the Americas</li>
+        <li>WPRO: Western Pacific Region</li>
+        <li>OTHER: regions not part of the WHO</li>
+      </ul>
     </div>
   )
 }
 
-export default PieChartTotalContinentCases
+export default PieChartContinentVaccines
