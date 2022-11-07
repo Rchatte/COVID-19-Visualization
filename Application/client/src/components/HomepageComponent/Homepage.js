@@ -6,8 +6,8 @@ import MuiAppBar from '@mui/material/AppBar';
 import VizCardLayout from "./Components/VizCards/VizCardLayout";
 import CardsContainer from "../CardsComponent/CardsContainer.js"
 import {
-    Button, CardActionArea, CardActions, Typography, Box, Card, CardContent,
-    CardMedia, List, ListItem, Toolbar, Grid, Divider, ListItemText, ListItemButton, IconButton,
+    Button, Container , CardActionArea, CardActions, Typography, Box, Card, CardContent,
+    CardMedia, AppBar, List, ListItem, Toolbar, Grid, Divider, ListItemText, ListItemButton, IconButton,
     CssBaseline, ListItemIcon, Slide, Stack, Link
 } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -39,168 +39,44 @@ export default function Homepage(){
     const [menu, setMenu] = useState(true);
     const containerRef = React.useRef(null);
 
-    { /* Functions are being passed to child component -> Navbar  */ }
-
-    function switchMenu() {
-        if(menu == false){setMenu(true);}
-        else{setMenu(false);}
-    }
-
-    const handleYChange = (value) => {
-        setYaxis(value)
-    }
-    const handleRegionChange = (value) => {
-        setRegion(value)
-    }   
-    const handleDateChange = (value) =>{
-        setDate(value)
-    }
 
               
-    const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-        ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-        }),
-    );
-    const AppBar = styled(MuiAppBar, {
-        shouldForwardProp: (prop) => prop !== 'open',
-      })(({ theme, open }) => ({
-        transition: theme.transitions.create(['margin', 'width'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        ...(open && {
-          width: `calc(100% - ${drawerWidth}px)`,
-          marginLeft: `${drawerWidth}px`,
-          transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        }),
-    }));
     
-    const DrawerHeader = styled('div')(({ theme }) => ({
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    }));
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    }
-    
-    const handleDrawerClose = () => {
-        setOpen(false);
-    }
     
     useEffect(() => {
         console.log(date)
         console.log(yAxis)
+
     },[yAxis, region, date]) 
 
     return(
         <>
  
-        <Box sx={{ display: 'flex' }}>
-            <></>
-        <CssBaseline />
-
-            <AppBar position="fixed" open={open} sx={{ overflow: 'hidden' }} ref={containerRef}>
-                { /* Upper Toolbar */}
-                <Toolbar>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+            <Toolbar>
                 <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
+                    size="large"
                     edge="start"
-                    sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
                 >
-                    <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    Dashboard
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    Senior Design
                 </Typography>
-
-                <Slide direction="up" in={menu} container={containerRef.current}>
-                    <Stack direction="row" sx={{ ml:95, pr: 4 }}>
-                        {tabs.map((name) => (
-                            // Replaced the Link elemenet as a Link component for the Button specifically. This achieves the same goal.
-                            <Button 
-                              variant="text"
-                              href={"/" + name}
-                              component={Link}
-                              to={'/' + name} 
-                              sx={{ my: 1, color: 'white', display: 'block', fontSize:14 }}
-                            > 
-                                {name}
-                            </Button>
-                        ))}
-                    </Stack>
-                </Slide>
-                        
-                <IconButton
-                  size="large"
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                  onClick={switchMenu}
-                  sx={{ mr: 2 }}
-                >
-                    <MenuIcon />
-                </IconButton>
-
-                </Toolbar>
+                <Button color="inherit">More Buttons</Button>
+            </Toolbar>
             </AppBar>
-                <Drawer
-                    sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                    }}
-                    variant="persistent"
-                    anchor="left"
-                    open={open}
-                >
-                <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                </IconButton>
-                </DrawerHeader>
-                <Divider />
-                    <Sidebar handleDateChangeParent={handleDateChange}/>
-                    {/* Navbar component.  */}
-                    {/* Navbar Just holds the sidebar values.  */}
-
-                <Divider />
-            </Drawer>
-
-        <Main open={open}>
-        <DrawerHeader />
-
-            <CardsContainer />
-
-
-        </Main>
         </Box>
+
+           
+                
+
+        <Container sx={{ mt: 3 } }>
+            <CardsContainer />
+        </Container>
         </>
 
     )

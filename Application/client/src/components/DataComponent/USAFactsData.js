@@ -23,9 +23,6 @@ const USAFactsData = () => {
         setChangeContent(false)
     }
 
-    useEffect(() => {
-        console.log("Change is being performed");
-    }, [currentCard])
 
     //----------------------------------------
 

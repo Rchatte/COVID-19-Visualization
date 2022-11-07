@@ -63,7 +63,7 @@ function Treemap_Setup(props){
 
 
     // read json data
-    d3.csv(url_data).then( function(data) {
+    d3.csv(props.url).then( function(data) {
 
 
         let State_County_Data_lists = {};
