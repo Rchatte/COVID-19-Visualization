@@ -3,13 +3,13 @@ import {Button} from "@mui/material"
 import * as d3 from 'd3';
 
 // Using Fetch if needed
-let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
+let url_value = "https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv"//url_for_data.value
 var today = new Date(); //today's date
 var lastUpdated = new Date('2022-10-27T10:55:00'); //the last date of the dataset, to be updated
 var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime()))/(60 * 60 * 1000); //get the Hours between these two dates ^
 let sorted_data = [];
 
-export default function LineChartWithZoom(props){
+export default function LineChartTotalCases(props){
     today = new Date(); //today's date
     const handleButtonClose = () => {
         props.close(true);
@@ -46,10 +46,7 @@ const createLineGraph = function(url_value,width,height) {
             // label.innerHTML = show_text
     
             // append the svg object to the body of the page
-    
-            console.log("Updated sorted data.")
-            console.log(lastUpdated)
-            console.log(today)
+
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
     
         }); 

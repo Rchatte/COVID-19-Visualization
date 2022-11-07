@@ -10,20 +10,28 @@ import * as d3 from 'd3';
 export default function World_Map_Death_Cases(props){
     return(
         <g>
-            <svg id={"my_dataviz_World_Map_Total_Death"}  ref={Map_Setup(props)} ></svg>
+            <svg id={"my_dataviz_World_Map_Total_Death"}  ref={Map_Setup(props,"my_dataviz_World_Map_Total_Death")} ></svg>
         </g>
     )
 
 
 }
 
-function Map_Setup(props){
+function Map_Setup(props,id){
+    const margin = {top: 100, right: 10, bottom: 10, left: 10}
+    let height = 600
+    let width = 400
 
 
     // The svg
-    const svg = d3.select("svg"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height");
+    const svg = d3.select("#"+id)
+        // .append("svg")
+        .attr("id", id)
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            `translate(${margin.left}, ${margin.top})`);
 
     // Map and projection
     const path = d3.geoPath();
@@ -55,9 +63,6 @@ function Map_Setup(props){
         })]).then(function(loadData){
 
 
-
-
-        console.log(max)
 
         // Data and color scale
         const colorScale = d3.scaleThreshold()

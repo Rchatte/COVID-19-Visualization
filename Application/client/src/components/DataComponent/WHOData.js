@@ -5,6 +5,7 @@ import ShowVisualization from './ShowVisualization';
 
 // visualization imports
 import PieChartContinentVaccines from '../Visualizations/PieChartContinentVaccines';
+import World_Map_Death_Cases from "../Visualizations/World_Map_Death_Cases";
 
 const WHOData = () => {
     //------------------------------------------
@@ -32,16 +33,16 @@ const WHOData = () => {
     // Contains viz component with prop info such as viz type and description
     const [visuals2, setVisuals] = useState([
         {
-        id: 1,
-        src: <PieChartContinentVaccines  width="900" height="900"/>,
-        visualization: "Donut Chart",
-        description: "Total Continent Vaccinations Per 100 Thousand by WHO region"
+            id: 1,
+            src: <PieChartContinentVaccines  width="900" height="900"/>,
+            visualization: "Donut Chart",
+            description: "Total Continent Vaccinations Per 100 Thousand by WHO region"
         },
         {
-          id: 2,
-          src: "A visualization",
-          visualization: "A Visualization Type",
-          description: "A Description"
+            id: 2,
+            src: <World_Map_Death_Cases/>,
+            visualization: "World Map",
+            description: "Total Covid Deaths"
         },
         {
         id: 3,

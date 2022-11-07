@@ -10,14 +10,17 @@ let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_u
 export default function Treemap(props){
     return(
         <g>
-            <svg id={"my_dataviz_tree_map"}  ref={DrawTreemap(props)} ></svg>
+            <svg id={"my_dataviz_tree_map"}  ref={Treemap_Setup(props)} ></svg>
         </g>
     )
 
 
 }
 
-function DrawTreemap(props){
+
+
+
+function Treemap_Setup(props){
 
     let height;
     let width;

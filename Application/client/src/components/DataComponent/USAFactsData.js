@@ -4,6 +4,7 @@ import Card from "../ContentComponent/Cards"
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Treemap from "../Visualizations/TreeMap";
 import ShowVisualization from './ShowVisualization';
+import LineChartTotalCases from "../Visualizations/LineChartTotalCases";
 
 const USAFactsData = () => {
     //------------------------------------------
@@ -45,10 +46,10 @@ const USAFactsData = () => {
         description: "U.S COVID-19 deaths since 2020 Tree Map"
         },
         {
-        id: 3,
-        src: "A visualization",
-        visualization: "A Visualization Type",
-        description: "A Description"
+            id: 3,
+            src: <LineChartTotalCases height={400} width={800} />,
+            visualization: "Line Chart",
+            description: "U.S COVID-19 Total Cases since 2020"
         },
         {
         id: 4,
