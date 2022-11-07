@@ -8,9 +8,7 @@ import {
 import USAFactsData from "./USAFactsData";
 import CDCData from "./CDCData";
 import WHOData from "./WHOData";
-<<<<<<< HEAD
 import CDPHData from "./CDPHData";
-=======
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Treemap from "../Visualizations/TreeMap";
 
@@ -56,10 +54,6 @@ export default function GraphData({ close, viz }) {
 
 
     const removeVisualType = () => { setVisualType('') }
->>>>>>> GUI-OLD
-
-
-
     const handleButtonClose = () => {
         close(true)
     }
