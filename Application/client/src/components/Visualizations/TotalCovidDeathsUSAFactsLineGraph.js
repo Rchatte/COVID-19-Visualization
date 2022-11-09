@@ -9,22 +9,25 @@ var lastUpdated = new Date('2022-10-27T10:55:00'); //the last date of the datase
 var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime()))/(60 * 60 * 1000); //get the Hours between these two dates ^
 let sorted_data = [];
 
-export default function LineChartWithZoom(props){
+export default function TotalCovidDeathsUSAFactsLineGraph(props){
     today = new Date(); //today's date
     const handleButtonClose = () => {
         props.close(true);
     }
+    console.log("Call here")
 
     return(
         <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height)} ></svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height,props.isInteractive)} ></svg>
         </g>
     )
 
 }
 
 
-const createLineGraph = function(url_value,width,height) {
+const createLineGraph = function(url_value,width,height,isInteractive=true) {
+
+
     let id = "lineGraph"
     let tagName = "my_dataviz_line"
     if(betweenDates > 24 || sorted_data.length == 0){
@@ -39,34 +42,30 @@ const createLineGraph = function(url_value,width,height) {
             dates.forEach(date => {
                 let value = {date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (d3.sum(data, d => d[date]))};
                 sorted_data.push(value)
-    
+
             })
-            
-    
+
+
             // label.innerHTML = show_text
-    
+
             // append the svg object to the body of the page
-    
-            console.log("Updated sorted data.")
-            console.log(lastUpdated)
-            console.log(today)
-            draw_linegraph_over_time(id, tagName, sorted_data, width, height)
-    
-        }); 
+
+
+            draw_linegraph_over_time(id, tagName, sorted_data, width, height,isInteractive)
+
+        });
     }
     else{
         d3.csv(url_value).then(data => {
-            draw_linegraph_over_time(id, tagName, sorted_data, width, height)
-            console.log("Didn't update the sorted_data.")
-            console.log(lastUpdated)
-            console.log(today)
-        })   
+            draw_linegraph_over_time(id, tagName, sorted_data, width, height,false)
+        })
     }
 }
 
 
 
-const draw_linegraph_over_time = function(id,tagName,data,width,height) {
+const draw_linegraph_over_time = function(id,tagName,data,width,height,isInteractive) {
+
 
 
     const margin = {top: 10, right: 30, bottom: 30, left: 60}
@@ -107,10 +106,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         .attr("x", 0)
         .attr("y", 0);
 
-    // Add brushing
-    const brush = d3.brushX()                   // Add the brush feature using the d3.brush function
-        .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-        .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
+
 
     // Create the line variable: where both the line and the brush take place
     const line = svg.append('g')
@@ -128,11 +124,26 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             .y(function(d) { return y(d.sum_to_date) })
         )
 
-    // Add the brushing
-    line
-        .append("g")
-        .attr("class", "brush")
-        .call(brush);
+
+
+
+
+
+
+
+
+    // Add brushing
+    if(isInteractive){
+        const brush = d3.brushX()                   // Add the brush feature using the d3.brush function
+            .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+            .on("end", updateChart)
+
+        // Each time the brush selection changes, trigger the 'updateChart' function
+        // Add the brushing
+        line
+            .append("g")
+            .attr("class", "brush")
+            .call(brush);
 
     // A function that set idleTimeOut to null
     let idleTimeout
@@ -178,12 +189,11 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             )
     });
 
-    console.log(svg)
     //Hovering
+      svg.on('mouseover', mouseover)
+          .on('mousemove', mousemove)
+          .on('mouseout', mouseout)
 
-    svg.on('mouseover', mouseover)
-        .on('mousemove', mousemove)
-        .on('mouseout', mouseout)
 
 
 
@@ -235,6 +245,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
     }
 
 
+    }
 
 
 }
