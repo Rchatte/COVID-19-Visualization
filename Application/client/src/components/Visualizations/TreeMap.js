@@ -13,11 +13,7 @@ export default function Treemap(props){
             <svg id={"my_dataviz_tree_map"}  ref={Treemap_Setup(props)} ></svg>
         </g>
     )
-
-
 }
-
-
 
 
 function Treemap_Setup(props){
@@ -28,9 +24,6 @@ function Treemap_Setup(props){
 
     let id = "treemap"
     let svgName = "my_dataviz_tree_map"
-
-
-
     let url_data= "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
 
     if(props.height == null){
@@ -60,6 +53,8 @@ function Treemap_Setup(props){
     const margin = {top: 100, right: 10, bottom: 10, left: 10}
     width = width - margin.left - margin.right
     height = height - margin.top - margin.bottom;
+
+    console.log(props.url);
 
 
     // read json data

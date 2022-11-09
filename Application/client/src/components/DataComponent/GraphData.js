@@ -3,43 +3,23 @@ import {
     Paper, Container, Box, Card, Typography,
     Button, Drawer, CardContent, Grid, CardActions,
     CardMedia, CardActionArea, CircularProgress,
-    Divider, List, ListItemButton, ListItemText, ListItem
-} from "@mui/material"
+    Divider, List, ListItemButton, ListItemText, ListItem, ButtonBase
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import ListItemIcon from '@mui/material/ListItemIcon';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
 import USAFactsData from "./USAFactsData";
 import CDCData from "./CDCData";
 import WHOData from "./WHOData";
 import CDPHData from "./CDPHData";
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Treemap from "../Visualizations/TreeMap";
-
-
-
-const values = [
-    {
-        title: "USA Facts",
-        url: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
-        ulr2: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
-        image: "img"
-    },
-    {
-        title: "World Health Organization",
-        url: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
-        ulr2: "NA",
-        image: "img"
-    },
-    {
-        title: "CDC",
-        url: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
-        ulr2: "NA",
-        image: "img"
-    },
-    {
-        title: "California Department of Public Health",
-        url: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
-        ulr2: "NA",
-        image: "img"
-    },
-]
+import PieChartContinentVaccines from "../Visualizations/PieChartContinentVaccines";
+import { useBootstrapBreakpoints } from "react-bootstrap/esm/ThemeProvider";
+import VisualizationDisplay from "../VisualizationDisplay/VisualizationDisplay";
+import { DATA } from "./DataExports.js";
 
 
 export default function GraphData({ close, viz }) {
@@ -47,40 +27,42 @@ export default function GraphData({ close, viz }) {
     { /* Gather all data needed to complete the graph? */ }
     { /* Button to close */ }
 
-    const [selectedVisual, setSelectedVisual] = useState(null);
-    const [showLargeVisual, setShowLargeVisual] = useState(false);
-    const [visualType, setVisualType] = useState('');
+    // Contains the object in DATA with a specified title from home page.
+    const [ selectedVisual, setSelectedVisual] = useState(null);
+    const [ largeView, setLargeView ] = useState(false);
+    const [ visualData, setVisualData ] = useState(null);
 
-
-
-    const removeVisualType = () => { setVisualType('') }
-    const handleButtonClose = () => {
-        close(true)
+    const openLargeVisual = (item) => {
+        setLargeView(true);
+        setSelectedVisual(null);
+        setVisualData(item);
     }
 
-
-
+    const handleButtonClose = () => {
+        setSelectedVisual(null);
+        close(true)
+    }
 
     // If new visual is selected look at values array above and fill in useState to update all values in 
     // react component return ()
     useEffect(() => {
-        values.map((item) => {
+        setLargeView(false);
+        DATA.map((item) => {
             if (item.title === viz) {
+                console.log("Current OBJ: ",item);
                 setSelectedVisual(item);
-                console.log("Found")
-                return
+                return;
             }
         })
-        console.log(selectedVisual);
     }, [viz])
 
-    // Function which chekcs which data source the user picks then returns a component which contains the visualization cards created from the data source
-    const checkDataSource = (dataSource) => {
-        switch (dataSource) {
-            case "USA Facts":
-                return <USAFactsData />
-            case "World Health Organization":
-                return <WHOData />
+
+    const showVisualType = (type, url) => {
+        switch (type) {
+            case "line-chart":
+                return <LineChartWithZoom url={url} height={400} width={400} />
+            case "tree-map":
+                return <Treemap url={url} height={400} width={400} />
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
@@ -90,24 +72,18 @@ export default function GraphData({ close, viz }) {
         }
     }
 
-
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
-                
-
+            <Box sx={{ flexGrow: 2 }}>
                 <Container>
                     <Typography variant="h5">
                         Select visual
                     </Typography>
                 </Container>
-
-
                 <Container sx={{ pt: 3 }}>
                     {/* <h2>All info on charts</h2> */}
                     {/* Call method to check which data source user picks */}
                     {/*checkDataSource(viz)*/}
-
                     <Grid
                         container
                         rowSpacing={3}
@@ -116,95 +92,43 @@ export default function GraphData({ close, viz }) {
                         justifyContent="center"
                         alignItems="center"
                     >
+                        { largeView ? ( <VisualizationDisplay data={visualData} /> ) : (null) }
+
                         {
-                            selectedVisual === null ? <CircularProgress /> :
-                                (<>
-                                    <Grid item xs={3} md={6}>
-                                        <Card>
-                                            <CardActionArea onClick={() => { setVisualType('line-chart') }} >
-                                                <Container sx={{ pt: 1, pl: 1, pb: 1, pr: 1 }}>
-                                                    <LineChartWithZoom url={selectedVisual.url} height={400} width={400} />
-                                                </Container>
-
-                                                <CardContent>
-                                                    <Typography gutterBottom variant="h5" component="div">
-                                                        Line graph
-                                                    </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-
-                                        </Card>
-                                    </Grid>
-                                    <Grid item xs={3} md={6}>
-                                        <Card>
-                                            <CardActionArea onClick={() => { setVisualType('tree-map') }}>
-
-                                                <Container sx={{ pt: 1, pl: 1, pb: 1, pr: 1 }}>
-                                                    <Treemap url={selectedVisual.url} height={400} width={400} />
-                                                </Container>
-
-                                                <CardContent>
-                                                    <Typography gutterBottom variant="h5" component="div">
-                                                         Tree map
-                                                    </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-
-                                        </Card>
-                                    </Grid>
-                                    <Grid item xs={3} md={6}>
-                                        <Card>
-                                            <Container sx={{ pt: 1, pl: 1, pb: 1, pr: 1 }}>
-                                                <LineChartWithZoom url={selectedVisual.url} height={400} width={400} />
-                                            </Container>
-
-                                            <CardContent>
-                                                <Typography gutterBottom variant="h5" component="div">
-                                                    {selectedVisual.title}
-                                                </Typography>
-                                            </CardContent>
-
-                                        </Card>
-                                    </Grid>
-                                    <Grid item xs={3} md={6}>
-                                        <Card>
-                                            <Container sx={{ pt: 1, pl: 1, pb: 1, pr: 1 }}>
-                                                <LineChartWithZoom url={selectedVisual.url} height={400} width={400} />
-                                            </Container>
-
-                                            <CardContent>
-                                                <Typography gutterBottom variant="h5" component="div">
-                                                    {selectedVisual.title}
-                                                </Typography>
-                                            </CardContent>
-
-                                        </Card>
-                                    </Grid>
-
-                                </>)
-
+                            selectedVisual === null ? (null): 
+                                (
+                                selectedVisual.graphs.map( (i) => {
+                                    const Visual = showVisualType(i.type, i.link1);
+                                    return (
+                                        <>
+                                        <Grid item xs={3} md={6}>
+                                            <Card onClick={ () =>  openLargeVisual(i) }>
+                                                <CardActionArea>
+                                                    <Container sx={{ pt: 1, pl: 1, pb: 1, pr: 1 }}>
+                                                        { Visual } 
+                                                    </Container>
+    
+                                                    <CardContent>
+                                                        <Typography gutterBottom variant="h5" component="div">
+                                                            { i.type }
+                                                        </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+    
+                                            </Card>
+                                        </Grid>
+                                        </>
+                                    )
+                                }))
+                            
                         }
 
-
-
-
                     </Grid>
-                    <Button size="small" onClick={handleButtonClose}>Return to Home Page</Button>
+                    <Button size="small" onClick={ handleButtonClose }>Return to Home Page</Button>
                 </Container>
-
-                <Container>
-                    <Container>
-                        <Typography variant="h5">
-                            Select visual
-                        </Typography>
-                    </Container>
-
-                    <Button variant="contained" onClick={() => console.log("Show filter")}>Show filters</Button>
-
-                </Container>
-
-
             </Box>
+                
+    
         </>
     )
 }

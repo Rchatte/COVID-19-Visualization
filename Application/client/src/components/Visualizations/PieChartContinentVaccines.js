@@ -6,7 +6,7 @@ import PieChartTotalContinentCases from './PieChartTotalContinentCases';
 // needs to be reupdated once we are close to presenting
 const csvUrl = 'https://gist.githubusercontent.com/Fran-cis-co/5e79b46342a561fa7a39a3793892e354/raw/e9c26a280e62c15ca09a27aa5e826cac362a3b1b/vaccination-data.csv';
 
-const PieChartContinentVaccines = ({width, height}) => {
+const PieChartContinentVaccines = (props) => {
     const svgRef = useRef();
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const PieChartContinentVaccines = ({width, height}) => {
           .innerRadius(radius - 150);
 
       // d3 csv 
-      d3.csv(csvUrl).then(
+      d3.csv(props.link).then(
         function(data){
         const WHORegion = []
         const vaccinations = []
@@ -109,7 +109,7 @@ const PieChartContinentVaccines = ({width, height}) => {
   
   return (
     <div id='chartArea'>
-      <svg ref={svgRef} width={width} height={height}></svg>
+      <svg ref={svgRef} width={props.width} height={props.height}></svg>
       <ul>
         <li>AFRO: African Region</li>
         <li>EMRO: Eastern Mediterranean Region</li>

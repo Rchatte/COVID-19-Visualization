@@ -2,6 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import Footer from './components/FooterComponent/Footer';
 import Homepage from './components/HomepageComponent/Homepage';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import GraphData from './components/DataComponent/GraphData';
+import VisualizationDisplay from './components/VisualizationDisplay/VisualizationDisplay';
 
 
 /* Folder structure is divided as follows: client (Front end) and server (Backend) */
@@ -26,11 +29,9 @@ Packages added so far: (NPM)
 
 function App() {
   return (
-    <>
-        <div className="App">
-            <Homepage />
-        </div>
-    </>
+    <div className="app">
+      <Homepage/>
+   </div>
   );
 }
 

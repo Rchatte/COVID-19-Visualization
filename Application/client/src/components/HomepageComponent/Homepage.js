@@ -16,6 +16,9 @@ import MenuIcon from '@mui/icons-material/ChevronRight';
 
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Sidebar from "../NavbarComponent/Sidebar";
+import AdbIcon from '@mui/icons-material/Adb';
+import { useNavigate } from "react-router-dom";
+
 
 
       
@@ -38,21 +41,16 @@ export default function Homepage(){
     const [selectedCard, setSelectedCard] = useState('');
     const [menu, setMenu] = useState(true);
     const containerRef = React.useRef(null);
-
-
-              
-    
     
     useEffect(() => {
-        console.log(date)
-        console.log(yAxis)
 
-    },[yAxis, region, date]) 
+    },[]) 
 
     return(
         <>
- 
+
         <Box sx={{ flexGrow: 1 }}>
+            
             <AppBar position="static">
             <Toolbar>
                 <IconButton
@@ -63,10 +61,28 @@ export default function Homepage(){
                     sx={{ mr: 2 }}
                 >
                 </IconButton>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Senior Design
-                </Typography>
-                <Button color="inherit">More Buttons</Button>
+
+                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                        mr: 2,
+                        display: { xs: 'none', md: 'flex' },
+                        fontFamily: 'monospace',
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'inherit',
+                        textDecoration: 'none',
+                        }}
+                    >
+                        Senior Design
+          </Typography>
+                <Button color="inherit">Dashboard</Button>
+                <Button color="inherit">About</Button>
+                <Button color="inherit">Data types</Button>
             </Toolbar>
             </AppBar>
         </Box>
