@@ -1,3 +1,7 @@
+import React from "react"
+
+import img1 from "../images/CDC.png"
+
 
 export const DATA = [
     {
@@ -5,8 +9,9 @@ export const DATA = [
         graphs: [
             {
                 type: "line-chart",
+                img: img1,
+                description: "Data provided by static.usafacts via Line Chart. X and Y axis are available for edit and much more.",
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
-
                 link2: "",
                 filters: {
                     color: "color",
@@ -16,6 +21,8 @@ export const DATA = [
             },
             {
                 type: "tree-map",
+                description: "Data provided by static.usafacts via Tree map. X and Y axis are available for edit and much more.",
+                img: img1,
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
                 filters: {
                     color: "color",
@@ -25,6 +32,8 @@ export const DATA = [
             },
             {
                 type: "graph-type",
+                img: img1,
+                description: "Data provided by static.usafacts. X and Y axis are available for edit and much more.",
                 link1: "",
                 filters: {
                     color: "color",

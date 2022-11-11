@@ -3,7 +3,7 @@ import {
     Paper, Container, Box, Card, Typography,
     Button, Drawer, CardContent, Grid, CardActions,
     CardMedia, CardActionArea, CircularProgress,
-    Divider, List, ListItemButton, ListItemText, ListItem, ButtonBase
+    Divider, List, ListItemButton, ListItemText, ListItem, ButtonBase, Stack
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -20,6 +20,8 @@ import PieChartContinentVaccines from "../Visualizations/PieChartContinentVaccin
 import { useBootstrapBreakpoints } from "react-bootstrap/esm/ThemeProvider";
 import VisualizationDisplay from "../VisualizationDisplay/VisualizationDisplay";
 import { DATA } from "./DataExports.js";
+import "./row.css";
+
 
 
 export default function GraphData({ close, viz }) {
@@ -28,7 +30,8 @@ export default function GraphData({ close, viz }) {
     { /* Button to close */ }
 
     // Contains the object in DATA with a specified title from home page.
-    const [ selectedVisual, setSelectedVisual] = useState(null);
+    const [selectedVisual, setSelectedVisual] = useState(null);
+    const [ graphs, setGraphs] = useState([])
     const [ largeView, setLargeView ] = useState(false);
     const [ visualData, setVisualData ] = useState(null);
 
@@ -51,6 +54,7 @@ export default function GraphData({ close, viz }) {
             if (item.title === viz) {
                 console.log("Current OBJ: ",item);
                 setSelectedVisual(item);
+                setGraphs(item.graphs)
                 return;
             }
         })
@@ -75,55 +79,33 @@ export default function GraphData({ close, viz }) {
     return (
         <>
             <Box sx={{ flexGrow: 2 }}>
-                <Container>
-                    <Typography variant="h5">
-                        Select visual
-                    </Typography>
-                </Container>
+
                 <Container sx={{ pt: 3 }}>
                     {/* <h2>All info on charts</h2> */}
                     {/* Call method to check which data source user picks */}
                     {/*checkDataSource(viz)*/}
-                    <Grid
-                        container
-                        rowSpacing={3}
-                        columnSpacing={2}
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        { largeView ? ( <VisualizationDisplay data={visualData} /> ) : (null) }
 
                         {
-                            selectedVisual === null ? (null): 
-                                (
-                                selectedVisual.graphs.map( (i) => {
-                                    const Visual = showVisualType(i.type, i.link1);
-                                    return (
-                                        <>
-                                        <Grid item xs={3} md={6}>
-                                            <Card onClick={ () =>  openLargeVisual(i) }>
-                                                <CardActionArea>
-                                                    <Container sx={{ pt: 1, pl: 1, pb: 1, pr: 1 }}>
-                                                        { Visual } 
-                                                    </Container>
-    
-                                                    <CardContent>
-                                                        <Typography gutterBottom variant="h5" component="div">
-                                                            { i.type }
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-    
-                                            </Card>
-                                        </Grid>
-                                        </>
-                                    )
-                                }))
+                            selectedVisual === null ? (null) : (showVisualType(graphs[0].type, graphs[0].link1) )
                             
                         }
 
-                    </Grid>
+                       
+                    <Box>
+                        <h2>{"hello"}</h2>
+
+                        <div className="row">
+                            <Stack className="row__posters" direction="row" spacing={2}>
+                                {graphs.map(visualization => (
+                                    <img
+                                        className={"row__poster"}
+                                        src={visualization.img}
+                                        alt={visualization} />
+                                ))}
+                            </Stack>
+                        </div>
+                    </Box>
+
                     <Button size="small" onClick={ handleButtonClose }>Return to Home Page</Button>
                 </Container>
             </Box>

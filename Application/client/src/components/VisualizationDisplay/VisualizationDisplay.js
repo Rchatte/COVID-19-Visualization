@@ -12,6 +12,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
 import Treemap from "../Visualizations/TreeMap";
+import Filters from "../FiltersComponent/Filters";
 
 
 
@@ -60,9 +61,10 @@ export default function VisualizationDisplay(props) {
 
       useEffect(() => {
         console.log(props.data) // The entire json 
-        setData(props.data);
+          setData(props.data);
+          console.log(props.filters);
         //setVisualState(props.visual); // 
-        //setFilters(props.objectData);
+        setFilters(props.filters);
       }, [])
 
 
@@ -84,36 +86,46 @@ export default function VisualizationDisplay(props) {
     }
 
     return(
-        <> 
-            <Box>
+        <>
+            <Container sx={{ pt: 5}}>
                 <Drawer
                         anchor={"left"}
                         open={openNavigationBar}
-                        onClose={() => setOpenNavigationBar(false) } 
-                    >
-                    {list("left")}
+                    onClose={() => setOpenNavigationBar(false)} 
+
+                >
+                    { <p> </p>}
+                    <Filters filters={data.filters} />
                 </Drawer>
 
-
-                <Stack direction="row" spacing={2}>
-                <Button variant="contained" onClick={ () => setOpenNavigationBar(true) } >Show filters</Button>
-                <Button variant="contained" onClick={ () => setOpenNavigationBar(true) } >Show filters</Button>
-                <Button variant="contained" onClick={ () => setOpenNavigationBar(true) } >Show filters</Button>
-                </Stack>
-                <Container>
-
+                <Grid container spacing={2}>
+                    <Grid item xs={6} md={8}>
                         <Container>
                             {
-                                data === null ? (null) :
+                            data === null ? (null) :
                                 (
                                     showVisualType(data, data.filters)
                                 )
                             }
                         </Container>
-                </Container>
+                    </Grid>
+                    <Grid item xs={6} md={4}>
+                        <Paper elevation={3} />
 
+                        <Box sx={{ pt: 2 }}>
+                        <Typography variant="p" component="div">
+                        {
+                                data === null ? (null) : (data.description)
+                        }
+                        </Typography>
+                            <Button variant="contained" onClick={() => setOpenNavigationBar(true) }>Filters</Button>
+                        </Box>
+                    </Grid>
 
-            </Box>
+                </Grid>
+                    
+
+            </Container>
 
         </>
     )
