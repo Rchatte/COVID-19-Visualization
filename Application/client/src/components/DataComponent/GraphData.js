@@ -64,9 +64,9 @@ export default function GraphData({ close, viz }) {
     const showVisualType = (type, url) => {
         switch (type) {
             case "line-chart":
-                return <LineChartWithZoom url={url} height={400} width={400} />
+                return <LineChartWithZoom url={url} height={400} width={800} />
             case "tree-map":
-                return <Treemap url={url} height={400} width={400} />
+                return <Treemap url={url} height={400} width={800} />
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
@@ -92,7 +92,7 @@ export default function GraphData({ close, viz }) {
 
                        
                     <Box>
-                        <h2>{"hello"}</h2>
+                        <h2>{" Other Visualization"}</h2>
 
                         <div className="row">
                             <Stack className="row__posters" direction="row" spacing={2}>
