@@ -83,9 +83,15 @@ export default function GraphData({ close, viz }) {
     const showVisualType = (type, url) => {
         switch (type) {
             case "line-chart":
+<<<<<<< HEAD
                 return <LineChartWithZoom url={url} height={400} width={600} />
             case "tree-map":
                 return <Treemap url={url} height={400} width={600} />
+=======
+                return <LineChartWithZoom url={url} height={400} width={800} />
+            case "tree-map":
+                return <Treemap url={url} height={400} width={800} />
+>>>>>>> 989133fab070df3b66ea56a9d5643d2b2a9c377b
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
@@ -129,6 +135,10 @@ export default function GraphData({ close, viz }) {
                     </Box>
                        
                     <Box>
+<<<<<<< HEAD
+=======
+                        <h2>{" Other Visualization"}</h2>
+>>>>>>> 989133fab070df3b66ea56a9d5643d2b2a9c377b
 
                         <div className="row">
                             <Stack

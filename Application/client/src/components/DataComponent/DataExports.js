@@ -18,7 +18,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             },
             {
@@ -29,7 +29,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             },
             {
@@ -40,7 +40,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             }
         ]
@@ -56,7 +56,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             },
             {
@@ -65,7 +65,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             },
             {
@@ -74,7 +74,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             }
         ]
@@ -84,7 +84,7 @@ export const DATA = [
         filters: {
             color: "color",
             height: 400,
-            width: 400,
+            width: 800,
         },
         graphs: [
             {
@@ -94,7 +94,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             },
             {
@@ -103,7 +103,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             },
             {
@@ -112,7 +112,7 @@ export const DATA = [
                 filters: {
                     color: "color",
                     height: 400,
-                    width: 400,
+                    width: 800,
                 },
             }
         ]
@@ -122,7 +122,7 @@ export const DATA = [
         filters: {
             color: "color",
             height: 400,
-            width: 400,
+            width: 800,
         },
         graphs: [
             {
