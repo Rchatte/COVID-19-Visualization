@@ -87,7 +87,8 @@ export default function VisualizationDisplay(props) {
 
     return(
         <>
-            <Container sx={{ pt: 5}}>
+            <Container sx={{ pt: 5 }}>
+
                 <Drawer
                         anchor={"left"}
                         open={openNavigationBar}

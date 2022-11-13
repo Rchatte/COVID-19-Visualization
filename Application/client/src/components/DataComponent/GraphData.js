@@ -3,7 +3,7 @@ import {
     Paper, Container, Box, Card, Typography,
     Button, Drawer, CardContent, Grid, CardActions,
     CardMedia, CardActionArea, CircularProgress,
-    Divider, List, ListItemButton, ListItemText, ListItem, ButtonBase, Stack
+    Divider, List, ListItemButton, ListItemText, ListItem, ButtonBase, Stack, CardHeader
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -21,6 +21,7 @@ import { useBootstrapBreakpoints } from "react-bootstrap/esm/ThemeProvider";
 import VisualizationDisplay from "../VisualizationDisplay/VisualizationDisplay";
 import { DATA } from "./DataExports.js";
 import "./row.css";
+import { select } from "d3";
 
 
 
@@ -31,7 +32,8 @@ export default function GraphData({ close, viz }) {
 
     // Contains the object in DATA with a specified title from home page.
     const [selectedVisual, setSelectedVisual] = useState(null);
-    const [ graphs, setGraphs] = useState([])
+    const [graphs, setGraphs] = useState([])
+    const [currentGraph, setCurrentGraph] = useState([]);
     const [ largeView, setLargeView ] = useState(false);
     const [ visualData, setVisualData ] = useState(null);
 
@@ -46,6 +48,16 @@ export default function GraphData({ close, viz }) {
         close(true)
     }
 
+    const updateGraph = (selected) => {
+        console.log(selected)
+        graphs.map((items) => {
+            if (items.type === selected) {
+                console.log(items)
+                setCurrentGraph(items)
+            }
+        })
+    }
+
     // If new visual is selected look at values array above and fill in useState to update all values in 
     // react component return ()
     useEffect(() => {
@@ -55,18 +67,25 @@ export default function GraphData({ close, viz }) {
                 console.log("Current OBJ: ",item);
                 setSelectedVisual(item);
                 setGraphs(item.graphs)
+                setCurrentGraph(item.graphs[0]);
                 return;
             }
         })
     }, [viz])
 
+    const makeStringNice = (str) => {
+        console.log(str)
+        var newString = str.replaceAll('-', '');
+        var capitalize = newString.charAt(0).toUpperCase() + newString.slice(1).toLowerCase()
+        return capitalize
+    }
 
     const showVisualType = (type, url) => {
         switch (type) {
             case "line-chart":
-                return <LineChartWithZoom url={url} height={400} width={400} />
+                return <LineChartWithZoom url={url} height={400} width={600} />
             case "tree-map":
-                return <Treemap url={url} height={400} width={400} />
+                return <Treemap url={url} height={400} width={600} />
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
@@ -78,29 +97,61 @@ export default function GraphData({ close, viz }) {
 
     return (
         <>
-            <Box sx={{ flexGrow: 2 }}>
+            <Box>
 
                 <Container sx={{ pt: 3 }}>
                     {/* <h2>All info on charts</h2> */}
                     {/* Call method to check which data source user picks */}
                     {/*checkDataSource(viz)*/}
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
 
                         {
-                            selectedVisual === null ? (null) : (showVisualType(graphs[0].type, graphs[0].link1) )
+                            currentGraph === null ? (null) : (showVisualType(currentGraph.type, currentGraph.link1))
                             
                         }
+                        <Container sx={{ pt: 1 }}>
+                            <Card sx={{ minHeight: 200 }}>
+                                <CardContent>
+                                    <Typography variant="h3" gutterBottom>
+                                        {currentGraph.type === null ? (null) : currentGraph.type}
+                                    </Typography>
 
+                                    <Typography variant="subtitle1" gutterBottom>
+                                        {currentGraph === null ? (null) : currentGraph.description}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Container>
+                    </Box>
                        
                     <Box>
-                        <h2>{"hello"}</h2>
 
                         <div className="row">
-                            <Stack className="row__posters" direction="row" spacing={2}>
+                            <Stack
+                                justifyContent="center"
+                                alignItems="center"
+                                className="row__posters" direction="row" spacing={2.5}>
                                 {graphs.map(visualization => (
-                                    <img
-                                        className={"row__poster"}
-                                        src={visualization.img}
-                                        alt={visualization} />
+                                    <>
+                                <Card>
+                                    <CardContent>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            { visualization.type }
+                                        </Typography>
+                                        <img
+                                            id={visualization.type}
+                                            onClick={() => updateGraph(visualization.type)}
+                                            className={"row__poster"}
+                                            src={visualization.img}
+                                                alt={visualization} />
+                                    </CardContent>
+
+                                </Card>
+                                    </>
                                 ))}
                             </Stack>
                         </div>
