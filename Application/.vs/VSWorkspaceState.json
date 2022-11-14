@@ -4,11 +4,8 @@
     "\\client",
     "\\client\\src",
     "\\client\\src\\components",
-    "\\client\\src\\components\\CardsComponent",
-    "\\client\\src\\components\\DataComponent",
-    "\\client\\src\\components\\images",
-    "\\client\\src\\components\\VisualizationDisplay"
+    "\\client\\src\\components\\FiltersComponent"
   ],
-  "SelectedNode": "\\client\\src\\components\\DataComponent\\GraphData.js",
+  "SelectedNode": "\\client\\src\\components\\FiltersComponent\\Filters.js",
   "PreviewInSolutionExplorer": false
 }

@@ -22,6 +22,7 @@ import VisualizationDisplay from "../VisualizationDisplay/VisualizationDisplay";
 import { DATA } from "./DataExports.js";
 import "./row.css";
 import { select } from "d3";
+import Filters from "../FiltersComponent/Filters.js"
 
 
 
@@ -31,17 +32,12 @@ export default function GraphData({ close, viz }) {
     { /* Button to close */ }
 
     // Contains the object in DATA with a specified title from home page.
-    const [selectedVisual, setSelectedVisual] = useState(null);
-    const [graphs, setGraphs] = useState([])
-    const [currentGraph, setCurrentGraph] = useState([]);
-    const [ largeView, setLargeView ] = useState(false);
-    const [ visualData, setVisualData ] = useState(null);
+    const [ selectedVisual, setSelectedVisual] = useState(null);
+    const [ graphs, setGraphs] = useState([])
+    const [ currentGraph, setCurrentGraph] = useState([]);
+    const [ filter, setFilter] = useState({});
+    const [ filtersTrigger, setOpenFilters] = useState();
 
-    const openLargeVisual = (item) => {
-        setLargeView(true);
-        setSelectedVisual(null);
-        setVisualData(item);
-    }
 
     const handleButtonClose = () => {
         setSelectedVisual(null);
@@ -54,6 +50,7 @@ export default function GraphData({ close, viz }) {
             if (items.type === selected) {
                 console.log(items)
                 setCurrentGraph(items)
+                setFilter(items.filters)
             }
         })
     }
@@ -61,13 +58,13 @@ export default function GraphData({ close, viz }) {
     // If new visual is selected look at values array above and fill in useState to update all values in 
     // react component return ()
     useEffect(() => {
-        setLargeView(false);
         DATA.map((item) => {
             if (item.title === viz) {
                 console.log("Current OBJ: ",item);
                 setSelectedVisual(item);
                 setGraphs(item.graphs)
                 setCurrentGraph(item.graphs[0]);
+                setFilter(item.graphs[0].filters)
                 return;
             }
         })
@@ -100,6 +97,16 @@ export default function GraphData({ close, viz }) {
                     {/* <h2>All info on charts</h2> */}
                     {/* Call method to check which data source user picks */}
                     {/*checkDataSource(viz)*/}
+
+                    <Drawer
+                        anchor={"left"}
+                        open={filtersTrigger}
+                        onClose={() => console.log("Close Drawer")}
+                    >
+                        <Filters open={filtersTrigger} data={filter} />
+                    </Drawer>
+
+
                     <Box
                         display="flex"
                         justifyContent="center"
@@ -120,7 +127,10 @@ export default function GraphData({ close, viz }) {
                                     <Typography variant="subtitle1" gutterBottom>
                                         {currentGraph === null ? (null) : currentGraph.description}
                                     </Typography>
+                                    <Button variant="outlined" onClick={() => setOpenFilters(true)}>Filter</Button>
+
                                 </CardContent>
+
                             </Card>
                         </Container>
                     </Box>
@@ -148,7 +158,6 @@ export default function GraphData({ close, viz }) {
                                             src={visualization.img}
                                                 alt={visualization} />
                                     </CardContent>
-
                                 </Card>
                                     </>
                                 ))}
