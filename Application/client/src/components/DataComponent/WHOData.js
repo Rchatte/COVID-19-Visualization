@@ -42,7 +42,7 @@ const WHOData = () => {
             id: 2,
             src: <World_Map_Death_Cases/>,
             visualization: "World Map",
-            description: "Total Covid Deaths"
+            description: "Total COVID-19 Deaths"
         },
         {
         id: 3,

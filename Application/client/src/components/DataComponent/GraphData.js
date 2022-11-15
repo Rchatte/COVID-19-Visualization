@@ -14,7 +14,7 @@ import USAFactsData from "./USAFactsData";
 import CDCData from "./CDCData";
 import WHOData from "./WHOData";
 import CDPHData from "./CDPHData";
-import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
+import LineChartUSAFACTSTotalOverTime from "../Visualizations/LineChartUSAFACTSTotalOverTime";
 import Treemap from "../Visualizations/TreeMap";
 import PieChartContinentVaccines from "../Visualizations/PieChartContinentVaccines";
 import { useBootstrapBreakpoints } from "react-bootstrap/esm/ThemeProvider";
@@ -73,13 +73,14 @@ export default function GraphData({ close, viz }) {
 
     const showVisualType = (type, url) => {
         switch (type) {
-            case "line-chart":
-                return <LineChartWithZoom url={url} height={400} width={600} />
+            case "line-chart-USA-FACTS-total-over-time":
+                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} />
             case "tree-map":
-                return <Treemap url={url} height={400} width={600} />
-                return <LineChartWithZoom url={url} height={400} width={800} />
+                return <Treemap url={url} height={400} width={700} />
+                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} />
             case "tree-map":
-                return <Treemap url={url} height={400} width={800} />
+                return <Treemap url={url} height={400} width={700} />
+
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
@@ -121,7 +122,7 @@ export default function GraphData({ close, viz }) {
                             <Card sx={{ minHeight: 200 }}>
                                 <CardContent>
                                     <Typography variant="h3" gutterBottom>
-                                        {currentGraph.type === null ? (null) : currentGraph.type}
+                                        {currentGraph.type === null ? (null) : currentGraph.title}
                                     </Typography>
 
                                     <Typography variant="subtitle1" gutterBottom>
@@ -149,7 +150,7 @@ export default function GraphData({ close, viz }) {
                                 <Card>
                                     <CardContent>
                                         <Typography variant="subtitle1" gutterBottom>
-                                            { visualization.type }
+                                            { visualization.title }
                                         </Typography>
                                         <img
                                             id={visualization.type}

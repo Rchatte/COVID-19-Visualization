@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
+import LineChartUSAFACTSTotalOverTime from "../Visualizations/LineChartUSAFACTSTotalOverTime";
 
 
 export default function D3Data() {

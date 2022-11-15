@@ -14,7 +14,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/ChevronRight';
 
-import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
+import LineChartUSAFACTSTotalOverTime from "../Visualizations/LineChartUSAFACTSTotalOverTime";
 import Sidebar from "../NavbarComponent/Sidebar";
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from "react-router-dom";

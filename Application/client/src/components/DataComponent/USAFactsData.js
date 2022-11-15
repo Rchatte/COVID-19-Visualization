@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { Grid, Button } from "@mui/material"
 import Card from "../ContentComponent/Cards"
-import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
+import LineChartUSAFACTSTotalOverTime from "../Visualizations/LineChartUSAFACTSTotalOverTime";
 import Treemap from "../Visualizations/TreeMap";
 import ShowVisualization from './ShowVisualization';
 import LineChartTotalCases from "../Visualizations/LineChartTotalCases";
@@ -32,7 +32,7 @@ const USAFactsData = () => {
         // src section is the visualization component which goes to the card component to display a preview of the visualization
         {
         id: 1,
-        src: <LineChartWithZoom height={400} width={800} />,
+        src: <LineChartUSAFACTSTotalOverTime height={400} width={800} />,
         visualization: "Line Chart",
         description: "U.S COVID-19 deaths since 2020"
         },

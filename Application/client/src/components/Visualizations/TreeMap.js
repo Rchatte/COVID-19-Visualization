@@ -8,6 +8,7 @@ let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_u
 
 
 export default function Treemap(props){
+    console.log("Tree map called")
     return(
         <g>
             <svg id={"my_dataviz_tree_map"}  ref={Treemap_Setup(props)} ></svg>
@@ -111,12 +112,12 @@ function Treemap_Setup(props){
         root = root.sum(function(d){ return d.value})
 
 
-        let title = "Deaths Per States and Counties"
-        drawTreeMap(root,width,height,margin,stateNames,State_County_Data_lists,id,svgName,is_Interactive,title)
+        // let title = "Deaths Per States and Counties"
+        drawTreeMap(root,width,height,margin,stateNames,State_County_Data_lists,id,svgName,is_Interactive)
     })
 }
 
-function drawTreeMap(root,width,height,margin,middleLayerNames,lowerLayerData,id,svgName,is_Interactive,title){
+function drawTreeMap(root,width,height,margin,middleLayerNames,lowerLayerData,id,svgName,is_Interactive){
     //------------------------- SVG HERE --------------------------------------------------------------------------
 
     // append the svg object to the body of the page
@@ -129,17 +130,17 @@ function drawTreeMap(root,width,height,margin,middleLayerNames,lowerLayerData,id
         .attr("transform",
             `translate(${margin.left}, ${margin.top})`);
 
-    //Title
-    //Dont show title if not interactive TEMP
-    if(is_Interactive){
-        svg.append("text")
-            .attr("x", (width / 2))
-            .attr("y", 0 - (margin.top / 3))
-            .attr("text-anchor", "middle")
-            .style("font-size", "25px")
-            .style("text-decoration", "underline")
-            .text(title);
-    }
+    // //Title
+    // //Dont show title if not interactive TEMP
+    // if(is_Interactive){
+    //     svg.append("text")
+    //         .attr("x", (width / 2))
+    //         .attr("y", 0 - (margin.top / 3))
+    //         .attr("text-anchor", "middle")
+    //         .style("font-size", "25px")
+    //         .style("text-decoration", "underline")
+    //         .text(title);
+    // }
     if(is_Interactive){
         var focusText = svg
             .append('g')

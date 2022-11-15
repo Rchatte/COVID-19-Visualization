@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import ListItemIcon from '@mui/material/ListItemIcon';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
+import LineChartUSAFACTSTotalOverTime from "../Visualizations/LineChartUSAFACTSTotalOverTime";
 import Treemap from "../Visualizations/TreeMap";
 import Filters from "../FiltersComponent/Filters";
 
@@ -77,7 +77,7 @@ export default function VisualizationDisplay(props) {
         console.log(filters);
         switch (data.type) {
             case "line-chart":
-                return <LineChartWithZoom url={data.link1} height={400} width={600} />
+                return <LineChartUSAFACTSTotalOverTime url={data.link1} height={400} width={600} />
             case "tree-map":
                 return <Treemap url={data.link1} height={400} width={600} />
             default:

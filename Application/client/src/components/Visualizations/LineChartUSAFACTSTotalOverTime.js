@@ -41,7 +41,7 @@ const createLineGraph = function(url_value,width,height) {
 
             //TODO: Modify to make more effecent Later
             dates.forEach(date => {
-                let value = {date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (data, d => d[date])};
+                let value = {date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (d3.sum(data, d => d[date]))};
                 sorted_data.push(value)
     
             })
