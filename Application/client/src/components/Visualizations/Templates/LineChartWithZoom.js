@@ -3,7 +3,7 @@ import {Button} from "@mui/material"
 import * as d3 from 'd3';
 
 // Using Fetch if needed
-let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
+// let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
 var today = new Date(); //today's date
 var lastUpdated = new Date('2022-10-27T10:55:00'); //the last date of the dataset, to be updated
 var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime()))/(60 * 60 * 1000); //get the Hours between these two dates ^
@@ -15,10 +15,9 @@ export default function LineChartWithZoom(props){
         props.close(true);
     }
 
-    console.log(props.filter);
     return(
         <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height)} ></svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url,props.width,props.height)} ></svg>
         </g>
     )
 
@@ -47,10 +46,7 @@ const createLineGraph = function(url_value,width,height) {
             // label.innerHTML = show_text
     
             // append the svg object to the body of the page
-    
-            console.log("Updated sorted data.")
-            console.log(lastUpdated)
-            console.log(today)
+
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
     
         }); 
@@ -58,9 +54,6 @@ const createLineGraph = function(url_value,width,height) {
     else{
         d3.csv(url_value).then(data => {
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
-            console.log("Didn't update the sorted_data.")
-            console.log(lastUpdated)
-            console.log(today)
         })   
     }
 }
@@ -179,7 +172,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             )
     });
 
-    console.log(svg)
+
     //Hovering
 
     svg.on('mouseover', mouseover)

@@ -60,9 +60,8 @@ export default function VisualizationDisplay(props) {
       );
 
       useEffect(() => {
-        console.log(props.data) // The entire json 
+         // The entire json
           setData(props.data);
-          console.log(props.filters);
         //setVisualState(props.visual); // 
         setFilters(props.filters);
       }, [])
@@ -74,7 +73,6 @@ export default function VisualizationDisplay(props) {
       // Filters are then applied to charts
 
       const showVisualType = (data, filters) => {
-        console.log(filters);
         switch (data.type) {
             case "line-chart":
                 return <LineChartUSAFACTSTotalOverTime url={data.link1} height={400} width={600} />

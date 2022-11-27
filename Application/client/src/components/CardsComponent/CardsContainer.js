@@ -20,7 +20,7 @@ export default function CardsContainer(props) {
     const onButtonClick = (value) => {
         setCurrentCard(value)
         setChangeContent(true) 
-        console.log(value)
+
     }
 
     const handleClose = () => {

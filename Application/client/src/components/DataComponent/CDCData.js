@@ -16,7 +16,7 @@ const CDCData = () => {
     const onButtonClick = (value) => {
         setCurrentCard(value)
         setChangeContent(true) 
-        console.log(value)
+
     }
     
     const handleClose = () => {
@@ -24,7 +24,7 @@ const CDCData = () => {
     }
 
     useEffect(() => {
-        console.log("Change is being performed");
+
     }, [currentCard])
 
     //----------------------------------------

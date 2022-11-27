@@ -3,12 +3,11 @@ import {Button} from "@mui/material"
 import * as d3 from 'd3';
 
 // Using Fetch if needed
-let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
-
 
 
 export default function Treemap(props){
-    console.log("Tree map called")
+    console.log("Tree Map URL")
+    console.log(props.url)
     return(
         <g>
             <svg id={"my_dataviz_tree_map"}  ref={Treemap_Setup(props)} ></svg>
@@ -25,14 +24,13 @@ function Treemap_Setup(props){
 
     let id = "treemap"
     let svgName = "my_dataviz_tree_map"
-    let url_data= "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
+
 
     if(props.height == null){
-        console.log("NULLL")
+
         height = 200
     }
     else{
-        console.log("NOt NULLL")
         height = props.height
     }
 
@@ -55,7 +53,7 @@ function Treemap_Setup(props){
     width = width - margin.left - margin.right
     height = height - margin.top - margin.bottom;
 
-    console.log(props.url);
+
 
 
     // read json data
@@ -208,7 +206,7 @@ function drawTreeMap(root,width,height,margin,middleLayerNames,lowerLayerData,id
         .on('mouseover', function (event,d) {
             //Setting text for mouseover
             if(is_Interactive){
-                focusText.html("State: "+d.parent.data.name+" | Total Deaths:"+lowerLayerData[d.parent.data.name]['total']
+                focusText.html("State: "+d.parent.data.name+" | Total :"+lowerLayerData[d.parent.data.name]['total']
                     +"\t County: "+d.data.name+" | Total: "+d.data.value)
                 d3.select(this)
                     .style("opacity", .3)

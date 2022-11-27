@@ -3,22 +3,24 @@ import {Button} from "@mui/material"
 import * as d3 from 'd3';
 
 // Using Fetch if needed
-let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
 var today = new Date(); //today's date
 var lastUpdated = new Date('2022-10-27T10:55:00'); //the last date of the dataset, to be updated
 var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime()))/(60 * 60 * 1000); //get the Hours between these two dates ^
 let sorted_data = [];
 
 export default function LineChartUSAFACTSTotalOverTime(props){
+
+    console.log("Line Chart URL")
+    console.log(props.url)
+
     today = new Date(); //today's date
     const handleButtonClose = () => {
         props.close(true);
     }
 
-    console.log(props.filter);
     return(
         <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(url_value,props.width,props.height)} ></svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url,props.width,props.height)} ></svg>
         </g>
     )
 
@@ -33,9 +35,6 @@ const createLineGraph = function(url_value,width,height) {
         d3.csv(url_value).then(data => {
 
             const dates = data.columns.splice(4)
-            console.log("TEST-----------")
-            console.log(dates)
-            console.log(data)
 
             sorted_data = [] //empty sorted_data, outdated data
 
@@ -51,9 +50,7 @@ const createLineGraph = function(url_value,width,height) {
     
             // append the svg object to the body of the page
     
-            console.log("Updated sorted data.")
-            console.log(lastUpdated)
-            console.log(today)
+
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
     
         }); 
@@ -61,9 +58,6 @@ const createLineGraph = function(url_value,width,height) {
     else{
         d3.csv(url_value).then(data => {
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
-            console.log("Didn't update the sorted_data.")
-            console.log(lastUpdated)
-            console.log(today)
         })   
     }
 }
@@ -182,7 +176,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             )
     });
 
-    console.log(svg)
+
     //Hovering
 
     svg.on('mouseover', mouseover)

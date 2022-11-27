@@ -8,6 +8,7 @@ import * as d3 from 'd3';
 
 
 export default function World_Map_Death_Cases(props){
+
     return(
         <g>
             <svg id={"my_dataviz_World_Map_Total_Death"}  ref={Map_Setup(props,"my_dataviz_World_Map_Total_Death")} ></svg>

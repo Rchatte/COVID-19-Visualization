@@ -16,8 +16,7 @@ const WHOData = () => {
     // Updates the value to know which graph to pull from
     const onButtonClick = (value) => {
         setCurrentCard(value)
-        setChangeContent(true) 
-        console.log(value)
+        setChangeContent(true)
     }
     
     const handleClose = () => {
@@ -25,7 +24,7 @@ const WHOData = () => {
     }
 
     useEffect(() => {
-        console.log("Change is being performed");
+
     }, [currentCard])
 
     //----------------------------------------

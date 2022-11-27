@@ -111,8 +111,7 @@ export default function Navbar({ handleXChangeParent, handleYChangeParent, handl
     };
 
     useEffect(() => {
-        console.log(selectedIndex)
-        console.log(selectedY)
+
     }, [selectedIndex])
 
     return (

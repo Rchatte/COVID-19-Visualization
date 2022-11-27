@@ -17,7 +17,7 @@ export default function Filters(props) {
     useEffect(() => {
 
         setFilters(props.data);
-        console.log(props.data);
+
         
     }, [props.data])
 
@@ -31,7 +31,7 @@ export default function Filters(props) {
             >
                 <List>
                     {
-                        console.log(filters)
+
                     }
                 </List>
                 <Divider />

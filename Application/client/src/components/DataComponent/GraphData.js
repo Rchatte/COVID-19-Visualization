@@ -23,6 +23,7 @@ import { DATA } from "./DataExports.js";
 import "./row.css";
 import { select } from "d3";
 import Filters from "../FiltersComponent/Filters.js"
+import World_Map_Death_Cases from "../Visualizations/World_Map_Death_Cases";
 
 
 
@@ -45,10 +46,9 @@ export default function GraphData({ close, viz }) {
     }
 
     const updateGraph = (selected) => {
-        console.log(selected)
         graphs.map((items) => {
             if (items.type === selected) {
-                console.log(items)
+
                 setCurrentGraph(items)
                 setFilter(items.filters)
             }
@@ -60,7 +60,7 @@ export default function GraphData({ close, viz }) {
     useEffect(() => {
         DATA.map((item) => {
             if (item.title === viz) {
-                console.log("Current OBJ: ",item);
+
                 setSelectedVisual(item);
                 setGraphs(item.graphs)
                 setCurrentGraph(item.graphs[0]);
@@ -75,11 +75,12 @@ export default function GraphData({ close, viz }) {
         switch (type) {
             case "line-chart-USA-FACTS-total-over-time":
                 return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} />
+
             case "tree-map":
                 return <Treemap url={url} height={400} width={700} />
-                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} />
-            case "tree-map":
-                return <Treemap url={url} height={400} width={700} />
+
+            case "World_Map":
+                return <World_Map_Death_Cases url={url} height={400} width={700} />
 
             case "CDC":
                 return <CDCData />

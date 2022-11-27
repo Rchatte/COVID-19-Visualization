@@ -62,6 +62,20 @@ export const DATA = [
                 },
             },
 
+
+            {
+                type: "World_Map",
+                title: "US COVID-19 Cases By Country",
+                description: "Data provided by static usafacts For COVID-19 Cases in each state and county",
+                img: TreeMapImg,
+                link1: "https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv",
+                filters: {
+                    color: "color",
+                    height: 400,
+                    width: 800,
+                },
+            },
+
             {
                 type: "graph-type",
                 img: Defualt,

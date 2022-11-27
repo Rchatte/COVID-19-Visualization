@@ -44,7 +44,7 @@ const DonutChartCACasesByEthnicity = ({width, height}) => {
             }
         }
 
-        console.log((ethnicityRaceCases))
+
         // variable which creats the tooltip to hover over each slice
         const tooldiv = d3.select('#chartArea')
                         .append('div')
