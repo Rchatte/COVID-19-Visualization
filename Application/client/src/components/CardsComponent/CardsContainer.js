@@ -20,24 +20,19 @@ export default function CardsContainer(props) {
     const onButtonClick = (value) => {
         setCurrentCard(value)
         setChangeContent(true) 
-        console.log(value)
+
     }
 
     const handleClose = () => {
         setChangeContent(false)
     }
 
-    useEffect(() => {
-        console.log("Change is being performed");
-    }, [currentCard])
-
-
+   
     return(
         <>
         { /* What this is doing is checking if changeCcontent is true or false.  */}
         { /* True: updates the current container view -> Show all graphs to user.  */}
         { /* False: Continue showing the grid of options to click from. */}
-
 
         { changeContent ? (<GraphData close={handleClose} viz={currentCard}/>) : 
            <Grid 
@@ -48,17 +43,31 @@ export default function CardsContainer(props) {
            justifyContent="center"
            alignItems="center"
            >
+
                 <Grid item xs={6}>
-                    <Card setCardView={onButtonClick} image={img1} body={"Visualizations from World Health Organization Data"} title={"World Health Organization"} />
+                        <Card
+                            setCardView={onButtonClick}
+                            image={img1}
+                            body={"Visualizations from World Health Organization Data"}
+                            title={"World Health Organization"} />
                 </Grid>
                 <Grid item xs={6}>
-                    <Card setCardView={onButtonClick}  image={img2} body={"Visualizations from USA Facts Data"} title={"USA Facts"} />
+                        <Card
+                            setCardView={onButtonClick}
+                            image={img2}
+                            body={"Visualizations from USA Facts Data"}
+                            title={"USA Facts"} />
                 </Grid>
                 <Grid item xs={6}>
-                    <Card setCardView={onButtonClick}  image={img3} body={"Visualizations from CDC Data"} title={"CDC"} />
+                        <Card setCardView={onButtonClick}
+                            image={img3}
+                            body={"Visualizations from CDC Data"}
+                            title={"CDC"} />
                 </Grid>
                 <Grid item xs={6}>
-                    <Card setCardView={onButtonClick}  image={img4} body={"Visualizations from California Department of Public Health Data"} title={"California Department of Public Health"} />
+                        <Card setCardView={onButtonClick}
+                            image={img4} 
+                            body={"Visualizations from California Department of Public Health Data"} title={"California Department of Public Health"} />
                 </Grid>
             </Grid>
         }

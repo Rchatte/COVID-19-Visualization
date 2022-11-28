@@ -1,64 +1,75 @@
-import React, { Component, useState }  from 'react';
+import React, { Component, useState, useEffect }  from 'react';
 import {Button} from "@mui/material"
 import * as d3 from 'd3';
 
 // Using Fetch if needed
-let url_value = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv"//url_for_data.value
-export default function LineChartWithZoom(props){
+// let url_value = "https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv"//url_for_data.value
+var today = new Date(); //today's date
+var lastUpdated = new Date('2022-10-27T10:55:00'); //the last date of the dataset, to be updated
+var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime()))/(60 * 60 * 1000); //get the Hours between these two dates ^
+let sorted_data = [];
+
+export default function LineChartTotalCases(props){
+    today = new Date(); //today's date
     const handleButtonClose = () => {
         props.close(true);
     }
-    
+
     return(
         <g>
-            <svg id={"my_dataviz"} ref={createLineGraph(url_value,props.width,props.height)} >
-            </svg>
-            <Button size="small" onClick={handleButtonClose}>Return to Visualizations</Button>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url,props.width,props.height)} ></svg>
         </g>
     )
-
 
 }
 
 
 const createLineGraph = function(url_value,width,height) {
-    d3.csv(url_value).then(data => {
+    let id = "lineGraph"
+    let tagName = "my_dataviz_line"
+    if(betweenDates > 24 || sorted_data.length == 0){
+        lastUpdated = today;
+        d3.csv(url_value).then(data => {
 
-        const dates = data.columns.splice(4)
+            const dates = data.columns.splice(4)
 
-        let sorted_data = []
+            sorted_data = [] //empty sorted_data, outdated data
 
-        let id = "lineGraph"
-        let tagName = "my_dataviz"
+            //TODO: Modify to make more effecent Later
+            dates.forEach(date => {
+                let value = {date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (d3.sum(data, d => d[date]))};
+                sorted_data.push(value)
+    
+            })
+            
+    
+            // label.innerHTML = show_text
+    
+            // append the svg object to the body of the page
 
-        //TODO: Modify to make more effecent Later
-        dates.forEach(date => {
-            let value = {date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (d3.sum(data, d => d[date]))};
-            sorted_data.push(value)
-
-        })
-
-        // label.innerHTML = show_text
-
-        // append the svg object to the body of the page
-
-
-        draw_linegraph_over_time(id, tagName, sorted_data, width, height)
-
-    });
+            draw_linegraph_over_time(id, tagName, sorted_data, width, height)
+    
+        }); 
+    }
+    else{
+        d3.csv(url_value).then(data => {
+            draw_linegraph_over_time(id, tagName, sorted_data, width, height)
+        })   
+    }
 }
 
 
+
 const draw_linegraph_over_time = function(id,tagName,data,width,height) {
+
 
     const margin = {top: 10, right: 30, bottom: 30, left: 60}
     width = width - margin.left - margin.right;
     height = height - margin.top - margin.bottom;
 
-
     // d3.select("#"+id).remove(); //What does this do?
     const svg = d3.select("#"+tagName)
-        // .append("svg")
+        //.append("svg")
         .attr("id", id)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -161,7 +172,6 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             )
     });
 
-    console.log(svg)
     //Hovering
 
     svg.on('mouseover', mouseover)

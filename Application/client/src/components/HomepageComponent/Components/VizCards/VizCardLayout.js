@@ -7,7 +7,6 @@ import {
 import Grid from '@mui/material/Grid';
 
 // Vizualisation imports
-import LineChartWithZoom from "../../../Visualizations/LineChartWithZoom";
    
 const VizCardLayout = ({graph}) => {
   // Starting visualization cards
@@ -16,12 +15,12 @@ const VizCardLayout = ({graph}) => {
   const [visuals, setVisuals] = useState([
       {
       id: 1,
-      src: <LineChartWithZoom height={500} width={600}/>,
+      src: "",
       visualization: "Line Chart",
       description: "U.S COVID-19 deaths since 2020"
       },
       {
-      id: 1,
+      id: 2,
       src: "A visualization",
       visualization: "A Visualization Type",
       description: "A Description"

@@ -6,24 +6,29 @@ import MuiAppBar from '@mui/material/AppBar';
 import VizCardLayout from "./Components/VizCards/VizCardLayout";
 import CardsContainer from "../CardsComponent/CardsContainer.js"
 import {
-    Button, CardActionArea, CardActions, Typography, Box, Card, CardContent,
-    CardMedia, List, ListItem, Toolbar, Grid, Divider, ListItemText, ListItemButton, IconButton,
-    CssBaseline, ListItemIcon
+    Button, Container , CardActionArea, CardActions, Typography, Box, Card, CardContent,
+    CardMedia, AppBar, List, ListItem, Toolbar, Grid, Divider, ListItemText, ListItemButton, IconButton,
+    CssBaseline, ListItemIcon, Slide, Stack, Link
 } from "@mui/material";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/ChevronRight';
 
-<<<<<<< HEAD
-import VizCard from "./Components/VizCards/VizCard";
-=======
->>>>>>> eb85cf22dfabdc3f6e06d12f8e3a8e2e9d08e151
-import LineChartWithZoom from "../Visualizations/LineChartWithZoom";
+import LineChartUSAFACTSTotalOverTime from "../Visualizations/LineChartUSAFACTSTotalOverTime";
 import Sidebar from "../NavbarComponent/Sidebar";
+import AdbIcon from '@mui/icons-material/Adb';
+import { useNavigate } from "react-router-dom";
+
 
 
       
 const drawerWidth = 260;
+const tabs = [
+    'World Health Organization',
+    'USA Facts', 
+    'CDC', 
+    'CDPH'
+];
   
 
 export default function Homepage(){
@@ -34,138 +39,61 @@ export default function Homepage(){
     const [yAxis, setYaxis] = useState([]);
     const [region, setRegion] = useState();
     const [selectedCard, setSelectedCard] = useState('');
-
-    { /* Functions are being passed to child component -> Navbar  */ }
-
-    const handleYChange = (value) => {
-        setYaxis(value)
-    }
-    const handleRegionChange = (value) => {
-        setRegion(value)
-    }   
-    const handleDateChange = (value) =>{
-        setDate(value)
-    }
-
-              
-    const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-        ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-        }),
-    );
-    const AppBar = styled(MuiAppBar, {
-        shouldForwardProp: (prop) => prop !== 'open',
-      })(({ theme, open }) => ({
-        transition: theme.transitions.create(['margin', 'width'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        ...(open && {
-          width: `calc(100% - ${drawerWidth}px)`,
-          marginLeft: `${drawerWidth}px`,
-          transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        }),
-    }));
-    
-    const DrawerHeader = styled('div')(({ theme }) => ({
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    }));
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    }
-    
-    const handleDrawerClose = () => {
-        setOpen(false);
-    }
+    const [menu, setMenu] = useState(true);
+    const containerRef = React.useRef(null);
     
     useEffect(() => {
-        console.log(date)
-        console.log(yAxis)
-    },[yAxis, region, date]) 
+
+    },[]) 
 
     return(
         <>
- 
-        <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                { /* Upper Toolbar */}
-                <Toolbar>
+
+        <Box sx={{ flexGrow: 1 }}>
+            
+            <AppBar position="static">
+            <Toolbar>
                 <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
+                    size="large"
                     edge="start"
-                    sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
                 >
-                    <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    Dashboard
-                </Typography>
-                </Toolbar>
+
+                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                        mr: 2,
+                        display: { xs: 'none', md: 'flex' },
+                        fontFamily: 'monospace',
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'inherit',
+                        textDecoration: 'none',
+                        }}
+                    >
+                        Senior Design
+          </Typography>
+                <Button color="inherit">Dashboard</Button>
+                <Button color="inherit">About</Button>
+                <Button color="inherit">Data types</Button>
+            </Toolbar>
             </AppBar>
-                <Drawer
-                    sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                    }}
-                    variant="persistent"
-                    anchor="left"
-                    open={open}
-                >
-                <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                </IconButton>
-                </DrawerHeader>
-                <Divider />
-                    <Sidebar handleDateChangeParent={handleDateChange}/>
-                    {/* Navbar component.  */}
-                    {/* Navbar Just holds the sidebar values.  */}
+        </Box>
 
-                <Divider />
-            </Drawer>
+           
+                
 
-        <Main open={open}>
-        <DrawerHeader />
-
+        <Container sx={{ mt: 3 } }>
             <CardsContainer />
-
-
-        </Main>
-<<<<<<< HEAD
-        </Box>  
+        </Container>
         </>
-=======
-        </Box> 
-        </> 
->>>>>>> eb85cf22dfabdc3f6e06d12f8e3a8e2e9d08e151
+
     )
 }

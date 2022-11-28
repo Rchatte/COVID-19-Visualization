@@ -114,8 +114,6 @@ export default function Sidebar({ handleYChangeParent, handleRegionChangeParent,
     };
 
     useEffect(() => {
-        console.log(selectedIndex)
-        console.log(selectedY)
     }, [selectedIndex])
 
     return (
