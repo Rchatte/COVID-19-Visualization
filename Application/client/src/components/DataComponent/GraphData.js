@@ -153,6 +153,16 @@ export default function GraphData({ close, viz }) {
                                         <Typography variant="subtitle1" gutterBottom>
                                             { visualization.title }
                                         </Typography>
+
+                                        {
+                                            /*
+                                            Nov 28 2022: 
+                                            Note: Once a new graph is clicked on the type is unique to each value in array (DataExports.js)
+                                            Just need to differenciate the 'type' for each item in array.
+                                            
+
+                                            */
+                                        }
                                         <img
                                             id={visualization.type}
                                             onClick={() => updateGraph(visualization.type)}

@@ -1,9 +1,14 @@
 import React from "react"
-
 import LineGraphImg from "../images/LineGraph.png"
 import TreeMapImg from "../images/TreeMap.png"
 import Defualt from "../images/NoImg.png"
 
+
+{
+    /*
+    Each 'type' value should be unique when updating a graph.
+    */
+}
 
 export const DATA = [
     {
