@@ -103,7 +103,9 @@ export default function GraphData({ close, viz }) {
                     <Drawer
                         anchor={"left"}
                         open={filtersTrigger}
-                        onClose={() => console.log("Close Drawer")}
+                        onClose={() => setOpenFilters(false) }
+                        onKeyDown={() => setOpenFilters(false) }
+
                     >
                         <Filters open={filtersTrigger} data={filter} />
                     </Drawer>
@@ -129,7 +131,7 @@ export default function GraphData({ close, viz }) {
                                     <Typography variant="subtitle1" gutterBottom>
                                         {currentGraph === null ? (null) : currentGraph.description}
                                     </Typography>
-                                    <Button variant="outlined" onClick={() => setOpenFilters(true)}>Filter</Button>
+                                    <Button variant="contained" onClick={() => setOpenFilters(true)}>Filter</Button>
 
                                 </CardContent>
 

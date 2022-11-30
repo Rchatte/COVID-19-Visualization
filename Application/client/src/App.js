@@ -5,7 +5,10 @@ import Homepage from './components/HomepageComponent/Homepage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GraphData from './components/DataComponent/GraphData';
 import VisualizationDisplay from './components/VisualizationDisplay/VisualizationDisplay';
-
+import Navbar from './components/NavbarComponent/Navbar';
+import SourcesComponent from './components/SourcesComponent/SourcesComponent';
+import AboutComponent from './components/AboutComponent/AboutComponent';
+import SponsorsComponent from './components/SponsorsComponent/SponsorsComponent';
 
 /* Folder structure is divided as follows: client (Front end) and server (Backend) */
 /* We might not need a backend so ignore for now. */
@@ -26,11 +29,33 @@ Packages added so far: (NPM)
 */
 
 
+/*
+  Nov 29 2022: 
+  About page
+  Sources page 
+  Sponsor page 
+
+  All have been added and ready to work on.
+
+
+
+*/
+
+
 
 function App() {
   return (
     <div className="app">
-      <Homepage/>
+      { /* Navbar has been added in the form of a component. So all routes will include the navbar. Nov 29, 2022 */ }
+      <Navbar/>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Homepage/>}></Route>  
+          <Route exact path="/About" element={<AboutComponent/>}></Route>  
+          <Route exact path="/Sources" element={<SourcesComponent/>}></Route>  
+          <Route exact path="/Sponsors" element={<SponsorsComponent/>}></Route>  
+        </Routes>
+      </Router>
    </div>
   );
 }

@@ -41,54 +41,20 @@ export default function Homepage(){
     const [selectedCard, setSelectedCard] = useState('');
     const [menu, setMenu] = useState(true);
     const containerRef = React.useRef(null);
+    const [refresh, setRefresh] = useState(false);
     
     useEffect(() => {
-
-    },[]) 
+        setRefresh(false);
+    },[refresh]) 
 
     return(
-        <>
-
-        <Box sx={{ flexGrow: 1 }}>
-            
-            <AppBar position="static">
-            <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                </IconButton>
-
-                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                        }}
-                    >
-                        Senior Design
-          </Typography>
-                <Button color="inherit">Dashboard</Button>
-                <Button color="inherit">About</Button>
-                <Button color="inherit">Data types</Button>
-            </Toolbar>
-            </AppBar>
-        </Box>
-
-           
-                
+        <>  
+        {
+            /*  Nov 29, 2022
+                Removed the Navbar from here. 
+                The navbar is not called from Navbar.js at app.js
+            */
+        }
 
         <Container sx={{ mt: 3 } }>
             <CardsContainer />

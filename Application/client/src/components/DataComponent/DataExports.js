@@ -22,7 +22,10 @@ export const DATA = [
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
                 link2: "",
                 filters: {
-                    color: "color",
+                    dateStart: "",
+                    dateEnd: "",
+                    color1: "color",
+                    color2: "color",
                     height: 400,
                     width: 800,
                 },
@@ -48,7 +51,10 @@ export const DATA = [
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv",
                 link2: "",
                 filters: {
-                    color: "color",
+                    dateStart: "",
+                    dateEnd: "",
+                    color1: "color",
+                    color2: "color",
                     height: 400,
                     width: 800,
                 },
