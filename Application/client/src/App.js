@@ -50,10 +50,10 @@ function App() {
       <Navbar/>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Homepage/>}></Route>  
-          <Route exact path="/About" element={<AboutComponent/>}></Route>  
-          <Route exact path="/Sources" element={<SourcesComponent/>}></Route>  
-          <Route exact path="/Sponsors" element={<SponsorsComponent/>}></Route>  
+          <Route exact path="COVID-19-Visualization/" element={<Homepage/>}></Route>  
+          <Route exact path="COVID-19-Visualization/About" element={<AboutComponent/>}></Route>  
+          <Route exact path="COVID-19-Visualization/Sources" element={<SourcesComponent/>}></Route>  
+          <Route exact path="COVID-19-Visualization/Sponsors" element={<SponsorsComponent/>}></Route>  
         </Routes>
       </Router>
    </div>
