@@ -51,10 +51,10 @@ export default function Navbar() {
                     >
                         Senior Design
           </Typography>
-                <Button color="inherit" onClick={() => window.location.href="COVID-19-Visualization/" } >Dashboard</Button>
-                <Button color="inherit" onClick={() => window.location.href="COVID-19-Visualization/About"} >About</Button>
-                <Button color="inherit" onClick={() => window.location.href="COVID-19-Visualization/Sources" }>Sources</Button>
-                <Button color="inherit" onClick={() => window.location.href="COVID-19-Visualization/Sponsors" }>Sponsors</Button>
+                <Button color="inherit" onClick={() => window.location.href="/" } >Dashboard</Button>
+                <Button color="inherit" onClick={() => window.location.href="/About"} >About</Button>
+                <Button color="inherit" onClick={() => window.location.href="/Sources" }>Sources</Button>
+                <Button color="inherit" onClick={() => window.location.href="/Sponsors" }>Sponsors</Button>
             </Toolbar>
             </AppBar>
         </Box>
