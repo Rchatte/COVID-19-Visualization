@@ -33,11 +33,11 @@ export default function GraphData({ close, viz }) {
     { /* Button to close */ }
 
     // Contains the object in DATA with a specified title from home page.
-    const [ selectedVisual, setSelectedVisual] = useState(null);
-    const [ graphs, setGraphs] = useState([])
-    const [ currentGraph, setCurrentGraph] = useState([]);
-    const [ filter, setFilter] = useState({});
-    const [ filtersTrigger, setOpenFilters] = useState();
+    const [selectedVisual, setSelectedVisual] = useState(null);
+    const [graphs, setGraphs] = useState([])
+    const [currentGraph, setCurrentGraph] = useState([]);
+    const [filter, setFilter] = useState({});
+    const [filtersTrigger, setOpenFilters] = useState();
 
 
     const handleButtonClose = () => {
@@ -85,7 +85,7 @@ export default function GraphData({ close, viz }) {
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
-                return <CDPHData/>
+                return <CDPHData />
             default:
                 return null
         }
@@ -103,8 +103,8 @@ export default function GraphData({ close, viz }) {
                     <Drawer
                         anchor={"left"}
                         open={filtersTrigger}
-                        onClose={() => setOpenFilters(false) }
-                        onKeyDown={() => setOpenFilters(false) }
+                        onClose={() => setOpenFilters(false)}
+                        onKeyDown={() => setOpenFilters(false)}
 
                     >
                         <Filters open={filtersTrigger} data={filter} />
@@ -119,7 +119,7 @@ export default function GraphData({ close, viz }) {
 
                         {
                             currentGraph === null ? (null) : (showVisualType(currentGraph.type, currentGraph.link1))
-                            
+
                         }
                         <Container sx={{ pt: 1 }}>
                             <Card sx={{ minHeight: 200 }}>
@@ -131,14 +131,14 @@ export default function GraphData({ close, viz }) {
                                     <Typography variant="subtitle1" gutterBottom>
                                         {currentGraph === null ? (null) : currentGraph.description}
                                     </Typography>
-                                    <Button variant="contained" onClick={() => setOpenFilters(true)}>Filter</Button>
+                                    <Button variant="contained" onClick={() => setOpenFilters(true)}>Open Filters</Button>
 
                                 </CardContent>
 
                             </Card>
                         </Container>
                     </Box>
-                       
+
                     <Box>
 
                         <h2>{" Other Visualization"}</h2>
@@ -150,40 +150,40 @@ export default function GraphData({ close, viz }) {
                                 className="row__posters" direction="row" spacing={2.5}>
                                 {graphs.map(visualization => (
                                     <>
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant="subtitle1" gutterBottom>
-                                            { visualization.title }
-                                        </Typography>
+                                        <Card>
+                                            <CardContent>
+                                                <Typography variant="subtitle1" gutterBottom>
+                                                    {visualization.title}
+                                                </Typography>
 
-                                        {
-                                            /*
-                                            Nov 28 2022: 
-                                            Note: Once a new graph is clicked on the type is unique to each value in array (DataExports.js)
-                                            Just need to differenciate the 'type' for each item in array.
-                                            
-
-                                            */
-                                        }
-                                        <img
-                                            id={visualization.type}
-                                            onClick={() => updateGraph(visualization.type)}
-                                            className={"row__poster"}
-                                            src={visualization.img}
-                                                alt={visualization} />
-                                    </CardContent>
-                                </Card>
+                                                {
+                                                    /*
+                                                    Nov 28 2022: 
+                                                    Note: Once a new graph is clicked on the type is unique to each value in array (DataExports.js)
+                                                    Just need to differenciate the 'type' for each item in array.
+                                                    
+        
+                                                    */
+                                                }
+                                                <img
+                                                    id={visualization.type}
+                                                    onClick={() => updateGraph(visualization.type)}
+                                                    className={"row__poster"}
+                                                    src={visualization.img}
+                                                    alt={visualization} />
+                                            </CardContent>
+                                        </Card>
                                     </>
                                 ))}
                             </Stack>
                         </div>
                     </Box>
 
-                    <Button size="small" onClick={ handleButtonClose }>Return to Home Page</Button>
+                    <Button size="small" onClick={handleButtonClose}>Return to Home Page</Button>
                 </Container>
             </Box>
-                
-    
+
+
         </>
     )
 }
