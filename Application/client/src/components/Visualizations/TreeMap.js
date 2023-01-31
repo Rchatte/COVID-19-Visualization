@@ -5,13 +5,15 @@ import * as d3 from 'd3';
 
 
 export default function Treemap(props){
+
+
     return(
-        <g>
-            <svg id={"my_dataviz_tree_map"} ref={setUP(props)}></svg>
-            <div id="tooltip" className="hidden">
+        <g id="vizFrame">
+            <div id="tooltip">
                 <h2 id="tooltip_name"></h2>
                 <p id="tooltip_value"></p>
             </div>
+            <svg id={"my_dataviz_tree_map"} ref={setUP(props)}></svg>
         </g>
     )
 }
@@ -46,29 +48,27 @@ function setUP(props) {
     }
 
 
-    console.log("TreeMap")
-    let temp = document.getElementById(id)
-    console.log(temp)
-    temp = document.getElementById(svgName)
-    console.log(temp)
-
-
     // append the svg object to the body of the page
     const svg = d3.select("#"+ svgName)
-        .attr("id", id)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`)
         .style("font", "10px sans-serif");
 
-    const tooltip_name = svg.append("h2")
+
+    //Tooltips to display text on hover
+    d3.select("#tooltip")
+        .style("position", "absolute")
+        .style("top", 0)
+        .style("left", 0);
 
 
-    console.log("Start")
-    console.log(svg)
+    var tooltip_name = d3.select("#tooltip_name")
+    var tooltip_value = d3.select("#tooltip_value")
+        .style("font-size", "20px");
 
-    var tooltip = d3.select("#tooltip")
+
 
     // set the dimensions and margins of the graph
     height = props.height - margin.top - margin.bottom;
@@ -149,18 +149,30 @@ function setUP(props) {
                 (root)
 
 
-
-
-
-
-
-
-
             //Group is the svg itself that is being changed
             var group = svg.append("g")
-            // .call(drawTreeMap, root)
-            zoomin(root, group)
 
+
+            svg
+                .on("mouseenter",(event) => {
+                    d3.select("#tooltip").style("opacity",1)
+                })
+                .on("mouseleave",(event)=> {
+                    d3.select("#tooltip").style("opacity",0)
+                })
+
+
+
+            d3.select("#vizFrame") //Todo change to selecting the svg later
+                .on("mousemove", function(event) {
+                    var coords = d3.pointer(event);
+                    d3.select("#tooltip")
+                        .style("top", (coords[1] + 10) + "px")
+                        .style("left", (coords[0] + 10) + "px");
+                });
+
+
+            zoomin(root, group)
         })
 
 
@@ -196,9 +208,9 @@ function setUP(props) {
             .attr("fill", d => d === root ? colors.barColor : d.children ? colors.parentColor : colors.childrenColor)
             .attr("stroke", "#00ffc4")
             .on("mouseover", function(event,d){
-                console.log("X: " + event.clientX + " | " + "Y: " + event.clientY)
-                document.getElementById("tooltip_name").innerHTML = d.data.name
-                document.getElementById("tooltip_value").innerHTML = (d.value)
+
+                tooltip_name.text(d.data.name)
+                tooltip_value.text(d.value)
 
 
             });
@@ -224,10 +236,6 @@ function setUP(props) {
             .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
             .attr("font-weight", (d, i, nodes) => i === nodes.length - 1 ? "normal" : null)
             .text(d => d);
-
-
-
-
 
 
         group.call(position, root);
