@@ -1,10 +1,13 @@
-import React, { Component, useState }  from 'react';
+import React, { Component, useState,useEffect, useRef }  from 'react';
 import * as d3 from 'd3';
 
 // Using Fetch if needed
 
 
 export default function Treemap(props){
+    const svgRef = useRef(null);
+
+    useEffect(() => {setUP(props,svgRef)})
 
 
     return(
@@ -13,12 +16,12 @@ export default function Treemap(props){
                 <h2 id="tooltip_name"></h2>
                 <p id="tooltip_value"></p>
             </div>
-            <svg id={"my_dataviz_tree_map"} ref={setUP(props)}></svg>
+            <svg id={"my_dataviz_tree_map"} ref={svgRef}></svg>
         </g>
     )
 }
 
-function setUP(props) {
+function setUP(props,svgRef) {
 
 
     const colors = {barColor: "#00ffc4", parentColor: "#575278", childrenColor: "#27b694"};
@@ -49,7 +52,7 @@ function setUP(props) {
 
 
     // append the svg object to the body of the page
-    const svg = d3.select("#"+ svgName)
+    const svg = d3.select(svgRef.current)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -167,7 +170,7 @@ function setUP(props) {
                 .on("mousemove", function(event) {
                     var coords = d3.pointer(event);
                     d3.select("#tooltip")
-                        .style("top", (coords[1] + 10) + "px")
+                        .style("top" , (coords[1] + 10) + "px")
                         .style("left", (coords[0] + 10) + "px");
                 });
 
