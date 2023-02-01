@@ -318,5 +318,3 @@ function setUP(props, svgRef) {
 
 
 }
-
-
