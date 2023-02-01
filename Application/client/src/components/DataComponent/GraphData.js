@@ -27,7 +27,7 @@ import World_Map_Death_Cases from "../Visualizations/World_Map_Death_Cases";
 
 
 
-export default function GraphData({ close, viz }) {
+export default function GraphData(props) {
 
     { /* Gather all data needed to complete the graph? */ }
     { /* Button to close */ }
@@ -39,10 +39,14 @@ export default function GraphData({ close, viz }) {
     const [filter, setFilter] = useState({});
     const [filtersTrigger, setOpenFilters] = useState();
 
+    // used to store the starting date for the filter
+    const [startDate, setBeginningDate] = useState(Date());
+    // used to store the ending date for the filter
+    const [endDate, setEndingDate] = useState(Date());
 
     const handleButtonClose = () => {
         setSelectedVisual(null);
-        close(true)
+        props.close(true)
     }
 
     const updateGraph = (selected) => {
@@ -59,7 +63,7 @@ export default function GraphData({ close, viz }) {
     // react component return ()
     useEffect(() => {
         DATA.map((item) => {
-            if (item.title === viz) {
+            if (item.title === props.viz) {
 
                 setSelectedVisual(item);
                 setGraphs(item.graphs)
@@ -68,14 +72,13 @@ export default function GraphData({ close, viz }) {
                 return;
             }
         })
-    }, [viz])
+    }, [props.viz])
 
 
     const showVisualType = (type, url) => {
         switch (type) {
             case "line-chart-USA-FACTS-total-over-time":
-                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} />
-
+                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} startDate={startDate} endDate={endDate} />
             case "tree-map":
                 return <Treemap url={url} height={400} width={700} />
 
@@ -107,7 +110,9 @@ export default function GraphData({ close, viz }) {
                         onKeyDown={() => setOpenFilters(false)}
 
                     >
-                        <Filters open={filtersTrigger} data={filter} />
+                        {/* Send the useStates to the filters file to recieve the information */}
+                        <Filters open={filtersTrigger} data={filter} setBeginningDate={setBeginningDate}
+                            setEndingDate={setEndingDate} />
                     </Drawer>
 
 

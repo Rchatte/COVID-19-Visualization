@@ -10,6 +10,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import moment from "moment";
 import { TwitterPicker, CirclePicker } from 'react-color'
+import GraphData from "../DataComponent/GraphData";
 
 
 export default function Filters(props) {
@@ -17,24 +18,17 @@ export default function Filters(props) {
     const [filters, setFilters] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [startDate, setStartDate] = useState(moment());
-    const [endDate, setEndDate] = useState(moment(Date()));
+    const [endDate, setEndDate] = useState(moment());
     const [filterData, setFilterData] = useState(filters);
     const [color1, setColor1] = useState({ h: 0, s: 0, v: 68, a: 1 });
     const [color2, setColor2] = useState({ h: 0, s: 0, v: 68, a: 1 });
 
-    // Temp code -------
-    // ----- 1/28/22 -----///
-    // Code used to test handling the data
-
+    // Method which will set the dates for the filter
     const handleFilter = () => {
-        console.log(startDate);
-        console.log(endDate);
-        console.log(color1);
-        console.log(color2);
+        // using format() to make filtering easier compared to the default format of the desktop date picker
+        props.setBeginningDate(startDate.format('MM-DD-YYYY'));
+        props.setEndingDate(moment(endDate).format('MM-DD-YYYY'));
     }
-    // -----------------
-
-
 
     useEffect(() => {
         setFilters(props.data);
@@ -52,7 +46,7 @@ export default function Filters(props) {
                     <>
                         <DesktopDatePicker
                             label="Start Date"
-                            // inputFormat="mm/dd/yyyy"
+                            inputFormat="MM/dd/yyyy"
                             value={startDate}
                             onChange={(e) => setStartDate(e)}
                             renderInput={(params) => <TextField {...params} />}
@@ -64,7 +58,7 @@ export default function Filters(props) {
                     <>
                         <DesktopDatePicker
                             label="End Date"
-                            // inputFormat="mm/dd/yyyy"
+                            inputFormat="MM/dd/yyyy"
                             value={endDate}
                             onChange={(e) => setEndDate(e)}
                             renderInput={(params) => <TextField {...params} />}
