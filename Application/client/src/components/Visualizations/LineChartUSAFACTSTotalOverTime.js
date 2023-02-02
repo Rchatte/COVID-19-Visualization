@@ -1,14 +1,16 @@
-import React, { Component, useState, useEffect }  from 'react';
-import {Button} from "@mui/material"
+import React, { Component, useState, useEffect } from 'react';
+import { Button } from "@mui/material"
 import * as d3 from 'd3';
+import moment from "moment";
+import { sort } from 'd3';
 
 // Using Fetch if needed
 var today = new Date(); //today's date
 var lastUpdated = new Date('2022-10-27T10:55:00'); //the last date of the dataset, to be updated
-var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime()))/(60 * 60 * 1000); //get the Hours between these two dates ^
+var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime())) / (60 * 60 * 1000); //get the Hours between these two dates ^
 let sorted_data = [];
 
-export default function LineChartUSAFACTSTotalOverTime(props){
+export default function LineChartUSAFACTSTotalOverTime(props) {
 
     console.log("Line Chart URL")
     console.log(props.url)
@@ -18,61 +20,67 @@ export default function LineChartUSAFACTSTotalOverTime(props){
         props.close(true);
     }
 
-    return(
+    return (
         <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url,props.width,props.height)} ></svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url, props.width, props.height, props.startDate, props.endDate)} ></svg>
         </g>
     )
 
 }
 
 
-const createLineGraph = function(url_value,width,height) {
+const createLineGraph = function (url_value, width, height, startDate, endDate) {
     let id = "lineGraph"
     let tagName = "my_dataviz_line"
-    if(betweenDates > 24 || sorted_data.length == 0){
+    if (betweenDates > 24 || sorted_data.length == 0) {
         lastUpdated = today;
         d3.csv(url_value).then(data => {
 
             const dates = data.columns.splice(4)
 
+            // ---------- The attempt of Filtering -----------------//
+            if (startDate >= dates[0] && endDate <= dates[dates.length - 1]) {
+                dates.filter(function (date) {
+                    return date >= startDate;
+                });
+            }
+
             sorted_data = [] //empty sorted_data, outdated data
 
             //TODO: Modify to make more effecent Later
             dates.forEach(date => {
-                let value = {date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (d3.sum(data, d => d[date]))};
+                let value = { date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (d3.sum(data, d => d[date])) };
                 sorted_data.push(value)
-    
             })
-            
-    
+
+
             // label.innerHTML = show_text
-    
+
             // append the svg object to the body of the page
-    
+
 
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
-    
-        }); 
+
+        });
     }
-    else{
+    else {
         d3.csv(url_value).then(data => {
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
-        })   
+        })
     }
 }
 
 
 
-const draw_linegraph_over_time = function(id,tagName,data,width,height) {
+const draw_linegraph_over_time = function (id, tagName, data, width, height) {
 
 
-    const margin = {top: 10, right: 30, bottom: 30, left: 60}
+    const margin = { top: 10, right: 30, bottom: 30, left: 60 }
     width = width - margin.left - margin.right;
     height = height - margin.top - margin.bottom;
 
     // d3.select("#"+id).remove(); //What does this do?
-    const svg = d3.select("#"+tagName)
+    const svg = d3.select("#" + tagName)
         //.append("svg")
         .attr("id", id)
         .attr("width", width + margin.left + margin.right)
@@ -83,16 +91,16 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
 
     // Add X axis --> it is a date format
     const x = d3.scaleTime()
-        .domain(d3.extent(data, function(d) { return d.date; }))
-        .range([ 0, width ]);
+        .domain(d3.extent(data, function (d) { return d.date; }))
+        .range([0, width]);
     let xAxis = svg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x));
 
     // Add Y axis
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return +d.sum_to_date; })])
-        .range([ height, 0 ]);
+        .domain([0, d3.max(data, function (d) { return +d.sum_to_date; })])
+        .range([height, 0]);
     let yAxis = svg.append("g")
         .call(d3.axisLeft(y));
 
@@ -100,14 +108,14 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
     const clip = svg.append("defs").append("svg:clipPath")
         .attr("id", "clip")
         .append("svg:rect")
-        .attr("width", width )
-        .attr("height", height )
+        .attr("width", width)
+        .attr("height", height)
         .attr("x", 0)
         .attr("y", 0);
 
     // Add brushing
     const brush = d3.brushX()                   // Add the brush feature using the d3.brush function
-        .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+        .extent([[0, 0], [width, height]])  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
         .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
 
     // Create the line variable: where both the line and the brush take place
@@ -122,8 +130,8 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .attr("d", d3.line()
-            .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.sum_to_date) })
+            .x(function (d) { return x(d.date) })
+            .y(function (d) { return y(d.sum_to_date) })
         )
 
     // Add the brushing
@@ -137,17 +145,17 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
     function idled() { idleTimeout = null; }
 
     // A function that update the chart for given boundaries
-    function updateChart(event,d) {
+    function updateChart(event, d) {
 
         // What are the selected boundaries?
         let extent = event.selection
 
         // If no selection, back to initial coordinate. Otherwise, update X axis domain
-        if(!extent){
+        if (!extent) {
             if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-            x.domain([ 4,8])
-        }else{
-            x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
+            x.domain([4, 8])
+        } else {
+            x.domain([x.invert(extent[0]), x.invert(extent[1])])
             line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
         }
 
@@ -158,21 +166,21 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             .transition()
             .duration(1000)
             .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.sum_to_date) })
+                .x(function (d) { return x(d.date) })
+                .y(function (d) { return y(d.sum_to_date) })
             )
     }
 
     // If user double click, reinitialize the chart
-    svg.on("dblclick",function(){
-        x.domain(d3.extent(data, function(d) { return d.date; }))
+    svg.on("dblclick", function () {
+        x.domain(d3.extent(data, function (d) { return d.date; }))
         xAxis.transition().call(d3.axisBottom(x))
         line
             .select('.line')
             .transition()
             .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.sum_to_date) })
+                .x(function (d) { return x(d.date) })
+                .y(function (d) { return y(d.sum_to_date) })
             )
     });
 
@@ -205,11 +213,11 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         .attr("alignment-baseline", "middle")
 
 
-    var bisect = d3.bisector(function(d) { return d.date; }).right;
+    var bisect = d3.bisector(function (d) { return d.date; }).right;
 
     function mouseover() {
         focus.style("opacity", 1)
-        focusText.style("opacity",1)
+        focusText.style("opacity", 1)
     }
 
     function mousemove(event) {
@@ -223,7 +231,7 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
             .attr("cx", x(selectedData.date))
             .attr("cy", y(selectedData.sum_to_date))
         focusText
-            .html("x:" + zeroPad(selectedData.date.getDate() , 2)+ "/" +zeroPad((selectedData.date.getMonth(), 2))+"/"+ selectedData.date.getFullYear() + " | " + selectedData.sum_to_date)
+            .html("x:" + zeroPad(selectedData.date.getDate(), 2) + "/" + zeroPad((selectedData.date.getMonth(), 2)) + "/" + selectedData.date.getFullYear() + " | " + selectedData.sum_to_date)
             .attr("x", 0)
             .attr("y", 1)
     }

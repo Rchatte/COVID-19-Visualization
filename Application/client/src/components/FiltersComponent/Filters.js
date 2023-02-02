@@ -26,8 +26,8 @@ export default function Filters(props) {
     // Method which will set the dates for the filter
     const handleFilter = () => {
         // using format() to make filtering easier compared to the default format of the desktop date picker
-        props.setBeginningDate(startDate.format('MM-DD-YYYY'));
-        props.setEndingDate(moment(endDate).format('MM-DD-YYYY'));
+        props.setBeginningDate(moment(startDate).format('YYYY-MM-DD'));
+        props.setEndingDate(moment(endDate).format('YYYY-MM-DD'));
     }
 
     useEffect(() => {
