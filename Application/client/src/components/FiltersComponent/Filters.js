@@ -23,6 +23,10 @@ export default function Filters(props) {
     const [color1, setColor1] = useState({ h: 0, s: 0, v: 68, a: 1 });
     const [color2, setColor2] = useState({ h: 0, s: 0, v: 68, a: 1 });
 
+    
+
+
+
 
 
     useEffect(() => {
@@ -43,7 +47,7 @@ export default function Filters(props) {
                         label="Start Date"
                         inputFormat="mm/dd/yyyy"
                         value={startDate}
-                        onChange={(e) => setStartDate(e) }
+                        onChange={(e) => setFilters() }
                         renderInput={(params) => <TextField {...params} />}
                         />
                     </>

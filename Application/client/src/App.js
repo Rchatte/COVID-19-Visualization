@@ -29,31 +29,18 @@ Packages added so far: (NPM)
 */
 
 
-/*
-  Nov 29 2022: 
-  About page
-  Sources page 
-  Sponsor page 
-
-  All have been added and ready to work on.
-
-
-
-*/
-
 
 
 function App() {
   return (
     <div className="app">
-      { /* Navbar has been added in the form of a component. So all routes will include the navbar. Nov 29, 2022 */ }
       <Navbar/>
       <Router>
         <Routes>
-          <Route exact path="COVID-19-Visualization/" element={<Homepage/>}></Route>  
-          <Route exact path="COVID-19-Visualization/About" element={<AboutComponent/>}></Route>  
-          <Route exact path="COVID-19-Visualization/Sources" element={<SourcesComponent/>}></Route>  
-          <Route exact path="COVID-19-Visualization/Sponsors" element={<SponsorsComponent/>}></Route>  
+          <Route exact path="/" element={<Homepage/>}></Route>  
+          <Route exact path="/About" element={<AboutComponent/>}></Route>  
+          <Route exact path="/Sources" element={<SourcesComponent/>}></Route>  
+          <Route exact path="/Sponsors" element={<SponsorsComponent/>}></Route>  
         </Routes>
       </Router>
    </div>

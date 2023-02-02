@@ -8,22 +8,23 @@ export default function Treemap(props){
 
 
     return(
-        <g id="vizFrame">
+        <div id="vizFrame">
             <div id="tooltip">
                 <h2 id="tooltip_name"></h2>
                 <p id="tooltip_value"></p>
             </div>
             <svg id={"my_dataviz_tree_map"} ref={setUP(props)}></svg>
-        </g>
+        </div>
+
     )
 }
 
 function setUP(props) {
 
 
-    const colors = {barColor: "#00ffc4", parentColor: "#575278", childrenColor: "#27b694"};
+    const colors = { barColor: "#00ffc4", parentColor: "#575278", childrenColor: "#27b694" };
 
-    const margin = {top: 100, right: 5, bottom: 5, left: 5}
+    const margin = { top: 100, right: 5, bottom: 5, left: 5 }
 
     let height = 600;//Default values
     let width =  800;
@@ -31,7 +32,6 @@ function setUP(props) {
 
     let id = "treemapID"
     let svgName = "my_dataviz_tree_map"
-
 
 
     if(props.hasOwnProperty("height")){
@@ -311,7 +311,7 @@ function setUP(props) {
 
 
 
-
+    return svg
 
 
 }

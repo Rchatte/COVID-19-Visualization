@@ -34,15 +34,17 @@ export default function CardsContainer(props) {
         { /* True: updates the current container view -> Show all graphs to user.  */}
         { /* False: Continue showing the grid of options to click from. */}
 
-        { changeContent ? (<GraphData close={handleClose} viz={currentCard}/>) : 
+        { changeContent ? 
+        
+           (<GraphData close={handleClose} viz={currentCard}/>) : 
            <Grid 
-           container
-           rowSpacing={3}
-           columnSpacing={2}
-           direction="row"
-           justifyContent="center"
-           alignItems="center"
-           >
+            container
+            rowSpacing={3}
+            columnSpacing={2}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            >
 
                 <Grid item xs={6}>
                         <Card

@@ -48,7 +48,6 @@ export default function GraphData({ close, viz }) {
     const updateGraph = (selected) => {
         graphs.map((items) => {
             if (items.type === selected) {
-
                 setCurrentGraph(items)
                 setFilter(items.filters)
             }
@@ -60,7 +59,6 @@ export default function GraphData({ close, viz }) {
     useEffect(() => {
         DATA.map((item) => {
             if (item.title === viz) {
-
                 setSelectedVisual(item);
                 setGraphs(item.graphs)
                 setCurrentGraph(item.graphs[0]);
@@ -71,10 +69,22 @@ export default function GraphData({ close, viz }) {
     }, [viz])
 
 
+    const Loader = () => {
+
+        return(
+            <Box
+                sx={{ height: 400, width: 700}}
+            >
+                <CircularProgress color="secondary" />
+            </Box>
+        )
+    }
+
+
     const showVisualType = (type, url) => {
         switch (type) {
             case "line-chart-USA-FACTS-total-over-time":
-                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} />
+                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} filter={filter} />
 
             case "tree-map":
                 return <Treemap url={url} height={400} width={700} />
@@ -118,18 +128,17 @@ export default function GraphData({ close, viz }) {
                     >
 
                         {
-                            currentGraph === null ? (null) : (showVisualType(currentGraph.type, currentGraph.link1))
-                            
+                            currentGraph === null ? <Loader/> : showVisualType(currentGraph.type, currentGraph.link1, currentGraph.filters)
                         }
                         <Container sx={{ pt: 1 }}>
                             <Card sx={{ minHeight: 200 }}>
                                 <CardContent>
                                     <Typography variant="h3" gutterBottom>
-                                        {currentGraph.type === null ? (null) : currentGraph.title}
+                                        { currentGraph.type === null ? (null) : currentGraph.title }
                                     </Typography>
 
                                     <Typography variant="subtitle1" gutterBottom>
-                                        {currentGraph === null ? (null) : currentGraph.description}
+                                        { currentGraph === null ? (null) : currentGraph.description }
                                     </Typography>
                                     <Button variant="contained" onClick={() => setOpenFilters(true)}>Filter</Button>
 
@@ -148,7 +157,7 @@ export default function GraphData({ close, viz }) {
                                 justifyContent="center"
                                 alignItems="center"
                                 className="row__posters" direction="row" spacing={2.5}>
-                                {graphs.map(visualization => (
+                                { graphs.map(visualization => (
                                     <>
                                 <Card>
                                     <CardContent>

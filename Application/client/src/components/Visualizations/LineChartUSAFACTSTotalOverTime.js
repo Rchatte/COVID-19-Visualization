@@ -44,13 +44,10 @@ const createLineGraph = function(url_value,width,height) {
                 sorted_data.push(value)
     
             })
-            
-    
-            // label.innerHTML = show_text
-    
+        
+            // label.innerHTML = show_text   
             // append the svg object to the body of the page
     
-
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
     
         }); 
