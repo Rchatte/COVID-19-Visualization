@@ -62,7 +62,7 @@ export default function GraphData(props) {
     // react component return ()
     useEffect(() => {
         DATA.map((item) => {
-            if (item.title === viz) {
+            if (item.title === props.viz) {
 
                 setSelectedVisual(item);
                 setGraphs(item.graphs)
