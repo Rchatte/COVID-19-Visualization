@@ -11,10 +11,10 @@ export default function Treemap(props) {
 
 
     return (
-        <g id="vizFrame">
-            <div id="tooltip">
-                <h2 id="tooltip_name"></h2>
-                <p id="tooltip_value"></p>
+        <g id="vizFrame" width="50px" height="50px">
+            <div id="tooltip" >
+                <h2 id="tooltip_name" width="50px" height="50px"></h2>
+                <p id="tooltip_value" width="50px" height="50px"></p>
             </div>
             <svg id={"my_dataviz_tree_map"} ref={svgRef}></svg>
         </g>
@@ -52,10 +52,15 @@ function setUP(props, svgRef) {
 
 
     // append the svg object to the body of the page
-    const svg = d3.select(svgRef.current)
+    var svg = d3.select(svgRef.current)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        .append("g")
+
+    svg.select("#"+id).remove()
+
+
+    svg = svg.append("g")
+        .attr("id",id)
         .attr("transform", `translate(${margin.left}, ${margin.top})`)
         .style("font", "10px sans-serif");
 
@@ -68,7 +73,12 @@ function setUP(props, svgRef) {
 
 
     var tooltip_name = d3.select("#tooltip_name")
+        .attr("width","50px")
+        .attr("height","50px")
+
     var tooltip_value = d3.select("#tooltip_value")
+        .attr("width","50px")
+        .attr("height","50px")
         .style("font-size", "20px");
 
 
@@ -148,7 +158,7 @@ function setUP(props, svgRef) {
                 .paddingTop(.5)
                 .paddingRight(.5)
                 .padding(.1)
-                .round(true)
+                // .round(true)
                 (root)
 
 
@@ -170,8 +180,8 @@ function setUP(props, svgRef) {
                 .on("mousemove", function (event) {
                     var coords = d3.pointer(event);
                     d3.select("#tooltip")
-                        .style("top", (coords[1] + 10) + "px")
-                        .style("left", (coords[0] + 10) + "px");
+                        .style("top", (coords[1] + 1) + "px")
+                        .style("left", (coords[0] + 1) + "px");
                 });
 
 
