@@ -16,15 +16,17 @@ export default function Treemap(props) {
                 <h2 id="tooltip_name"></h2>
                 <p id="tooltip_value"></p>
             </div>
-            <svg id={"my_dataviz_tree_map"} ref={setUP(props)}></svg>
+            <svg id={"my_dataviz_tree_map"} ref={setUP(props, svgRef)}></svg>
         </g>
     )
 }
 
 function setUP(props, svgRef) {
+    const c1 = props.filters.color1;
+    const c2 = props.filters.color2;
 
 
-    const colors = { barColor: "#00ffc4", parentColor: "#575278", childrenColor: "#27b694" };
+    const colors = { barColor: c1, parentColor:c2, childrenColor: c1 };
 
     const margin = { top: 100, right: 5, bottom: 5, left: 5 }
 
@@ -309,6 +311,8 @@ function setUP(props, svgRef) {
     Id.prototype.toString = function () {
         return "url(" + this.href + ")";
     };
+
+    props.loadingStatus(false);
 
 
 

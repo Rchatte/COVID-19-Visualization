@@ -21,9 +21,9 @@ import { useBootstrapBreakpoints } from "react-bootstrap/esm/ThemeProvider";
 import VisualizationDisplay from "../VisualizationDisplay/VisualizationDisplay";
 import { DATA } from "./DataExports.js";
 import "./row.css";
-import { select } from "d3";
 import Filters from "../FiltersComponent/Filters.js"
 import World_Map_Death_Cases from "../Visualizations/World_Map_Death_Cases";
+import useWindowDimensions from "../Hooks/useWindowDimensions";
 
 
 
@@ -32,17 +32,20 @@ export default function GraphData(props) {
     { /* Gather all data needed to complete the graph? */ }
     { /* Button to close */ }
 
+    const { width, height } = useWindowDimensions();
     // Contains the object in DATA with a specified title from home page.
     const [selectedVisual, setSelectedVisual] = useState(null);
     const [graphs, setGraphs] = useState([])
-    const [currentGraph, setCurrentGraph] = useState([]);
-    const [filter, setFilter] = useState({});
+    const [currentGraph, setCurrentGraph] = useState({});
+    const [filters, setFilter] = useState({});
     const [filtersTrigger, setOpenFilters] = useState();
+    const [loading, setLoading] = useState(true);
 
     // used to store the starting date for the filter
     const [startDate, setBeginningDate] = useState(Date());
     // used to store the ending date for the filter
     const [endDate, setEndingDate] = useState(Date());
+
 
     const handleButtonClose = () => {
         setSelectedVisual(null);
@@ -58,45 +61,33 @@ export default function GraphData(props) {
         })
     }
 
+
+
+
     // If new visual is selected look at values array above and fill in useState to update all values in 
-    // react component return ()
     useEffect(() => {
         DATA.map((item) => {
-            if (item.title === viz) {
-
+            if (item.title === props.viz) {
                 setSelectedVisual(item);
-                setGraphs(item.graphs)
+                setGraphs(item.graphs);
                 setCurrentGraph(item.graphs[0]);
-                setFilter(item.graphs[0].filters)
+                setFilter(item.graphs[0].filters);
                 return;
             }
         })
+        setLoading(false);
+        setOpenFilters(false);
     }, [props.viz])
-
-
-    const Loader = () => {
-
-        return(
-            <Box
-                sx={{ height: 400, width: 700}}
-            >
-                <CircularProgress color="secondary" />
-            </Box>
-        )
-    }
 
 
     const showVisualType = (type, url) => {
         switch (type) {
             case "line-chart-USA-FACTS-total-over-time":
-                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={700} />
-
+                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
             case "tree-map":
-                return <Treemap url={url} height={400} width={700} />
-
+                return <Treemap url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
             case "World_Map":
-                return <World_Map_Death_Cases url={url} height={400} width={700} />
-
+                return <World_Map_Death_Cases url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
@@ -106,9 +97,39 @@ export default function GraphData(props) {
         }
     }
 
+    const GenerateList = () => {
+        return (
+            <>
+            <List>
+                {
+                    graphs.map(item => (
+                        <ListItem disablePadding>
+                            <ListItemButton
+                                onClick={() => updateGraph(item.type)}
+                            >
+                                <ListItemText primary={item.title} secondary={ item.type_desc  + " : "+ item.description} />
+                            </ListItemButton>
+                        </ListItem>
+                        
+                    ))
+                }
+             </List>
+            </>
+        )
+    }
+
+    const LoadingSpinner = () => {
+        return (
+            <>
+                <Box justify="center" align="center" sx={{ pt: 2}} >
+                    <CircularProgress/>
+                </Box>
+            </>
+        )
+    }
+
     return (
         <>
-            <Box>
 
                 <Container sx={{ pt: 3 }}>
                     {/* <h2>All info on charts</h2> */}
@@ -123,84 +144,65 @@ export default function GraphData(props) {
 
                     >
                         {/* Send the useStates to the filters file to recieve the information */}
-                        <Filters open={filtersTrigger} data={filter} setBeginningDate={setBeginningDate}
+                        <Filters open={filtersTrigger} data={filters} updatedFilters={setFilter} setBeginningDate={setBeginningDate}
                             setEndingDate={setEndingDate} />
                     </Drawer>
 
 
-                    <Box
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
+                    <Grid 
+                        container
+                        direction="row"
+                        sx={{ p: 1}}
+                        >
+                        <Grid item xs={12} md={6} sm={6} lg={6}>
+                            <Box>
+                                <Container sx={{ pt: 1, height: (height/2) }}>
+                                    <Card sx={{ minHeight: 200 }}>
 
-                        {
-                            currentGraph === null ? (null) : (showVisualType(currentGraph.type, currentGraph.link1))
-                            
-                        }
-                        <Container sx={{ pt: 1 }}>
-                            <Card sx={{ minHeight: 200 }}>
-                                <CardContent>
-                                    <Typography variant="h3" gutterBottom>
-                                        { currentGraph.type === null ? (null) : currentGraph.title }
-                                    </Typography>
+                                {
+                                    loading && <LoadingSpinner/>            
+                                }
+                                {
+                                    currentGraph && showVisualType(currentGraph.type, currentGraph.link1, filters)
+                                }
+                                
+                                        <CardContent>
+                                            <Typography variant="h5" gutterBottom>
+                                                { currentGraph.type === null ? (null) : currentGraph.title }
+                                            </Typography>
 
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        { currentGraph === null ? (null) : currentGraph.description }
-                                    </Typography>
-                                    <Button variant="contained" onClick={() => setOpenFilters(true)}>Open Filters</Button>
+                                            <Typography variant="subtitle1" gutterBottom>
+                                                { currentGraph === null ? (null) : currentGraph.description }
+                                            </Typography>
+                                            <Button variant="contained" onClick={() => setOpenFilters(true)}>Open Filters</Button>
 
-                                </CardContent>
+                                        </CardContent>
 
-                            </Card>
-                        </Container>
-                    </Box>
+                                    </Card>
+                                </Container>
+                            </Box>
+                        </Grid>
 
-                    <Box>
-
-                        <h2>{" Other Visualization"}</h2>
-
-                        <div className="row">
-                            <Stack
-                                justifyContent="center"
-                                alignItems="center"
-                                className="row__posters" direction="row" spacing={2.5}>
-                                { graphs.map(visualization => (
-                                    <>
-                                        <Card>
-                                            <CardContent>
-                                                <Typography variant="subtitle1" gutterBottom>
-                                                    {visualization.title}
-                                                </Typography>
-
-                                                {
-                                                    /*
-                                                    Nov 28 2022: 
-                                                    Note: Once a new graph is clicked on the type is unique to each value in array (DataExports.js)
-                                                    Just need to differenciate the 'type' for each item in array.
-                                                    
-        
-                                                    */
-                                                }
-                                                <img
-                                                    id={visualization.type}
-                                                    onClick={() => updateGraph(visualization.type)}
-                                                    className={"row__poster"}
-                                                    src={visualization.img}
-                                                    alt={visualization} />
-                                            </CardContent>
-                                        </Card>
-                                    </>
-                                ))}
-                            </Stack>
-                        </div>
-                    </Box>
+                        <Grid item xs={12} md={6} sm={6} lg={6}>
+                            <Container>
+                                <Card>
+                                    <CardContent>
+                                        <Typography variant="subtitle1">
+                                            Visuals Available
+                                        </Typography>
+                                        <Typography variant="subtitle2">
+                                            
+                                        </Typography>
+                                            <GenerateList />
+                                    </CardContent>
+                                </Card>
+                                
+                            </Container>
+                        </Grid>
+                    </Grid>
 
                     <Button size="small" onClick={handleButtonClose}>Return to Home Page</Button>
                 </Container>
-            </Box>
-
-
         </>
     )
 }

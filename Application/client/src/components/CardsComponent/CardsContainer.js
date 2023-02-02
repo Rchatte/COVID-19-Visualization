@@ -12,8 +12,8 @@ export default function CardsContainer(props) {
 
     { /* Props passed in here should be the filter options */}
 
-    const [currentCard, setCurrentCard ] = useState('');
-    const [changeContent, setChangeContent] = useState(false)
+    const [ currentCard, setCurrentCard ] = useState('');
+    const [ changeContent, setChangeContent ] = useState(false);
 
 
     // Updates the value to know which graph to pull from

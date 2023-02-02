@@ -17,8 +17,8 @@ export default function Filters(props) {
 
     const [filters, setFilters] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [startDate, setStartDate] = useState(moment());
-    const [endDate, setEndDate] = useState(moment());
+    const [startDate, setStartDate] = useState(new Date() );
+    const [endDate, setEndDate] = useState(new Date());
     const [filterData, setFilterData] = useState(filters);
     const [color1, setColor1] = useState({ h: 0, s: 0, v: 68, a: 1 });
     const [color2, setColor2] = useState({ h: 0, s: 0, v: 68, a: 1 });
@@ -27,12 +27,17 @@ export default function Filters(props) {
 
     useEffect(() => {
         setFilters(props.data);
-    }, [props.data])
+
+    }, [props.data]);
 
 
     const handleChange = (newValue) => {
         setStartDate(newValue);
     };
+
+    const appendFilters = () => {
+        props.updatedFilters(filters);
+    }
 
     const returnInputType = (title) => {
         switch (title) {
@@ -41,9 +46,8 @@ export default function Filters(props) {
                     <>
                         <DesktopDatePicker
                         label="Start Date"
-                        inputFormat="mm/dd/yyyy"
-                        value={startDate}
-                        onChange={(e) => setStartDate(e) }
+                        value={filters.startDate}
+                        onChange={(e) => setFilters((prev) => ({ ...prev, startDate: moment(e) } )) }
                         renderInput={(params) => <TextField {...params} />}
                         />
                     </>
@@ -53,9 +57,8 @@ export default function Filters(props) {
                     <>
                         <DesktopDatePicker
                             label="End Date"
-                            inputFormat="MM/dd/yyyy"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e)}
+                            value={filters.endDate}
+                            onChange={(e) => setFilters((prev) => ({ ...prev, endDate: moment(e)} )) }
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </>
@@ -67,7 +70,7 @@ export default function Filters(props) {
                             <Typography variant="subtitle1">
                                 Color 1:
                             </Typography>
-                            <TwitterPicker />
+                            <TwitterPicker color={filters.color1} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color1: e.hex}))} />
                         </Stack>
                     </>
                 )
@@ -78,7 +81,7 @@ export default function Filters(props) {
                             <Typography variant="subtitle1">
                                 Color 2:
                             </Typography>
-                            <TwitterPicker />
+                            <TwitterPicker color={filters.color2} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color2: e.hex}))} />
                         </Stack>
                     </>
                 )
@@ -118,7 +121,7 @@ export default function Filters(props) {
                         This is basically a prototype of what I have in mind, but the next step with this method is to figure
                         out a way to pass the info into the visualization file*/}
                         <ListItem>
-                            <Button variant="contained" onClick={() => handleFilter()}>Filter</Button>
+                            <Button variant="contained" onClick={() => appendFilters()}>Filter</Button>
                         </ListItem>
                     </List>
                 </LocalizationProvider>

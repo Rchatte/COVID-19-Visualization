@@ -10,24 +10,24 @@ let sorted_data = [];
 
 export default function LineChartUSAFACTSTotalOverTime(props){
 
-    console.log("Line Chart URL")
-    console.log(props.url)
-
     today = new Date(); //today's date
     const handleButtonClose = () => {
         props.close(true);
     }
 
+
     return(
         <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url,props.width,props.height)} ></svg>
+            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url,props.width,props.height, props.filters)} ></svg>
         </g>
     )
 
 }
 
 
-const createLineGraph = function(url_value,width,height) {
+const createLineGraph = function(url_value,width,height,filters) {
+    console.log(filters);
+
     let id = "lineGraph"
     let tagName = "my_dataviz_line"
     if(betweenDates > 24 || sorted_data.length == 0){

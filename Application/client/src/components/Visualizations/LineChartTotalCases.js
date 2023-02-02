@@ -24,7 +24,7 @@ export default function LineChartTotalCases(props){
 }
 
 
-const createLineGraph = function(url_value,width,height) {
+const createLineGraph = (url_value,width,height) => {
     let id = "lineGraph"
     let tagName = "my_dataviz_line"
     if(betweenDates > 24 || sorted_data.length == 0){
@@ -56,6 +56,7 @@ const createLineGraph = function(url_value,width,height) {
             draw_linegraph_over_time(id, tagName, sorted_data, width, height)
         })   
     }
+
 }
 
 
@@ -226,7 +227,6 @@ const draw_linegraph_over_time = function(id,tagName,data,width,height) {
         focus.style("opacity", 0)
         focusText.style("opacity", 0)
     }
-
 
 
 
