@@ -1,25 +1,27 @@
-import React, { Component, useState }  from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
 // Using Fetch if needed
 
 
-export default function Treemap(props){
+export default function Treemap(props) {
+    const svgRef = useRef(null);
+
+    useEffect(() => { setUP(props, svgRef) })
 
 
     return(
-        <div id="vizFrame">
+        <g id="vizFrame">
             <div id="tooltip">
                 <h2 id="tooltip_name"></h2>
                 <p id="tooltip_value"></p>
             </div>
             <svg id={"my_dataviz_tree_map"} ref={setUP(props)}></svg>
-        </div>
-
+        </g>
     )
 }
 
-function setUP(props) {
+function setUP(props, svgRef) {
 
 
     const colors = { barColor: "#00ffc4", parentColor: "#575278", childrenColor: "#27b694" };
@@ -27,29 +29,29 @@ function setUP(props) {
     const margin = { top: 100, right: 5, bottom: 5, left: 5 }
 
     let height = 600;//Default values
-    let width =  800;
+    let width = 800;
     let is_Interactive = true;
 
     let id = "treemapID"
     let svgName = "my_dataviz_tree_map"
 
 
-    if(props.hasOwnProperty("height")){
+    if (props.hasOwnProperty("height")) {
         height = props.height
     }
 
-    if(props.hasOwnProperty("width")){
+    if (props.hasOwnProperty("width")) {
         width = props.width //Defult values
     }
 
 
-    if(props.hasOwnProperty("is_Interactive")){
+    if (props.hasOwnProperty("is_Interactive")) {
         is_Interactive = props.is_Interactive
     }
 
 
     // append the svg object to the body of the page
-    const svg = d3.select("#"+ svgName)
+    const svg = d3.select(svgRef.current)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -103,7 +105,7 @@ function setUP(props) {
 
 
             for (var i = 0; i < data.length; i++) {
-                var x = {name: data[i]['County Name'], value: data[i][latest_date]}
+                var x = { name: data[i]['County Name'], value: data[i][latest_date] }
 
                 if (data[i][latest_date] == 0) {
                     continue;
@@ -113,7 +115,7 @@ function setUP(props) {
                     State_County_Data_lists[data[i]['State']] = [x]
                     State_County_Data_lists[data[i]['State']].total = parseInt(x.value)
                     stateNames.push(data[i]['State'])
-                    sorted_data.push({name: data[i]['State'], children: State_County_Data_lists[data[i]['State']]})
+                    sorted_data.push({ name: data[i]['State'], children: State_County_Data_lists[data[i]['State']] })
                 } else {
                     State_County_Data_lists[data[i]['State']].push(x)
                     State_County_Data_lists[data[i]['State']].total = parseInt(State_County_Data_lists[data[i]['State']].total) + parseInt(x.value)
@@ -121,7 +123,7 @@ function setUP(props) {
             }
 
             //parent level
-            sorted_data = {name: "USA", children: sorted_data}
+            sorted_data = { name: "USA", children: sorted_data }
 
             //sorting states / middle layer
             sorted_data.children.sort(function (a, b) {
@@ -154,17 +156,17 @@ function setUP(props) {
 
 
             svg
-                .on("mouseenter",(event) => {
-                    d3.select("#tooltip").style("opacity",1)
+                .on("mouseenter", (event) => {
+                    d3.select("#tooltip").style("opacity", 1)
                 })
-                .on("mouseleave",(event)=> {
-                    d3.select("#tooltip").style("opacity",0)
+                .on("mouseleave", (event) => {
+                    d3.select("#tooltip").style("opacity", 0)
                 })
 
 
 
             d3.select("#vizFrame") //Todo change to selecting the svg later
-                .on("mousemove", function(event) {
+                .on("mousemove", function (event) {
                     var coords = d3.pointer(event);
                     d3.select("#tooltip")
                         .style("top", (coords[1] + 10) + "px")
@@ -207,7 +209,7 @@ function setUP(props) {
             .attr("id", d => (d.leafUid = uid("leaf")).id)
             .attr("fill", d => d === root ? colors.barColor : d.children ? colors.parentColor : colors.childrenColor)
             .attr("stroke", "#00ffc4")
-            .on("mouseover", function(event,d){
+            .on("mouseover", function (event, d) {
 
                 tooltip_name.text(d.data.name)
                 tooltip_value.text(d.value)
@@ -315,5 +317,3 @@ function setUP(props) {
 
 
 }
-
-
