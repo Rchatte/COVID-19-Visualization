@@ -108,8 +108,7 @@ export default function Filters(props) {
                                 return (
                                     <>
                                         <ListItem key={index}>
-                                            {returnInputType(key)}
-
+                                            { returnInputType(key) }
                                         </ListItem>
                                     </>
                                 )
@@ -121,7 +120,7 @@ export default function Filters(props) {
                         This is basically a prototype of what I have in mind, but the next step with this method is to figure
                         out a way to pass the info into the visualization file*/}
                         <ListItem>
-                            <Button variant="contained" onClick={() => handleFilter()}>Filter</Button>
+                            <Button variant="contained" onClick={() => appendFilters()}>Filter</Button>
                         </ListItem>
                     </List>
                 </LocalizationProvider>
