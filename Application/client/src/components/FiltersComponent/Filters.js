@@ -17,7 +17,7 @@ export default function Filters(props) {
 
     const [filters, setFilters] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [startDate, setStartDate] = useState(new Date() );
+    const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [filterData, setFilterData] = useState(filters);
     const [color1, setColor1] = useState({ h: 0, s: 0, v: 68, a: 1 });
@@ -27,7 +27,6 @@ export default function Filters(props) {
 
     useEffect(() => {
         setFilters(props.data);
-
     }, [props.data]);
 
 
@@ -45,10 +44,10 @@ export default function Filters(props) {
                 return (
                     <>
                         <DesktopDatePicker
-                        label="Start Date"
-                        value={filters.startDate}
-                        onChange={(e) => setFilters((prev) => ({ ...prev, startDate: moment(e) } )) }
-                        renderInput={(params) => <TextField {...params} />}
+                            label="Start Date"
+                            value={filters.startDate}
+                            onChange={(e) => setFilters((prev) => ({ ...prev, startDate: moment(e) }))}
+                            renderInput={(params) => <TextField {...params} />}
                         />
                     </>
                 )
@@ -58,7 +57,7 @@ export default function Filters(props) {
                         <DesktopDatePicker
                             label="End Date"
                             value={filters.endDate}
-                            onChange={(e) => setFilters((prev) => ({ ...prev, endDate: moment(e)} )) }
+                            onChange={(e) => setFilters((prev) => ({ ...prev, endDate: moment(e) }))}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </>
@@ -70,7 +69,7 @@ export default function Filters(props) {
                             <Typography variant="subtitle1">
                                 Color 1:
                             </Typography>
-                            <TwitterPicker color={filters.color1} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color1: e.hex}))} />
+                            <TwitterPicker color={filters.color1} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color1: e.hex }))} />
                         </Stack>
                     </>
                 )
@@ -81,7 +80,7 @@ export default function Filters(props) {
                             <Typography variant="subtitle1">
                                 Color 2:
                             </Typography>
-                            <TwitterPicker color={filters.color2} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color2: e.hex}))} />
+                            <TwitterPicker color={filters.color2} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color2: e.hex }))} />
                         </Stack>
                     </>
                 )
@@ -108,7 +107,7 @@ export default function Filters(props) {
                                 return (
                                     <>
                                         <ListItem key={index}>
-                                            { returnInputType(key) }
+                                            {returnInputType(key)}
                                         </ListItem>
                                     </>
                                 )

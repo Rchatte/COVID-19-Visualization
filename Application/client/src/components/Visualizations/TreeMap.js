@@ -10,7 +10,7 @@ export default function Treemap(props) {
     useEffect(() => { setUP(props, svgRef) })
 
 
-    return(
+    return (
         <g id="vizFrame">
             <div id="tooltip">
                 <h2 id="tooltip_name"></h2>
@@ -26,7 +26,7 @@ function setUP(props, svgRef) {
     const c2 = props.filters.color2;
 
 
-    const colors = { barColor: c1, parentColor:c2, childrenColor: c1 };
+    const colors = { barColor: c1, parentColor: c2, childrenColor: c1 };
 
     const margin = { top: 100, right: 5, bottom: 5, left: 5 }
 

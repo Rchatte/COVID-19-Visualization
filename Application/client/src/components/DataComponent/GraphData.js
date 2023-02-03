@@ -64,12 +64,11 @@ export default function GraphData(props) {
 
     useEffect(() => {
 
-        
     }, [currentGraph])
 
 
 
-    
+
 
     // If new visual is selected look at values array above and fill in useState to update all values in 
     useEffect(() => {
@@ -108,20 +107,20 @@ export default function GraphData(props) {
     const GenerateList = () => {
         return (
             <>
-            <List>
-                {
-                    graphs.map(item => (
-                        <ListItem disablePadding>
-                            <ListItemButton
-                                onClick={() => updateGraph(item.type)}
-                            >
-                                <ListItemText primary={item.title} secondary={ item.type_desc  + " : "+ item.description} />
-                            </ListItemButton>
-                        </ListItem>
-                        
-                    ))
-                }
-             </List>
+                <List>
+                    {
+                        graphs.map(item => (
+                            <ListItem disablePadding>
+                                <ListItemButton
+                                    onClick={() => updateGraph(item.type)}
+                                >
+                                    <ListItemText primary={item.title} secondary={item.type_desc + " : " + item.description} />
+                                </ListItemButton>
+                            </ListItem>
+
+                        ))
+                    }
+                </List>
             </>
         )
     }
@@ -129,8 +128,8 @@ export default function GraphData(props) {
     const LoadingSpinner = () => {
         return (
             <>
-                <Box justify="center" align="center" sx={{ pt: 2}} >
-                    <CircularProgress/>
+                <Box justify="center" align="center" sx={{ pt: 2 }} >
+                    <CircularProgress />
                 </Box>
             </>
         )
@@ -139,78 +138,78 @@ export default function GraphData(props) {
     return (
         <>
 
-                <Container sx={{ pt: 3 }}>
-                    {/* <h2>All info on charts</h2> */}
-                    {/* Call method to check which data source user picks */}
-                    {/*checkDataSource(viz)*/}
+            <Container sx={{ pt: 3 }}>
+                {/* <h2>All info on charts</h2> */}
+                {/* Call method to check which data source user picks */}
+                {/*checkDataSource(viz)*/}
 
-                    <Drawer
-                        anchor={"left"}
-                        open={filtersTrigger}
-                        onClose={() => setOpenFilters(false)}
-                        onKeyDown={() => setOpenFilters(false)}
+                <Drawer
+                    anchor={"left"}
+                    open={filtersTrigger}
+                    onClose={() => setOpenFilters(false)}
+                    onKeyDown={() => setOpenFilters(false)}
 
-                    >
-                        {/* Send the useStates to the filters file to recieve the information */}
-                        <Filters open={filtersTrigger} data={filters} updatedFilters={setFilter} setBeginningDate={setBeginningDate}
-                            setEndingDate={setEndingDate} />
-                    </Drawer>
+                >
+                    {/* Send the useStates to the filters file to recieve the information */}
+                    <Filters open={filtersTrigger} data={filters} updatedFilters={setFilter} setBeginningDate={setBeginningDate}
+                        setEndingDate={setEndingDate} />
+                </Drawer>
 
 
-                    <Grid 
-                        container
-                        direction="row"
-                        sx={{ p: 1}}
-                        >
-                        <Grid item xs={12} md={6} sm={6} lg={6}>
-                            <Box>
-                                <Container sx={{ pt: 1, height: (height/2) }}>
-                                    <Card sx={{ minHeight: 200 }}>
+                <Grid
+                    container
+                    direction="row"
+                    sx={{ p: 1 }}
+                >
+                    <Grid item xs={12} md={6} sm={6} lg={6}>
+                        <Box>
+                            <Container sx={{ pt: 1, height: (height / 2) }}>
+                                <Card sx={{ minHeight: 200 }}>
 
-                                {
-                                    loading && <LoadingSpinner/>            
-                                }
-                                {
-                                    currentGraph && showVisualType(currentGraph.type, currentGraph.link1, filters)
-                                }
-                                
-                                        <CardContent>
-                                            <Typography variant="h5" gutterBottom>
-                                                { currentGraph.type === null ? (null) : currentGraph.title }
-                                            </Typography>
+                                    {
+                                        loading && <LoadingSpinner />
+                                    }
+                                    {
+                                        currentGraph && showVisualType(currentGraph.type, currentGraph.link1, filters)
+                                    }
 
-                                            <Typography variant="subtitle1" gutterBottom>
-                                                { currentGraph === null ? (null) : currentGraph.description }
-                                            </Typography>
-                                            <Button variant="contained" onClick={() => setOpenFilters(true)}>Open Filters</Button>
-
-                                        </CardContent>
-
-                                    </Card>
-                                </Container>
-                            </Box>
-                        </Grid>
-
-                        <Grid item xs={12} md={6} sm={6} lg={6}>
-                            <Container>
-                                <Card>
                                     <CardContent>
-                                        <Typography variant="subtitle1">
-                                            Visuals Available
+                                        <Typography variant="h5" gutterBottom>
+                                            {currentGraph.type === null ? (null) : currentGraph.title}
                                         </Typography>
-                                        <Typography variant="subtitle2">
-                                            
+
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            {currentGraph === null ? (null) : currentGraph.description}
                                         </Typography>
-                                            <GenerateList />
+                                        <Button variant="contained" onClick={() => setOpenFilters(true)}>Open Filters</Button>
+
                                     </CardContent>
+
                                 </Card>
-                                
                             </Container>
-                        </Grid>
+                        </Box>
                     </Grid>
 
-                    <Button size="small" onClick={handleButtonClose}>Return to Home Page</Button>
-                </Container>
+                    <Grid item xs={12} md={6} sm={6} lg={6}>
+                        <Container>
+                            <Card>
+                                <CardContent>
+                                    <Typography variant="subtitle1">
+                                        Visuals Available
+                                    </Typography>
+                                    <Typography variant="subtitle2">
+
+                                    </Typography>
+                                    <GenerateList />
+                                </CardContent>
+                            </Card>
+
+                        </Container>
+                    </Grid>
+                </Grid>
+
+                <Button size="small" onClick={handleButtonClose}>Return to Home Page</Button>
+            </Container>
         </>
     )
 }
