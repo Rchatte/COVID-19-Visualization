@@ -89,7 +89,8 @@ export default function GraphData(props) {
     // If new visual is selected look at values array above and fill in useState to update all values in 
     useEffect(() => {
         DATA.map((item) => {
-            if (item.title === props.viz) {
+            if (item.title === viz) {
+
                 setSelectedVisual(item);
                 setGraphs(item.graphs);
                 setCurrentGraph(item.graphs[0]);
