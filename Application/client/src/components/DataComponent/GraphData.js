@@ -62,7 +62,29 @@ export default function GraphData(props) {
     }
 
 
+    useEffect(() => {
 
+        
+    }, [currentGraph])
+
+
+
+    const updateVisualType = () => {
+        switch (type) {
+            case "line-chart-USA-FACTS-total-over-time":
+                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
+            case "tree-map":
+                return <Treemap url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
+            case "World_Map":
+                return <World_Map_Death_Cases url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
+            case "CDC":
+                return <CDCData />
+            case "California Department of Public Health":
+                return <CDPHData />
+            default:
+                return null
+        }
+    }
 
     // If new visual is selected look at values array above and fill in useState to update all values in 
     useEffect(() => {
