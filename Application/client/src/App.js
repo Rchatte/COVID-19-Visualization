@@ -35,17 +35,18 @@ Packages added so far: (NPM)
 function App() {
   return (
     <div className="app">
-      <Navbar/>
+      <Navbar />
       <Router>
         <Routes>
-          <Route exact path="/" element={<Homepage/>}></Route>  
-          <Route exact path="/Visual" element={<DisplayVisual/>}></Route>  
-          <Route exact path="/About" element={<AboutComponent/>}></Route>  
-          <Route exact path="/Sources" element={<SourcesComponent/>}></Route>  
-          <Route exact path="/Sponsors" element={<SponsorsComponent/>}></Route>  
+          <Route exact path="/" element={<Homepage />}></Route>
+          <Route exact path="/COVID-19-Visualization" element={<Homepage />}></Route>
+          <Route exact path="/Visual" element={<DisplayVisual />}></Route>
+          <Route exact path="/About" element={<AboutComponent />}></Route>
+          <Route exact path="/Sources" element={<SourcesComponent />}></Route>
+          <Route exact path="/Sponsors" element={<SponsorsComponent />}></Route>
         </Routes>
       </Router>
-   </div>
+    </div>
   );
 }
 

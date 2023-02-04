@@ -50,16 +50,14 @@ const createLineGraph = function (url_value, width, height, filters) {
             // if the filters prop actually has user selected data, the filtered data will get sent
             // else, the default data will
             if (filters.hasOwnProperty('endDate') && filters.hasOwnProperty('startDate')) {
-                // filtered data    
-                // Current issue: When it is sent to draw_linegraph_over_time() the console says that 
-                // selected data is undefined from
-                // the mousemove() function
+                // filtered data from selected dates   
                 const filteredData = sorted_data.filter(function (entry) {
                     return (entry.date >= filters.startDate) && (entry.date <= filters.endDate);
                 });
 
                 draw_linegraph_over_time(id, tagName, filteredData, width, height);
             } else {
+                // returns regular data if user doesn't select anything
                 draw_linegraph_over_time(id, tagName, sorted_data, width, height);
             }
         });
