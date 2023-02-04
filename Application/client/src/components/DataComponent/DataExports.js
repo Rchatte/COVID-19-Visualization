@@ -116,6 +116,8 @@ export const DATA = [
             {
                 type: "line-chart-USA-FACTS-total-over-time",
                 title: "Title",
+                type_desc: 'Line Graph',
+                description: "USA Facts ttotal deaths over time",
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
                 link2: "",
                 filters: {
@@ -127,6 +129,8 @@ export const DATA = [
             {
                 type: "tree-map",
                 title: "Title",
+                type_desc: 'Tree map',
+                description: "Tree map relating to deaths over time",
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
                 filters: {
                     color: "color",
