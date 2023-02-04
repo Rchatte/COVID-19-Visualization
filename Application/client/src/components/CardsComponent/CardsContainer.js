@@ -6,6 +6,7 @@ import img1 from "../images/WHO.png"
 import img2 from "../images/USAFacts.png"
 import img3 from "../images/CDC.png"
 import img4 from "../images/CDPH.png"
+import { DATA } from "../DataComponent/DataExports.js";
 
 
 export default function CardsContainer(props) {
@@ -16,16 +17,39 @@ export default function CardsContainer(props) {
     const [ changeContent, setChangeContent ] = useState(false);
 
 
-    // Updates the value to know which graph to pull from
+    // 2-3-2023:
+    // When a button is clicked, it returns the title
+    // This function then recives the title an looks for it in DataExports.js (Via function returnObjectToStore())
     const onButtonClick = (value) => {
-        setCurrentCard(value)
-        setChangeContent(true) 
+        const obj = returnObjectToStore(value); // Find Object 
+        console.log(obj);
+        setLocalStorage(obj); // Function to store object from DataExports in browser
+        window.location = "/Visual"; // Navigate to visual page. Component/DisplayVisual/DisplayVisual
 
     }
 
-    const handleClose = () => {
-        setChangeContent(false)
+
+    // Search for object in DataExports.js
+    // Returns obj
+    const returnObjectToStore = (title) => {
+        const value = DATA.map((item) => {
+            if(item.title === title){
+                return item;
+            }
+        })
+        if (value) { return value[0];}
+        return "NA";
     }
+
+    // Given a obj store it to browser memory given key "data"
+    // Key will be "data": { obj ... }
+    const setLocalStorage = (obj) => {
+        if (window){
+            window.sessionStorage.setItem("data", JSON.stringify(obj));
+        }
+    }
+
+    
 
    
     return(
@@ -34,9 +58,9 @@ export default function CardsContainer(props) {
         { /* True: updates the current container view -> Show all graphs to user.  */}
         { /* False: Continue showing the grid of options to click from. */}
 
-        { changeContent ? 
         
-           (<GraphData close={handleClose} viz={currentCard}/>) : 
+        
+           
            <Grid 
             container
             rowSpacing={3}
@@ -72,7 +96,7 @@ export default function CardsContainer(props) {
                             body={"Visualizations from California Department of Public Health Data"} title={"California Department of Public Health"} />
                 </Grid>
             </Grid>
-        }
+        
         </>
     )
 }

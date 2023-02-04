@@ -9,6 +9,7 @@ import Navbar from './components/NavbarComponent/Navbar';
 import SourcesComponent from './components/SourcesComponent/SourcesComponent';
 import AboutComponent from './components/AboutComponent/AboutComponent';
 import SponsorsComponent from './components/SponsorsComponent/SponsorsComponent';
+import DisplayVisual from "./components/DisplayVisual/DisplayVisual";
 
 /* Folder structure is divided as follows: client (Front end) and server (Backend) */
 /* We might not need a backend so ignore for now. */
@@ -38,6 +39,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Homepage/>}></Route>  
+          <Route exact path="/Visual" element={<DisplayVisual/>}></Route>  
           <Route exact path="/About" element={<AboutComponent/>}></Route>  
           <Route exact path="/Sources" element={<SourcesComponent/>}></Route>  
           <Route exact path="/Sponsors" element={<SponsorsComponent/>}></Route>  
