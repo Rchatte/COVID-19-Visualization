@@ -21,6 +21,7 @@ export default function CardsContainer(props) {
     // When a button is clicked, it returns the title
     // This function then recives the title an looks for it in DataExports.js (Via function returnObjectToStore())
     const onButtonClick = (value) => {
+        window.sessionStorage.removeItem("data");
         const obj = returnObjectToStore(value); // Find Object 
         console.log(obj);
         setLocalStorage(obj); // Function to store object from DataExports in browser
@@ -32,12 +33,13 @@ export default function CardsContainer(props) {
     // Search for object in DataExports.js
     // Returns obj
     const returnObjectToStore = (title) => {
-        const value = DATA.map((item) => {
+        let value;
+        DATA.map((item) => {
             if(item.title === title){
-                return item;
+                value = item;
             }
         })
-        if (value) { return value[0];}
+        if (value) { return value;}
         return "NA";
     }
 
@@ -48,8 +50,6 @@ export default function CardsContainer(props) {
             window.sessionStorage.setItem("data", JSON.stringify(obj));
         }
     }
-
-    
 
    
     return(
