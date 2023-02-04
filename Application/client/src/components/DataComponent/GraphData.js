@@ -62,14 +62,25 @@ export default function GraphData(props) {
     }
 
 
-    
+    const getLocalStorage = () => {
+        if (window) {
+            const currentObject = window.sessionStorage.getItem("data") || "NA";
+            setCurrentGraph(currentObject);
+        }
+    }
+
+    useEffect(() => {
+        getLocalStorage();
+    }, [currentGraph])
 
 
 
 
 
     // If new visual is selected look at values array above and fill in useState to update all values in 
-    
+    useEffect(() => {
+        getLocalStorage()
+    }, [props.viz])
 
 
     const showVisualType = (type, url) => {

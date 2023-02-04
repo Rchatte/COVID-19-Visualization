@@ -89,21 +89,23 @@ export default function Filters(props) {
     }
 
 
-    const renderList = (list) => {
 
-        return (
+
+
+    return (
+        <>
             <Box
-                sx={{ width: 300, pl: 1.5 }}
+                sx={{ width: 300, p: 1 }}
                 role="presentation"
             >
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <Typography variant="h5" sx={{ pl: 2, pt: 2, pb: 2 }}>
+                    <Typography variant="h6" sx={{ pl: 2, pt: 2, pb: 2 }}>
                         Filters
                     </Typography>
                     <Divider />
                     <List>
-                        {
-                            Object.keys(list).map((key, index) => {
+                        { filters && 
+                            Object.keys(filters).map((key, index) => {
                                 return (
                                     <>
                                         <ListItem key={index}>
@@ -124,15 +126,6 @@ export default function Filters(props) {
                     </List>
                 </LocalizationProvider>
             </Box>
-        );
-    }
-
-
-    return (
-        <>
-            {
-                filters === null ? (null) : renderList(filters)
-            }
         </>
 
     )
