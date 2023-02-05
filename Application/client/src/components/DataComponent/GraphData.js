@@ -86,7 +86,7 @@ export default function GraphData(props) {
     const showVisualType = (type, url) => {
         switch (type) {
             case "line-chart-USA-FACTS-total-over-time":
-                return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
+                return <LineChartUSAFACTSTotalOverTime ccccccccc />
             case "tree-map":
                 return <Treemap url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
             case "World_Map":
