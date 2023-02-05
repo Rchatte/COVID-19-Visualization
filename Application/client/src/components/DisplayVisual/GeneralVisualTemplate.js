@@ -8,6 +8,7 @@ import Treemap from '../Visualizations/TreeMap';
 const GeneralVisualTemplate = (props) => {
 
 
+    const [data, setData] = useState(null);
     // If data changes dependiong on click from DisplayVisual then this will trigger rerender.
     // In part will update GraphType.
     useEffect(() => {
