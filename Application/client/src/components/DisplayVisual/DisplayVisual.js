@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer } from "@mui/material";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
 import GeneralVisualTemplate from "./GeneralVisualTemplate";
+import GeneralFilteredVisualTemplate from "./GeneralFilteredVisualTemplate";
 
 
 export default function DisplayVisual(props) {
-
     const { height, width } = useWindowDimensions();
     const [currentData, setCurrentData] = useState();
     const [graphs, setGraphs] = useState();
@@ -79,18 +79,6 @@ export default function DisplayVisual(props) {
     useEffect(() => {
         getLocalStorage();
     }, [])
-
-    // const showVisualType = (type, url) => {
-    //     if (filters.hasOwnProperty('endDate') && filters.hasOwnProperty('startDate')) {
-    //         switch (type) {
-    //             case "line-chart-USA-FACTS-total-over-time":
-    //                 return <LineChartUSAFACTSTotalOverTime url={url} height={400} width={400} filters={filters} />
-    //         }
-    //     } else {
-    //         return <p>graph goes here</p>
-    //     }
-    // }
-
     return (
         <>
 
@@ -104,7 +92,7 @@ export default function DisplayVisual(props) {
 
                 >
                     {/* Send the useStates to the filters file to recieve the information */}
-                    <Filters open={filtersTrigger} data={filters} updatedFilters={setFilter} />
+                    <Filters open={filtersTrigger} data={filters} updatedFilters={setFilter} updateData={setCurrentData} currentData={currentData} />
                 </Drawer>
 
                 <Grid
