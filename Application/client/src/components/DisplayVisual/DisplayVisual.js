@@ -24,13 +24,26 @@ export default function DisplayVisual(props) {
                 const objectParse = JSON.parse(currentObject);
                 setCurrentData(objectParse.graphs[0]); // Get first graph by defualt
                 setGraphs(objectParse.graphs);
-                setFilter(objectParse.graphs[0].filters);
+                setFilter(objectParse.graphs.filters);
                 console.log()
             } catch (error) {
                 console.log(error)
             }
 
 
+        }
+    }
+
+    // When selecting a new card update the session storage and variables.
+    const updateChartData = (item) => {
+        if(window) {
+            try {
+                window.sessionStorage.setItem("data", JSON.stringify(item));
+                setCurrentData(item);
+                setFilter(item.filters);
+            }catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -52,7 +65,7 @@ export default function DisplayVisual(props) {
 
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small" onClick={() => setOpenFilters(true)}>Learn More</Button>
+                                    <Button variant="contained" onClick={() => updateChartData(item)}>Visual</Button>
                                 </CardActions>
                             </Card>
                         </Grid>
@@ -98,17 +111,16 @@ export default function DisplayVisual(props) {
                     container sx={{ p: 1, pt: 5, height: (height / 2) }}>
                     <Grid item xs={12} md={6} lg={6}>
                         <Container>
-                            <GeneralVisualTemplate filters={filters} vizType={currentData} />
+                            { currentData && <GeneralVisualTemplate data={currentData} /> }
                         </Container>
                     </Grid>
                     <Grid item xs={12} md={6} lg={6}>
                         <Container>
                             <Typography variant="h6" gutterBottom>
-                                Title
+                                { currentData  && currentData.title }
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
-                                Material UI is beautiful by design and features a suite of customization
-                                options that make it easy to implement your own custom design system on top of our components.
+                                { currentData && currentData.description}
                             </Typography>
                             <Button variant="outlined" onClick={() => setOpenFilters(true)}>Filters</Button>
                         </Container>

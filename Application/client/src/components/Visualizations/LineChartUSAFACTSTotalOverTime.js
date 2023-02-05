@@ -11,19 +11,15 @@ let sorted_data = [];
 
 export default function LineChartUSAFACTSTotalOverTime(props) {
     today = new Date(); //today's date
-    const handleButtonClose = () => {
-        props.close(true);
-    }
-
-    return (
-        <g>
-            <svg id={"my_dataviz_line"} ref={createLineGraph(props.url, props.width, props.height, props.filters)} ></svg>
-        </g>
-    )
-
-}
+    const svgRef = React.useRef(null);
 
 
+    useEffect(() => {
+        createLineGraph(props.url, props.filters.height, props.width, props.filters) 
+    }, [props])
+
+
+    
 const createLineGraph = function (url_value, width, height, filters) {
     let id = "lineGraph"
     let tagName = "my_dataviz_line"
@@ -32,24 +28,19 @@ const createLineGraph = function (url_value, width, height, filters) {
         d3.csv(url_value).then(data => {
 
             const dates = data.columns.splice(4)
-
             sorted_data = [] //empty sorted_data, outdated data
-
             //TODO: Modify to make more effecent Later
             dates.forEach(date => {
                 let value = { date: d3.timeParse("%Y-%m-%d")(date), sum_to_date: (d3.sum(data, d => d[date])) };
                 sorted_data.push(value)
 
             })
-
             // label.innerHTML = show_text   
             // append the svg object to the body of the page
-
-
             // checks if the filter prop has user selected dates to actually start filtering
             // if the filters prop actually has user selected data, the filtered data will get sent
             // else, the default data will
-            if (filters.hasOwnProperty('endDate') && filters.hasOwnProperty('startDate')) {
+            if (filters.hasOwnProperty("endDate") && filters.hasOwnProperty("startDate") ) {
                 // filtered data from selected dates   
                 const filteredData = sorted_data.filter(function (entry) {
                     return (entry.date >= filters.startDate) && (entry.date <= filters.endDate);
@@ -77,7 +68,7 @@ const draw_linegraph_over_time = function (id, tagName, data, width, height) {
     height = height - margin.top - margin.bottom;
 
     // d3.select("#"+id).remove(); //What does this do?
-    const svg = d3.select("#" + tagName)
+    const svg = d3.select(svgRef.current)
         //.append("svg")
         .attr("id", id)
         .attr("width", width + margin.left + margin.right)
@@ -236,8 +227,15 @@ const draw_linegraph_over_time = function (id, tagName, data, width, height) {
         focus.style("opacity", 0)
         focusText.style("opacity", 0)
     }
+}
 
+    return (
+        <>
+            <svg ref={svgRef}></svg>
+        </>
 
-
+    )
 
 }
+
+

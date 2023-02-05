@@ -24,8 +24,8 @@ export const DATA = [
                 link2: "",
                 filters: {
                     requires_dates: 'true',
-                    dateStart: "",
-                    dateEnd: "",
+                    endDate: "01/01/2023",
+                    startDate: "01/01/2020",
                     color1: "#27b694",
                     color2: "#27b694",
                     height: 400,
