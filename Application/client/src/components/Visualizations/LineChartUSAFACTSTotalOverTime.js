@@ -10,10 +10,12 @@ var betweenDates = (Math.abs(lastUpdated.getTime() - today.getTime())) / (60 * 6
 let sorted_data = [];
 
 export default function LineChartUSAFACTSTotalOverTime(props) {
+    const [filters, setFilters] = useState(props.filters);
+
     today = new Date(); //today's date
-    const handleButtonClose = () => {
-        props.close(true);
-    }
+    // const handleButtonClose = () => {
+    //     props.close(true);
+    // }
 
     return (
         <g>

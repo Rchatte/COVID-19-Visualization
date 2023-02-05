@@ -36,6 +36,8 @@ export default function Filters(props) {
 
     const appendFilters = () => {
         props.updatedFilters(filters);
+        props.currentData.filters = filters;
+        props.updateData(props.currentData);
     }
 
     const returnInputType = (title) => {
@@ -104,7 +106,7 @@ export default function Filters(props) {
                     </Typography>
                     <Divider />
                     <List>
-                        { filters && 
+                        {filters &&
                             Object.keys(filters).map((key, index) => {
                                 return (
                                     <>

@@ -5,7 +5,7 @@ import { DATA } from '../DataComponent/DataExports';
 
 import LineChartUSAFACTSTotalOverTime from '../Visualizations/LineChartUSAFACTSTotalOverTime';
 
-const GeneralVisualTemplate = (props) => {
+const GeneralFilteredVisualTemplate = (props) => {
     const checkGraphType = (graph) => {
         switch (graph.type) {
             case "line-chart-USA-FACTS-total-over-time":
@@ -25,4 +25,4 @@ const GeneralVisualTemplate = (props) => {
     )
 }
 
-export default GeneralVisualTemplate
+export default GeneralFilteredVisualTemplate
