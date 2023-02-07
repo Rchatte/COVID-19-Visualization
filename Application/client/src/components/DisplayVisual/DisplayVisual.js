@@ -1,39 +1,56 @@
-import React, { useEffect, useState, useReducer } from "react";
-import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer } from "@mui/material";
+import React, { useEffect, useState, useReducer, setState } from "react";
+import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer, CircularProgress, Box } from "@mui/material";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
 import GeneralVisualTemplate from "./GeneralVisualTemplate";
 import GeneralFilteredVisualTemplate from "./GeneralFilteredVisualTemplate";
+import LineChart from "../Visualizations/LineChart";
+import Treemap from "../Visualizations/TreeMap";
 
-
-export default function DisplayVisual(props) {
+export default function DisplayVisual() {
     const { height, width } = useWindowDimensions();
-    const [currentData, setCurrentData] = useState();
+    const [currentData, setCurrentData] = useState(null);
     const [graphs, setGraphs] = useState();
 
-
     const [filters, setFilter] = useState();
-    const [filtersTrigger, setOpenFilters] = useState();
+    const [filtersTrigger, setFiltersTrigger] = useState(false);
+    const [refresh, setRefresh] = useState(false);
+    const [loading, setLoading]= useState(false);
 
     // Get current data stored in key value "data"
     // Set object to variable currentData.
-    const getLocalStorage = () => {
+    useEffect(() => {  
+        getLocalStorage();
+    },[refresh]);
+
+
+    const getLocalStorage = async () => {
+        setLoading(true);
+        let objectParse;
+        const arrayGraphs = "graphs";
         if (window) {
-            try {
-                const currentObject = window.sessionStorage.getItem("data");
-                const objectParse = JSON.parse(currentObject);
-                setCurrentData(objectParse.graphs[0]); // Get first graph by defualt
-                setGraphs(objectParse.graphs);
-                setFilter(objectParse.graphs.filters);
-                console.log()
-            } catch (error) {
-                console.log(error)
-            }
-
-
+          try {
+            const currentObject = await window.sessionStorage.getItem("data");
+            objectParse = JSON.parse(currentObject);
+            console.log(objectParse);
+          } catch (error) {
+            setLoading(false);
+            console.log(error);
+          }
         }
-    }
-
+        // IF first time clicking on source, pick the first graph.
+        if ("graphs" in objectParse){
+            setCurrentData(objectParse.graphs[0]);
+            setGraphs(objectParse.graphs);
+            setFilter(objectParse.filters);
+            setLoading(false);
+        }else {
+            // Otherwise the value that has been selected and updated via sessionStorage. 
+            setCurrentData(objectParse);
+            setFilter(objectParse.filters);
+            setLoading(false);
+        } 
+    };
     // When selecting a new card update the session storage and variables.
     const updateChartData = (item) => {
         if(window) {
@@ -46,7 +63,6 @@ export default function DisplayVisual(props) {
             }
         }
     }
-
     const RenderCards = () => {
         return (
             <>
@@ -75,48 +91,90 @@ export default function DisplayVisual(props) {
         )
     }
 
-    // At render get the current information in browser data
-    useEffect(() => {
-        getLocalStorage();
-    }, [])
+    {/* 
+        Exmaple of a prop coming into this function
+        data: 
+            {
+            type: "line-chart",
+            graph_type: 'death-over-time',
+            title: "US COVID-19 Deaths Over Time",
+            img: LineGraphImg,
+            type_desc: 'Line Graph',
+            description: "Total COVID-19 Deaths in the USA over time",
+            link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
+            link2: "",
+            filters: {
+                requires_dates: 'true',
+                endDate: "01-01-2023",
+                startDate: "01-01-2020",
+                color1: "#27b694",
+                color2: "#27b694",
+                height: 400,
+                width: 800,
+            },
+    }
+
+    */}
+
+    const GraphType = (props) => {
+        console.log(props);
+        switch(props.type){
+            case "tree-map":
+                return (
+                    <Treemap url={props.data.link1} height={height/2.5} width={width/2.5} filters={props.filters} type={props.data.graph_type} />
+                );
+            case "line-chart":
+                return(
+                    <LineChart url={props.data.link1} height={height/2.5} width={width/2.5} filters={props.filters} type={props.data.graph_type} />
+                )
+            
+            
+            default:
+                return(
+                    <CircularProgress />
+                )
+        }
+    }
+
+
     return (
         <>
 
             <Container>
-
                 <Drawer
                     anchor={"left"}
                     open={filtersTrigger}
-                    onClose={() => setOpenFilters(false)}
-                    onKeyDown={() => setOpenFilters(false)}
-
-                >
+                    onClose={() => setFiltersTrigger(false)}
+                    onKeyDown={() => setFiltersTrigger(false)} >
                     {/* Send the useStates to the filters file to recieve the information */}
-                    <Filters open={filtersTrigger} data={filters} updatedFilters={setFilter} updateData={setCurrentData} currentData={currentData} />
+                    <Filters open={filtersTrigger} close={filtersTrigger} closeFilters={setFiltersTrigger} data={filters} updatedFilters={setFilter} refresh={setRefresh} />
                 </Drawer>
 
                 <Grid
-                    container sx={{ p: 1, pt: 5, height: (height / 2) }}>
+                    container sx={{ p: 1, display: 'flex', pt: 5, height: (height / 2) }}>
                     <Grid item xs={12} md={6} lg={6}>
-                        <Container>
-                            { currentData && <GeneralVisualTemplate data={currentData} /> }
-                        </Container>
+                        <Box sx={{ display: 'flex', alignContent: 'center'}}>
+                            {
+                                currentData !== null ? <GraphType type={currentData.type} data={currentData} filters={currentData.filters}/> : (<CircularProgress />)  
+                            }
+                        </Box>
                     </Grid>
                     <Grid item xs={12} md={6} lg={6}>
-                        <Container>
+                        <Box>
                             <Typography variant="h6" gutterBottom>
-                                { currentData  && currentData.title }
+                                { currentData && currentData.title }
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
                                 { currentData && currentData.description}
                             </Typography>
-                            <Button variant="outlined" onClick={() => setOpenFilters(true)}>Filters</Button>
-                        </Container>
+                            <Button variant="outlined" onClick={() => setFiltersTrigger(true)}>Filters</Button>
+                        </Box>
                     </Grid>
+
                 </Grid>
 
 
-                <Grid sx={{ p: 2 }} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid sx={{ p: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {graphs && <RenderCards />}
 
                 </Grid>

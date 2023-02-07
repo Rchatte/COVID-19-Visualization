@@ -15,7 +15,8 @@ export const DATA = [
         title: "USA Facts",
         graphs: [
             {
-                type: "line-chart-USA-FACTS-total-over-time",
+                type: "line-chart",
+                graph_type: 'death-over-time',
                 title: "US COVID-19 Deaths Over Time",
                 img: LineGraphImg,
                 type_desc: 'Line Graph',
@@ -24,8 +25,8 @@ export const DATA = [
                 link2: "",
                 filters: {
                     requires_dates: 'true',
-                    endDate: "01/01/2023",
-                    startDate: "01/01/2020",
+                    endDate: "01-01-2023",
+                    startDate: "01-01-2020",
                     color1: "#27b694",
                     color2: "#27b694",
                     height: 400,
@@ -35,22 +36,26 @@ export const DATA = [
             {
                 type: "tree-map",
                 title: "US COVID-19 Deaths By State",
+                graph_type: 'death-over-time',
                 description: "Data provided by static usafacts For COVID-19 Deaths in each state and county",
                 img: TreeMapImg,
                 type_desc: 'Tree Map',
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
                 filters: {
                     requires_dates: 'true',
-                    color1: "color",
-                    color2: "color",
+                    endDate: "01-01-2023",
+                    startDate: "01-01-2020",
+                    color1: "#808080",
+                    color2: "#818589",
+                    color3: "#818589",
                     height: 400,
                     width: 800,
                 },
             },
-
             {
-                type: "line-chart-USA-FACTS-total-over-time",
+                type: "line-chart",
                 title: "US COVID-19 Cases Over Time",
+                graph_type: 'cases-over-time',
                 img: LineGraphImg,
                 type_desc: 'Line Chart',
                 description: "Total COVID-19 Cases in the USA over time",
@@ -59,8 +64,8 @@ export const DATA = [
                 filters: {
                     dateStart: "",
                     dateEnd: "",
-                    color1: "color",
-                    color2: "color",
+                    color1: "#818589",
+                    color2: "#818589",
                     height: 400,
                     width: 800,
                 },
@@ -79,8 +84,6 @@ export const DATA = [
                     width: 800,
                 },
             },
-
-
             {
                 type: "World_Map",
                 title: "US COVID-19 Cases By Country",
@@ -89,7 +92,8 @@ export const DATA = [
                 type_desc: 'World Map',
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv",
                 filters: {
-                    color: "color",
+                    color1: "#818589",
+                    color2: "#818589",
                     height: 400,
                     width: 800,
                 },

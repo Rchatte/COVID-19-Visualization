@@ -14,30 +14,29 @@ import GraphData from "../DataComponent/GraphData";
 
 
 export default function Filters(props) {
+    const [filters, setFilters] = useState();
 
-    const [filters, setFilters] = useState(null);
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    const [filterData, setFilterData] = useState(filters);
-    const [color1, setColor1] = useState({ h: 0, s: 0, v: 68, a: 1 });
-    const [color2, setColor2] = useState({ h: 0, s: 0, v: 68, a: 1 });
-
-
-
+    // Depending on the filters associated with the chart click
     useEffect(() => {
+        console.log(props.data);
         setFilters(props.data);
     }, [props.data]);
 
-
-    const handleChange = (newValue) => {
-        setStartDate(newValue);
-    };
-
     const appendFilters = () => {
-        props.updatedFilters(filters);
-        props.currentData.filters = filters;
-        props.updateData(props.currentData);
+        console.log(filters);
+        let objectParse;
+        if (window) {
+            try {
+                const currentObject = window.sessionStorage.getItem("data");
+                objectParse = JSON.parse(currentObject);
+                objectParse.filters = filters;
+            }catch (error) {
+                console.log(error);
+            }
+        }
+        window.sessionStorage.setItem("data", JSON.stringify(objectParse));
+        props.refresh(true); // Refresh in DisplayVisual will cause re-render with useEffect.
+        props.closeFilters(true); // Close filters to show new visual.
     }
 
     const returnInputType = (title) => {
@@ -86,20 +85,25 @@ export default function Filters(props) {
                         </Stack>
                     </>
                 )
+            case "color3":
+                return (
+                    <>
+                        <Stack spacing={2}>
+                            <Typography variant="subtitle1">
+                                Color 3:
+                            </Typography>
+                            <TwitterPicker color={filters.color3} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color3: e.hex }))} />
+                        </Stack>
+                    </>
+                )
 
         }
     }
-
-
-
-
-
+    
     return (
         <>
             <Box
-                sx={{ width: 300, p: 1 }}
-                role="presentation"
-            >
+                sx={{ width: 300, p: 1 }} role="presentation">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <Typography variant="h6" sx={{ pl: 2, pt: 2, pb: 2 }}>
                         Filters
@@ -111,7 +115,7 @@ export default function Filters(props) {
                                 return (
                                     <>
                                         <ListItem key={index}>
-                                            {returnInputType(key)}
+                                            { returnInputType(key) }
                                         </ListItem>
                                     </>
                                 )

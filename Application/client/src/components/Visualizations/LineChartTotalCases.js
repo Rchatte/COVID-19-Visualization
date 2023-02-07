@@ -15,7 +15,7 @@ export default function LineChartTotalCases(props){
         props.close(true);
     }
 
-
+    
     const createLineGraph = (url_value,width,height) => {
         let id = "lineGraph"
         let tagName = "my_dataviz_line"

@@ -1,21 +1,37 @@
 import React, { Component, useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-// Using Fetch if needed
+
+
+{/* 
+    To make this scalable we can try:
+    props: url={props.data.link1} height={height/2.5} width={width/2.5} filters={props.filters} type={props.data.graph_type}
+*/}
 
 
 export default function Treemap(props) {
     const svgRef = useRef(null);
 
-    useEffect(() => { setUP(props, svgRef) })
+    useEffect(() => { 
 
+        // Check the (type)
+        // const appropriateData = func1() .. over time
+        // const appropriateData = func2() .. total deaths
+        // const appropriateData = func3() .. total vacinations
+        // setUP(appropriateData, svgRef) 
+        setUP(props, svgRef)
+    }, [])
+
+    {/* 
+        func1()
+        func2()
+        func3()
+    */}
     
     function setUP(props, svgRef) {
-        const c1 = props.filters.color1;
-        const c2 = props.filters.color2;
-    
-    
-        const colors = { barColor: "#31C2FC", parentColor: "#83DAFD", childrenColor: "#C1ECFE" };
+        const filters = props.filters;
+
+        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
     
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
