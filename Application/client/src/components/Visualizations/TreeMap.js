@@ -20,7 +20,7 @@ export default function Treemap(props) {
         // const appropriateData = func3() .. total vacinations
         // setUP(appropriateData, svgRef) 
         setUP(props, svgRef)
-    }, [])
+    }, [props.type])
 
     {/* 
         func1()
@@ -102,10 +102,15 @@ export default function Treemap(props) {
     
             // read json data
             d3.csv(url_data).then(function (data) {
-                var State_County_Data_lists = {};
+
+
+
+
+
     
     
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
+                var State_County_Data_lists = {};
                 const latest_date = data.columns[data.columns.length - 1]
                 var sorted_data = [];
                 var stateNames = []
@@ -131,6 +136,10 @@ export default function Treemap(props) {
     
                 //parent level
                 sorted_data = { name: "USA", children: sorted_data }
+
+                console.log("Sorted Data")
+
+                console.log(sorted_data)
     
                 //sorting states / middle layer
                 sorted_data.children.sort(function (a, b) {
@@ -331,5 +340,12 @@ export default function Treemap(props) {
             <svg ref={svgRef}></svg>
         </div>
     )
+}
+
+
+
+
+function total_Deaths_State_and_County(data){
+    
 }
 

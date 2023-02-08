@@ -10,6 +10,7 @@ import SourcesComponent from './components/SourcesComponent/SourcesComponent';
 import AboutComponent from './components/AboutComponent/AboutComponent';
 import SponsorsComponent from './components/SponsorsComponent/SponsorsComponent';
 import DisplayVisual from "./components/DisplayVisual/DisplayVisual";
+import Testing from './components/TestingComponent/Testing';
 
 /* Folder structure is divided as follows: client (Front end) and server (Backend) */
 /* We might not need a backend so ignore for now. */
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/About" element={<AboutComponent />}></Route>
           <Route exact path="/Sources" element={<SourcesComponent />}></Route>
           <Route exact path="/Sponsors" element={<SponsorsComponent />}></Route>
+          <Route exact path="/Testing" element={<Testing />}></Route>
         </Routes>
       </Router>
     </div>
