@@ -25,8 +25,10 @@ export const DATA = [
                 link2: "",
                 filters: {
                     requires_dates: 'true',
-                    endDate: "01-01-2023",
-                    startDate: "01-01-2020",
+                    // endDate: "",
+                    // startDate: "",
+                    dateStart: "",
+                    dateEnd: "",
                     color1: "#27b694",
                     color2: "#27b694",
                     height: 400,
@@ -62,6 +64,7 @@ export const DATA = [
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv",
                 link2: "",
                 filters: {
+                    requires_dates: 'true',
                     dateStart: "",
                     dateEnd: "",
                     color1: "#818589",
@@ -112,7 +115,7 @@ export const DATA = [
                 },
             }
         ]
-        
+
     },
     {
         title: "World Health Organization",
