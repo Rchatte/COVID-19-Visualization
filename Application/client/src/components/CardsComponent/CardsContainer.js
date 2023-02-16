@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Grid, Card, CardContent, Typography, Button, CardActions,CardMedia } from "@mui/material"
+import { Grid, Card, CardContent, Typography, Button, CardActions,CardMedia, CardActionArea } from "@mui/material"
 import GraphData from "../DataComponent/GraphData";
 
 import { DATA } from "../DataComponent/DataExports.js";
@@ -29,7 +29,8 @@ export default function CardsContainer(props) {
                     DATA.map((item, i) => (
                         <Grid item xs={2} sm={4} md={4} key={i}>
                             <Card sx={{ height: '100%' }} onClick={(e) => onButtonClick(item, e)}>
-                            <CardMedia
+                                <CardActionArea>
+                                <CardMedia
                                     sx={{ height: 160 }}
                                     image={item.cover_image}
                                     title="green iguana"
@@ -39,12 +40,12 @@ export default function CardsContainer(props) {
                                     <Typography variant="subtitle1" component="div">
                                         {item.title}
                                     </Typography>
-                                    <Typography variant="subtitle1" sx={{ mb: 1.5 }} color="text.secondary">
-                                        {item.description}
+                                    <Typography variant="body2" sx={{ mb: 1.5 }} color="text.secondary">
+                                        {item.source}
                                     </Typography>
 
                                 </CardContent>
-                                
+                                </CardActionArea>
                             </Card>
                         </Grid>
                     ))

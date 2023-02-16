@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer, setState, useContext } from "react";
-import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer, CircularProgress, Box } from "@mui/material";
+import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer,Paper , CircularProgress, Box, CardActionArea } from "@mui/material";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
 import GeneralVisualTemplate from "./GeneralVisualTemplate";
@@ -47,11 +47,11 @@ export default function DisplayVisual() {
         switch(props.type){
             case "tree-map":
                 return (
-                    <Treemap url={props.data.link1} height={height/2.5} width={width/2} filters={props.filters} type={props.data.graph_type} />
+                    <Treemap url={props.data.link1} height={height/2} width={width/2} filters={props.filters} type={props.data.graph_type} />
                 );
             case "line-chart":
                 return(
-                    <LineChart url={props.data.link1} height={height/2.5} width={width/2} filters={props.filters} type={props.data.graph_type} />
+                    <LineChart url={props.data.link1} height={height/2} width={width/2} filters={props.filters} type={props.data.graph_type} />
                 )    
             default:
                 return (
@@ -82,7 +82,7 @@ export default function DisplayVisual() {
                 <Grid
                     container sx={{ p:1, pt: 5, height: (height / 2) }}>
                     <Grid item xs={12} md={8} lg={8}>
-                        <Box>
+                        <Box xs={{ display: 'inline-flex'}}>
                             {
                                 data && <GraphType type={data.type} data={data} filters={data.filters}/> 
                             }
@@ -90,13 +90,20 @@ export default function DisplayVisual() {
                     </Grid>
                     <Grid item xs={12} md={4} lg={4}>
                         <Box>
+                            
                             <Typography variant="h6" gutterBottom>
                                 { data && data.title }
                             </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
+                            <Typography variant="subtitle2" gutterBottom>
                                 { data && data.description}
                             </Typography>
                             <Button variant="outlined" onClick={() => setFiltersTrigger(true)}>Filters</Button>
+                        </Box>
+                    </Grid>
+
+                    <Grid item sx={{ p: 2}} xs={12} md={12} lg={12}>
+                        <Box>
+                            <Typography variant="h6">Other visuals available</Typography>
                         </Box>
                     </Grid>
 
@@ -107,20 +114,19 @@ export default function DisplayVisual() {
                         {
                             graphs && graphs.map((item, i) => (
                                 <Grid item xs={2} sm={4} md={4} key={i}>
-                                    <Card sx={{ height: '100%' }}>
+                                    <Card sx={{ height: '100%' }} onClick={() => updateChartData(item)}>
+                                        <CardActionArea>
                                         <CardContent>
 
                                             <Typography variant="subtitle1" component="div">
                                                 {item.title}
                                             </Typography>
-                                            <Typography variant="subtitle1" sx={{ mb: 1.5 }} color="text.secondary">
+                                            <Typography variant="body2" sx={{ mb: 1.5 }} color="text.secondary">
                                                 {item.type_desc + " : " + item.description}
                                             </Typography>
 
                                         </CardContent>
-                                        <CardActions>
-                                            <Button variant="contained" onClick={() => updateChartData(item)}>Visual</Button>
-                                        </CardActions>
+                                        </CardActionArea>
                                     </Card>
                                 </Grid>
                             ))

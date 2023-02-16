@@ -20,7 +20,8 @@ export default function LineChart(props) {
     useEffect(() => {
         //console.log(props);
         //console.log(props.filters.endDate);
-        createLineGraph(props.url, props.height, props.width, props.filters)
+        console.log(props.width);
+        createLineGraph(props.url,  props.width, props.height, props.filters)
     }, [props])
 
 
@@ -74,9 +75,7 @@ export default function LineChart(props) {
 
     const draw_linegraph_over_time = function (id, tagName, data, width, height) {
         const margin = { top: 10, right: 30, bottom: 30, left: 60 }
-        width = width - margin.left - margin.right;
-        height = height - margin.top - margin.bottom;
-
+       
         // d3.select("#"+id).remove(); //What does this do?
         const svg = d3.select(svgRef.current)
             //.append("svg")

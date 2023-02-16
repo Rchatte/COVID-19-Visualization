@@ -209,7 +209,7 @@ export default function Treemap(props) {
     
         // When zooming in, draw the new nodes on top, and fade them in.
         function zoomin(d, group) {
-            console.log("Called");
+            console.log(d);
             const group0 = group.attr("pointer-events", "none");
             const group1 = group = svg.append("g").call(drawTreeMap, d);
     

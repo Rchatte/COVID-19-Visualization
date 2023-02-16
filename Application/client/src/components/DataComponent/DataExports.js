@@ -17,6 +17,7 @@ export const DATA = [
     {
         title: "USA Facts",
         cover_image: img1,
+        source: 'USAFacts is a non-profit organization and website that provides data and reports on the United States population, its governments finances, and governments impact on society. It was launched in 2017.',
         graphs: [
             {
                 type: "line-chart",
@@ -126,6 +127,7 @@ export const DATA = [
     {
         title: "World Health Organization",
         cover_image: img2,
+        source: 'The World Health Organization is a specialized agency of the United Nations responsible for international public health. Headquartered in Geneva, Switzerland, it has six regional offices and 150 field offices worldwide. The WHO was established on 7 April 1948.',
         graphs: [
             {
                 type: "line-chart-USA-FACTS-total-over-time",
@@ -167,6 +169,7 @@ export const DATA = [
     {
         title: "CDC",
         cover_image: img3,
+        source: 'The Centers for Disease Control and Prevention is the national public health agency of the United States. It is a United States federal agency, under the Department of Health and Human Services, and is headquartered in Atlanta, Georgia.',
         filters: {
             color: "color",
             height: 400,
@@ -209,6 +212,7 @@ export const DATA = [
     {
         title: "California Department of Public Health",
         cover_image: img4,
+        source: 'The California Department of Public Health is the state department responsible for public health in California. It is a subdivision of the California Health and Human Services Agency. It enforces some of the laws in the California Health and Safety Codes, notably the licensing of some types of healthcare facilities.',
         filters: {
             color: "color",
             height: 400,

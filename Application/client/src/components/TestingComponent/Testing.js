@@ -28,6 +28,9 @@ export default function Testing() {
     return(
         <>
             <TestingLineChart url={"url"} filters={"filters"}/>
+            <p>
+                Testing
+            </p>
         </>
     )
 }
