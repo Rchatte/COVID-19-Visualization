@@ -1,102 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material"
-import Card from "../ContentComponent/Cards" // This is class
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Grid, Card, CardContent, Typography, Button, CardActions,CardMedia } from "@mui/material"
 import GraphData from "../DataComponent/GraphData";
-import img1 from "../images/WHO.png"
-import img2 from "../images/USAFacts.png"
-import img3 from "../images/CDC.png"
-import img4 from "../images/CDPH.png"
+
 import { DATA } from "../DataComponent/DataExports.js";
+import { DataContext } from "../../App";
 
 
 export default function CardsContainer(props) {
 
-    { /* Props passed in here should be the filter options */}
-
-    const [ currentCard, setCurrentCard ] = useState('');
-    const [ changeContent, setChangeContent ] = useState(false);
+    const { setCurrentData } = useContext(DataContext);
+    const navigate = useNavigate();
 
 
-    // 2-3-2023:
-    // When a button is clicked, it returns the title
-    // This function then recives the title an looks for it in DataExports.js (Via function returnObjectToStore())
-    const onButtonClick = (value) => {
-        window.sessionStorage.removeItem("data");
-        const obj = returnObjectToStore(value); // Find Object 
-        console.log(obj);
-        setLocalStorage(obj); // Function to store object from DataExports in browser
-        window.location = "/Visual"; // Navigate to visual page. Component/DisplayVisual/DisplayVisual
-
-    }
-
-
-    // Search for object in DataExports.js
-    // Returns obj
-    const returnObjectToStore = (title) => {
-        let value;
-        DATA.map((item) => {
-            if(item.title === title){
-                value = item;
-            }
-        })
-        if (value) { return value;}
-        return "NA";
-    }
-
-    // Given a obj store it to browser memory given key "data"
-    // Key will be "data": { obj ... }
-    const setLocalStorage = (obj) => {
-        if (window){
-            window.sessionStorage.setItem("data", JSON.stringify(obj));
-        }
-    }
-
-   
+    const onButtonClick = (value, e) => {
+        e.preventDefault();
+        console.log(value);
+        setCurrentData(value)
+        navigate('/Visual');
+    }   
     return(
-        <>
-        { /* What this is doing is checking if changeCcontent is true or false.  */}
-        { /* True: updates the current container view -> Show all graphs to user.  */}
-        { /* False: Continue showing the grid of options to click from. */}
-
-        
-        
-           
+        <>     
            <Grid 
-            container
-            rowSpacing={3}
-            columnSpacing={2}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
+            sx={{ p: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}
             >
 
-                <Grid item xs={6}>
-                        <Card
-                            setCardView={onButtonClick}
-                            image={img1}
-                            body={"Visualizations from World Health Organization Data"}
-                            title={"World Health Organization"} />
-                </Grid>
-                <Grid item xs={6}>
-                        <Card
-                            setCardView={onButtonClick}
-                            image={img2}
-                            body={"Visualizations from USA Facts Data"}
-                            title={"USA Facts"} />
-                </Grid>
-                <Grid item xs={6}>
-                        <Card setCardView={onButtonClick}
-                            image={img3}
-                            body={"Visualizations from CDC Data"}
-                            title={"CDC"} />
-                </Grid>
-                <Grid item xs={6}>
-                        <Card setCardView={onButtonClick}
-                            image={img4} 
-                            body={"Visualizations from California Department of Public Health Data"} title={"California Department of Public Health"} />
-                </Grid>
-            </Grid>
-        
+                {
+                    DATA.map((item, i) => (
+                        <Grid item xs={2} sm={4} md={4} key={i}>
+                            <Card sx={{ height: '100%' }} onClick={(e) => onButtonClick(item, e)}>
+                            <CardMedia
+                                    sx={{ height: 160 }}
+                                    image={item.cover_image}
+                                    title="green iguana"
+                                />
+                                <CardContent>
+
+                                    <Typography variant="subtitle1" component="div">
+                                        {item.title}
+                                    </Typography>
+                                    <Typography variant="subtitle1" sx={{ mb: 1.5 }} color="text.secondary">
+                                        {item.description}
+                                    </Typography>
+
+                                </CardContent>
+                                
+                            </Card>
+                        </Grid>
+                    ))
+                }
+                </Grid>        
         </>
     )
 }

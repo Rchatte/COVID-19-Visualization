@@ -6,8 +6,9 @@ export default function Cards({setCardView, title, image, body}) {
 
     { /* Template, passing in title, body, image and later on we will configure the button actions */}
 
-    const handleButtonClick = () => {
+    const handleButtonClick = (e) => {
         var t = title
+        e.preventDefault();
         setCardView(t)
     }
     return(

@@ -1,3 +1,4 @@
+import React, { useState, useContext, createContext} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Footer from './components/FooterComponent/Footer';
@@ -30,24 +31,31 @@ Packages added so far: (NPM)
 
 */
 
-
+export const DataContext = createContext();
 
 
 function App() {
+
+  const [currentData, setCurrentData] = useState(null);
+
+
   return (
     <div className="app">
       <Navbar />
+      <DataContext.Provider value={{ currentData, setCurrentData }}>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Homepage />}></Route>
-          <Route exact path="/COVID-19-Visualization" element={<Homepage />}></Route>
-          <Route exact path="/Visual" element={<DisplayVisual />}></Route>
-          <Route exact path="/About" element={<AboutComponent />}></Route>
-          <Route exact path="/Sources" element={<SourcesComponent />}></Route>
-          <Route exact path="/Sponsors" element={<SponsorsComponent />}></Route>
-          <Route exact path="/Testing" element={<Testing />}></Route>
+            <Route exact path="/" element={<Homepage />}></Route>
+            <Route exact path="/COVID-19-Visualization" element={<Homepage />}></Route>
+            <Route exact path="/Visual" element={<DisplayVisual />}></Route>
+            <Route exact path="/About" element={<AboutComponent />}></Route>
+            <Route exact path="/Sources" element={<SourcesComponent />}></Route>
+            <Route exact path="/Sponsors" element={<SponsorsComponent />}></Route>
+            <Route exact path="/Testing" element={<Testing />}></Route>
         </Routes>
       </Router>
+      </DataContext.Provider> 
+
     </div>
   );
 }

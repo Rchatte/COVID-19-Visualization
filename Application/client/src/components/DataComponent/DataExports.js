@@ -3,7 +3,10 @@ import LineGraphImg from "../images/LineGraph.png"
 import TreeMapImg from "../images/TreeMap.png"
 import Defualt from "../images/NoImg.png"
 
-
+import img1 from "../images/USAFacts.png"
+import img2 from "../images/WHO.png"
+import img3 from "../images/CDC.png"
+import img4 from "../images/CDPH.png"
 {
     /*
     Each 'type' value should be unique when updating a graph.
@@ -13,12 +16,12 @@ import Defualt from "../images/NoImg.png"
 export const DATA = [
     {
         title: "USA Facts",
+        cover_image: img1,
         graphs: [
             {
                 type: "line-chart",
                 graph_type: 'death-over-time',
                 title: "US COVID-19 Deaths Over Time",
-                img: LineGraphImg,
                 type_desc: 'Line Graph',
                 description: "Total COVID-19 Deaths in the USA over time",
                 link1: "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv",
@@ -29,8 +32,10 @@ export const DATA = [
                     startDate: "01-01-2020",
                     color1: "#27b694",
                     color2: "#27b694",
+                    color3: "#9B9B9B",
                     height: 400,
                     width: 800,
+
                 },
             },
             {
@@ -50,6 +55,7 @@ export const DATA = [
                     color3: "#818589",
                     height: 400,
                     width: 800,
+                    
                 },
             },
             {
@@ -116,6 +122,7 @@ export const DATA = [
     },
     {
         title: "World Health Organization",
+        cover_image: img2,
         graphs: [
             {
                 type: "line-chart-USA-FACTS-total-over-time",
@@ -156,6 +163,7 @@ export const DATA = [
     },
     {
         title: "CDC",
+        cover_image: img3,
         filters: {
             color: "color",
             height: 400,
@@ -197,6 +205,7 @@ export const DATA = [
     },
     {
         title: "California Department of Public Health",
+        cover_image: img4,
         filters: {
             color: "color",
             height: 400,
