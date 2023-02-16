@@ -54,7 +54,7 @@ export default function DisplayVisual() {
                     <LineChart url={props.data.link1} height={height/2.5} width={width/2} filters={props.filters} type={props.data.graph_type} />
                 )    
             default:
-                return(
+                return (
                     <CircularProgress />
                 )
         }
