@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 // Using Fetch if needed
 
 
-export default function Treemap(props){
+export default function Freedom_Score_and_Todal_Deaths_TreeMap(props){
     console.log("Tree Map URL")
     console.log(props.url)
     return(
