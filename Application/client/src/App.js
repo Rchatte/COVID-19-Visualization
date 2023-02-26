@@ -8,6 +8,7 @@ import GraphData from './components/DataComponent/GraphData';
 import VisualizationDisplay from './components/VisualizationDisplay/VisualizationDisplay';
 import Navbar from './components/NavbarComponent/Navbar';
 import SourcesComponent from './components/SourcesComponent/SourcesComponent';
+import CustomDashboard from './components/CustomDashboardComponent/CustomDashboard';
 import AboutComponent from './components/AboutComponent/AboutComponent';
 import SponsorsComponent from './components/SponsorsComponent/SponsorsComponent';
 import DisplayVisual from "./components/DisplayVisual/DisplayVisual";
@@ -37,7 +38,9 @@ export const DataContext = createContext();
 function App() {
 
   const [currentData, setCurrentData] = useState(null);
+  const [selectedGraphs, setSelectedGraphs] = useState([]);
 
+  console.log(selectedGraphs);
 
   return (
     <div className="app">
@@ -47,7 +50,8 @@ function App() {
         <Routes>
             <Route exact path="/" element={<Homepage />}></Route>
             <Route exact path="/COVID-19-Visualization" element={<Homepage />}></Route>
-            <Route exact path="/Visual" element={<DisplayVisual />}></Route>
+            <Route exact path="/Visual" element={<DisplayVisual setSelectedGraphs={setSelectedGraphs}/>}></Route>
+            <Route exact path="/CustomDashboard" element={<CustomDashboard selectedGraphs={selectedGraphs} />}></Route>
             <Route exact path="/About" element={<AboutComponent />}></Route>
             <Route exact path="/Sources" element={<SourcesComponent />}></Route>
             <Route exact path="/Sponsors" element={<SponsorsComponent />}></Route>

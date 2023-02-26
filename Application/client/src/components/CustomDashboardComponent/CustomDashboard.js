@@ -1,47 +1,33 @@
 import React, { useEffect, useState, useReducer, setState, useContext } from "react";
 import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer,Paper , CircularProgress, Box, CardActionArea } from "@mui/material";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
-import Filters from "../FiltersComponent/Filters";
-import GeneralVisualTemplate from "./GeneralVisualTemplate";
-import GeneralFilteredVisualTemplate from "./GeneralFilteredVisualTemplate";
+import { DataContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
-import { useNavigate } from "react-router-dom";
-import { DataContext } from "../../App";
 
-export default function DisplayVisual(props) {
+const CustomDashboard = (props) => {
     const { height, width } = useWindowDimensions();
-    const { currentData, setCurrentData } = useContext(DataContext); 
-    const navigate = useNavigate();
-
-    const [data, setData] = useState(); // Graph selected
+    const [data, setData] = useState();
     const [graphs, setGraphs] = useState(null);
-    const [filters, setFilters] = useState();
-
-    const [filtersTrigger, setFiltersTrigger] = useState(false);
-
+    const [currentData, setCurrentData] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {  
         if(currentData === null) {
-            navigate('/');
-        }else {
-            getCurrentData(currentData);
-        }
-    },[currentData]);
 
+        }else {
+            getCurrentData(props.selectedGraphs);
+        }
+    },[props.selectedGraphs]);
 
     const getCurrentData = (data) => {
-        setData(data.graphs[0]);
-        setGraphs(data.graphs);
-        setFilters(data.graphs[0].filters) 
+        setData(data[0]);
+        setGraphs(data); 
     }
 
     const updateChartData = (item) => {
         setData({ ...item});
-    }
-
-    const setFilterLocations = (list) => {
-        
     }
 
     const GraphType = (props) => {
@@ -61,29 +47,26 @@ export default function DisplayVisual(props) {
         }
     }
 
-    const setNewFilters = (newFilters) =>{
-        console.log(newFilters);
-        setData(prevState => ({ ...prevState, filters: newFilters }));
-        console.log(data);
+    const deleteFromDashboard = (graph) => {
+        let index = 0;
+        if(data === graphs[0]){
+            graphs.shift();
+            getCurrentData(graphs);
+        } else {
+            for(let i = 0; i < graphs.length; i++){
+                if((graphs[i].graph_type === data.graph_type) && (graphs[i].title === data.title) && (graphs[i].description === data.description)){
+                    index = i;
+                    break;
+                }
+            }
+            getCurrentData(graphs.splice(0, index).concat(graphs.slice(index + 1)));
+        }
     }
 
-    const addToCustomDashboard = (graphData) => {
-        props.setSelectedGraphs(element => [...element, graphData]);
-    }
-
-
-    return (
-        <>
+  return (
+    <>
             <Container>
-                <Drawer
-                    anchor={"left"}
-                    open={filtersTrigger}
-                    onClose={() => setFiltersTrigger(false)}
-                    onKeyDown={() => setFiltersTrigger(false)} >
-                    {/* Send the useStates to the filters file to recieve the information */}
-                    <Filters open={filtersTrigger} close={filtersTrigger} closeFilters={setFiltersTrigger} setNewFilters={setNewFilters} data={filters} />
-                </Drawer>
-
+                {graphs.length != 0 ? 
                 <Grid
                     container sx={{ p:1, pt: 5, height: (height / 2) }}>
                     <Grid item xs={12} md={8} lg={8}>
@@ -102,9 +85,7 @@ export default function DisplayVisual(props) {
                             <Typography variant="subtitle2" gutterBottom>
                                 { data && data.description}
                             </Typography>
-                            <Button variant="outlined" onClick={() => setFiltersTrigger(true)}>Filters</Button><br/>
-                            <Button variant="outlined" onClick={() => addToCustomDashboard(data)}>Add to Your Dashboard</Button><br/>
-                            <Button variant="outlined" onClick={() => navigate("/CustomDashboard")}>Go to Your Dashboard</Button>
+                            <Button variant="outlined" onClick={() => deleteFromDashboard(data)}>Remove From Your Dashboard</Button>
                         </Box>
                     </Grid>
 
@@ -113,8 +94,6 @@ export default function DisplayVisual(props) {
                             <Typography variant="h6">Other visuals available</Typography>
                         </Box>
                     </Grid>
-
-                
 
                     <Grid item xs={12} md={12} sm={12}>
                         <Grid sx={{ p: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -141,12 +120,23 @@ export default function DisplayVisual(props) {
                         </Grid>
                     </Grid>
                 </Grid>
-
-
+                : 
+                <Grid 
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                style={{ minHeight: '100vh' }}
+                >
+                    <Box xs={{ display: 'inline-flex'}}>
+                        There are currently no visualizations in Your Dashboard.
+                        Those you have selected will show up here.
+                    </Box>
+                </Grid>}
             </Container>
-
-
-        </>
-    )
-
+    </>
+  )
 }
+
+export default CustomDashboard
