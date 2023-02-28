@@ -8,6 +8,7 @@ import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../App";
+import UserSelectedGraphs from "../CustomDashboardComponent/UserSelectedGraphs";
 
 export default function DisplayVisual(props) {
     const { height, width } = useWindowDimensions();
@@ -69,6 +70,8 @@ export default function DisplayVisual(props) {
 
     const addToCustomDashboard = (graphData) => {
         props.setSelectedGraphs(element => [...element, graphData]);
+        UserSelectedGraphs.push(graphData);
+        window.localStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs));
     }
 
 

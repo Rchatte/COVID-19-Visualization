@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext} from 'react';
+import React, { useState, useContext, createContext, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Footer from './components/FooterComponent/Footer';
