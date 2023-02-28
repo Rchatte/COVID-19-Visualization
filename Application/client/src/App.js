@@ -40,8 +40,6 @@ function App() {
   const [currentData, setCurrentData] = useState(null);
   const [selectedGraphs, setSelectedGraphs] = useState([]);
 
-  console.log(selectedGraphs);
-
   return (
     <div className="app">
       <Navbar />
