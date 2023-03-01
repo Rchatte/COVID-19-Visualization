@@ -1,5 +1,6 @@
 import { Typography, Container, Box } from "@mui/material";
 import React from "react";
+import Carousel, { CarouselItem } from "./Carousel";
 
 
 export default function AboutComponent(props) {
@@ -14,6 +15,30 @@ export default function AboutComponent(props) {
                 whose primary goal is to observe all aspects of COVID-19 
                 cases to discover hidden correlations between 
                 medical/non-medical factors and their severity.</Typography>
+
+                {/* To-do: 
+                    Insert group Images and have them be clickable to showcase
+                    member and bio.
+                    Move buttons to be arrows on the sides of the display to make
+                    it look modern.
+                    
+
+                */}
+                <div className="Members">
+                    <Carousel>
+                        <CarouselItem>Professor</CarouselItem>
+                        <CarouselItem>Group Member 1</CarouselItem>
+                        <CarouselItem>Group Member 2</CarouselItem>
+                        <CarouselItem>Group Member 3</CarouselItem>
+                        <CarouselItem>Group Member 4</CarouselItem>
+                        <CarouselItem>Group Member 5</CarouselItem>
+                        <CarouselItem>Group Member 6</CarouselItem>
+                        <CarouselItem>Group Member 7</CarouselItem>
+                        <CarouselItem>Group Member 8</CarouselItem>
+                        <CarouselItem>Group Member 9</CarouselItem>
+                        <CarouselItem>Group Member 10</CarouselItem>
+                    </Carousel>
+                </div>
                 
                 <Typography variant="h4" paddingTop>Tableau Information:</Typography>
                 <Typography variant="h6">The purpose of the Tableau 
