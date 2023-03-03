@@ -1,59 +1,54 @@
 import React, { useEffect, useState, useReducer, setState, useContext } from "react";
-import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer,Paper , CircularProgress, Box, CardActionArea } from "@mui/material";
+import { Grid, Button, Container, Typography, Card, CardContent, Paper, Drawer,CardActionArea , CircularProgress, Box, Stack } from "@mui/material";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
-import GeneralVisualTemplate from "./GeneralVisualTemplate";
-import GeneralFilteredVisualTemplate from "./GeneralFilteredVisualTemplate";
 import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../App";
 import UserSelectedGraphs from "../CustomDashboardComponent/UserSelectedGraphs";
+import { DATA_UPDATE } from "../DataComponent/DataExports";
+import './displayVisual.css';
 
 export default function DisplayVisual(props) {
     const { height, width } = useWindowDimensions();
-    const { currentData, setCurrentData } = useContext(DataContext); 
+    const { currentData, currentRegion } = useContext(DataContext); 
     const navigate = useNavigate();
 
-    const [data, setData] = useState(); // Graph selected
-    const [graphs, setGraphs] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState();
-
+    const [visuals, setVisuals] = useState(); // All Available graphs prev: graphData
+    const [currentVisual, setCurrentVisual] = useState(); // Current visual selected and show, also will update on click. 
     const [filtersTrigger, setFiltersTrigger] = useState(false);
 
-
-    useEffect(() => {  
-        if(currentData === null) {
-            navigate('/');
-        }else {
-            getCurrentData(currentData);
-        }
-    },[currentData]);
+    useEffect(() => {
+        if (!currentRegion) { navigate('/'); return; }
+        getRegionJSON(currentRegion);
+    }, [currentRegion])
 
 
-    const getCurrentData = (data) => {
-        setData(data.graphs[0]);
-        setGraphs(data.graphs);
-        setFilters(data.graphs[0].filters) 
+    // Set region and pick JSON based on region
+    const getRegionJSON = (region) => {
+        const object = DATA_UPDATE[region];
+        setCurrentVisual(object[0]); // Initial visual.
+        setFilters(object[0].filters); // Inital filters.
+        setVisuals(object); // All visuals in a region.
+        setLoading(false);
     }
-
+    
     const updateChartData = (item) => {
-        setData({ ...item});
-    }
-
-    const setFilterLocations = (list) => {
-        
+        setCurrentVisual({ ...item});
     }
 
     const GraphType = (props) => {
-        switch(props.type){
+        switch(props.data.graph_type){
             case "tree-map":
                 return (
-                    <Treemap url={props.data.link1} height={height/2} width={width/2} filters={props.filters} type={props.data.graph_type} />
+                    <Treemap url={props.data.link_source} height={height/2} width={width}  filters={props.data.filters} type={props.data.graph_type} />
                 );
             case "line-chart":
                 return(
-                    <LineChart url={props.data.link1} height={height/2} width={width/2} filters={props.filters} type={props.data.graph_type} />
+                    <LineChart url={props.data.link_source} height={height/2} width={width} filters={props.data.filters} type={props.data.graph_type} />
                 )    
             default:
                 return (
@@ -64,10 +59,10 @@ export default function DisplayVisual(props) {
 
     const setNewFilters = (newFilters) =>{
         console.log(newFilters);
-        setData(prevState => ({ ...prevState, filters: newFilters }));
-        console.log(data);
+        setCurrentVisual(prevState => ({ ...prevState, filters: newFilters }));
     }
 
+    
     const addToCustomDashboard = (graphData) => {
         props.setSelectedGraphs(element => [...element, graphData]);
         UserSelectedGraphs.push(graphData);
@@ -90,40 +85,49 @@ export default function DisplayVisual(props) {
 
                 <Grid
                     container sx={{ p:1, pt: 5, height: (height / 2) }}>
-                    <Grid item xs={12} md={8} lg={8}>
-                        <Box xs={{ display: 'inline-flex'}}>
+                    <Grid item xs={12} md={12} lg={12}>
+                        <Box xs={{ position: 'relative', overflow: 'auto'}}>
                             {
-                                data && <GraphType type={data.type} data={data} filters={data.filters}/> 
+                                currentVisual ? <GraphType data={currentVisual}/>: (
+                                    <Box xs={{ display: 'flex', alignContent: 'center'}}>
+                                        <CircularProgress/>
+                                    </Box>
+                                )
                             }
                         </Box>
                     </Grid>
-                    <Grid item xs={12} md={4} lg={4}>
-                        <Box>
-                            
-                            <Typography variant="h6" gutterBottom>
-                                { data && data.title }
-                            </Typography>
-                            <Typography variant="subtitle2" gutterBottom>
-                                { data && data.description}
-                            </Typography>
-                            <Button variant="outlined" onClick={() => setFiltersTrigger(true)}>Filters</Button><br/>
-                            <Button variant="outlined" onClick={() => addToCustomDashboard(data)}>Add to Your Dashboard</Button><br/>
-                            <Button variant="outlined" onClick={() => navigate("/CustomDashboard")}>Go to Your Dashboard</Button>
+
+                    <Grid item xs={4} md={4} lg={4}>
+                        <Box sx={{ pt: 2}}>
+                            <Container>
+                                <Stack spacing={0.5}>
+                                    <Button variant="outlined" size="small" onClick={() => setFiltersTrigger(true)}>Filters</Button><br/>
+                                    <Button variant="outlined" size="small" onClick={() => addToCustomDashboard(currentVisual)}>Add to Your Dashboard</Button><br/>
+                                    <Button variant="outlined" size="small" onClick={() => navigate("/CustomDashboard")}>Go to Your Dashboard</Button>
+                                </Stack>
+                            </Container>
                         </Box>
                     </Grid>
 
-                    <Grid item sx={{ p: 2}} xs={12} md={12} lg={12}>
-                        <Box>
-                            <Typography variant="h6">Other visuals available</Typography>
+                    <Grid item xs={8} md={8} lg={8}>
+                        <Box sx={{ pt: 2}}>
+                            <Container sx={{textAlign: 'end'}}>
+                                <Typography variant="h6" gutterBottom>
+                                    { currentVisual && currentVisual.title }
+                                </Typography>
+                                <Typography variant="subtitle2" gutterBottom>
+                                    { currentVisual && currentVisual.description}
+                                </Typography>
+                               
+                            </Container>
                         </Box>
                     </Grid>
-
-                
 
                     <Grid item xs={12} md={12} sm={12}>
-                        <Grid sx={{ p: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        <Typography variant="h5" sx={{ pt: 3}}>More visuals</Typography>
+                        <Grid sx={{ pt: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {
-                            graphs && graphs.map((item, i) => (
+                            visuals && visuals.map((item, i) => (
                                 <Grid item xs={2} sm={4} md={4} key={i}>
                                     <Card sx={{ height: '100%' }} onClick={() => updateChartData(item)}>
                                         <CardActionArea>
@@ -133,7 +137,7 @@ export default function DisplayVisual(props) {
                                                 {item.title}
                                             </Typography>
                                             <Typography variant="body2" sx={{ mb: 1.5 }} color="text.secondary">
-                                                {item.type_desc + " : " + item.description}
+                                                {item.graph_desc + " : " + item.description}
                                             </Typography>
 
                                         </CardContent>
@@ -145,6 +149,7 @@ export default function DisplayVisual(props) {
                         </Grid>
                     </Grid>
                 </Grid>
+
 
 
             </Container>

@@ -22,7 +22,7 @@ export default function LineChart(props) {
         //console.log(props.filters.endDate);
         console.log(props.width);
         createLineGraph(props.url,  props.width, props.height, props.filters)
-    }, [props])
+    }, [props.filters])
 
 
 

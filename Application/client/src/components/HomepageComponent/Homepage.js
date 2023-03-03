@@ -1,27 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { styled, useTheme } from '@mui/material/styles';
-import Drawer from '@mui/material/Drawer';
-
-import MuiAppBar from '@mui/material/AppBar';
-import VizCardLayout from "./Components/VizCards/VizCardLayout";
-import CardsContainer from "../CardsComponent/CardsContainer.js"
 import {
-    Button, Container , CardActionArea, CardActions, Typography, Box, Card, CardContent,
-    CardMedia, AppBar, List, ListItem, Toolbar, Grid, Divider, ListItemText, ListItemButton, IconButton,
-    CssBaseline, ListItemIcon, Slide, Stack, Link
+    Button, Container , CardActionArea, Typography, Box, Card,
+    CardMedia, Grid
 } from "@mui/material";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import MenuIcon from '@mui/icons-material/ChevronRight';
-
-import LineChartUSAFACTSTotalOverTime from "../Visualizations/LineChartUSAFACTSTotalOverTime";
-import Sidebar from "../NavbarComponent/Sidebar";
-import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from "react-router-dom";
+import US_IMAGE from "../images/USA.png"
+import WORLD_IMGAGE from "../images/WORLD.png";
+import { DataContext } from "../../App";
 
-
-
-      
 const drawerWidth = 260;
 const tabs = [
     'World Health Organization',
@@ -35,18 +22,23 @@ export default function Homepage(){
 
     
     const theme = useTheme();
-    const [open, setOpen] = useState(false);
-    const [date, setDate] = useState('');
-    const [yAxis, setYaxis] = useState([]);
-    const [region, setRegion] = useState();
-    const [selectedCard, setSelectedCard] = useState('');
-    const [menu, setMenu] = useState(true);
-    const containerRef = React.useRef(null);
+    const navigate = useNavigate();
     const [refresh, setRefresh] = useState(false);
+    const { setCurrentRegion } = useContext(DataContext);
+
     
     useEffect(() => {
         setRefresh(false);
     },[refresh]) 
+
+
+    const handleRegionChange = (event) => {
+        event.preventDefault();
+        const id = event.currentTarget.id;
+        setCurrentRegion(id); // Sets the region
+        navigate('/Visual'); // Send to visuals
+
+    }
 
     return(
         <>  
@@ -54,11 +46,63 @@ export default function Homepage(){
             /*  Nov 29, 2022
                 Removed the Navbar from here. 
                 The navbar is not called from Navbar.js at app.js
+                <CardsContainer />
             */
         }
 
         <Container sx={{ mt: 3 } }>
-            <CardsContainer />
+
+            <Container sx={{ pb: 5}}>
+                <Typography variant="h4">Data Driven Documents</Typography>
+                <Typography variant="subtitle2">
+                    Select from the following sources.
+                </Typography>
+
+            </Container>
+            <Grid container spacing={2}>
+                <Grid item xs={6} md={8}>
+                    <Card sx={{ height: '100%' }} id="USA" onClick={handleRegionChange}>
+                    <CardActionArea>
+
+                    <CardMedia
+                            sx={{ height: '300px'}}
+                            image={US_IMAGE}
+                            title="USA"
+                            children={<Typography variant="h5" color="white" sx={{ pt: 2, pl: 2}}>Unites States</Typography>}
+                        />
+                        </CardActionArea>
+
+                    </Card>
+                </Grid>
+                <Grid item xs={6} md={4}>
+                <Container sx={{ pt: 2}}>
+                        <Typography variant="subtitle2">Contains all visualizations within the united states given all local sources. </Typography>
+
+                    </Container>
+                </Grid>
+                <Grid item xs={6} md={8}>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }} boxShadow="initial">
+
+                    <Card sx={{ height: '100%' }} id="WORLDWIDE"  onClick={handleRegionChange }>
+                        <CardActionArea>
+                            <CardMedia
+                                sx={{height: '300px'}}
+                                image={WORLD_IMGAGE}
+                                title="WORLD"
+                                children={<Typography variant="h5" color="white" sx={{pt: 2, pl: 2}}>World Map</Typography>}
+                            />                        
+                        </CardActionArea>
+                    </Card>
+                </Box>
+                </Grid>
+                <Grid item xs={6} md={4}>
+                    <Container sx={{ pt: 2}}>
+                        <Typography variant="h6" color="white">World Map</Typography>
+                        <Typography variant="subtitle2">Contains all visualizations across the world given all world wide sources. </Typography>
+                    </Container>
+                </Grid>
+            </Grid>
+            
         </Container>
         </>
 

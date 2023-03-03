@@ -38,12 +38,13 @@ export const DataContext = createContext();
 function App() {
 
   const [currentData, setCurrentData] = useState(null);
+  const [currentRegion, setCurrentRegion] = useState(null);
   const [selectedGraphs, setSelectedGraphs] = useState([]);
 
   return (
     <div className="app">
       <Navbar />
-      <DataContext.Provider value={{ currentData, setCurrentData }}>
+      <DataContext.Provider value={{ currentData, setCurrentData, currentRegion, setCurrentRegion }}>
       <Router>
         <Routes>
             <Route exact path="/" element={<Homepage />}></Route>
