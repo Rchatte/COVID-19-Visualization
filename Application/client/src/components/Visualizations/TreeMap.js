@@ -11,6 +11,11 @@ import * as d3 from 'd3';
 
 export default function Treemap(props) {
     const svgRef = useRef(null);
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        console.log(data)
+    }, [data])
 
     useEffect(() => { 
         console.log(props);
@@ -54,10 +59,13 @@ export default function Treemap(props) {
         }
 
         // append the svg object to the body of the page
-        const svg = d3.select(svgRef.current)
+        let svg = d3.select(svgRef.current)
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
+            //.select("#"+id).remove()
+        //svg
             .append("g")
+            .attr("id",id)
             .attr("transform", `translate(${margin.left}, ${margin.top})`)
             .style("font", "10px sans-serif");
     
@@ -158,7 +166,7 @@ export default function Treemap(props) {
 
         function drawTreeMap(group, root) {
             //------------------------- SVG HERE --------------------------------------------------------------------------
-    
+            setData(root)
             const node = group
                 .selectAll("g")
                 .data(root.children.concat(root))
