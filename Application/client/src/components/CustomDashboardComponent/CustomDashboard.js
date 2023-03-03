@@ -71,6 +71,8 @@ const CustomDashboard = (props) => {
             }
             getCurrentData(graphs.splice(0, index).concat(graphs.slice(index + 1)));
         }
+
+        window.localStorage.setItem('selected-graphs', JSON.stringify(data));
     }
 
 
