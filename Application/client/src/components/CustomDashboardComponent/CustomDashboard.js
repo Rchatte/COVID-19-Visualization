@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer, setState, useContext } from "react";
-import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer,Paper , CircularProgress, Box, CardActionArea } from "@mui/material";
+import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer,Paper , CircularProgress, Box, CardActionArea, Stack } from "@mui/material";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import { DataContext } from "../../App";
 import { useNavigate } from "react-router-dom";
@@ -14,13 +14,12 @@ const CustomDashboard = (props) => {
     const [currentData, setCurrentData] = useState();
     const navigate = useNavigate();
 
-    // useEffect(() => {  
-    //     if(currentData === null) {
+    const [loading, setLoading] = useState(true);
+    const [filters, setFilters] = useState();
+    const [visuals, setVisuals] = useState(); // All Available graphs prev: graphData
+    const [currentVisual, setCurrentVisual] = useState(); // Current visual selected and show, also will update on click. 
+    const [filtersTrigger, setFiltersTrigger] = useState(false);
 
-    //     }else {
-    //         getCurrentData(props.selectedGraphs);
-    //     }
-    // });
 
     useEffect(() => {
         const data = window.localStorage.getItem('selected-graphs');
@@ -30,23 +29,24 @@ const CustomDashboard = (props) => {
     }, [])
 
     const getCurrentData = (data) => {
-        setData(data[0]);
-        setGraphs(data); 
+        setCurrentData(data[0]);
+        setGraphs(data);
     }
 
     const updateChartData = (item) => {
-        setData({ ...item});
+        setCurrentData({ ...item});
     }
 
     const GraphType = (props) => {
-        switch(props.type){
+        console.log(props);
+        switch(props.data.graph_type){
             case "tree-map":
                 return (
-                    <Treemap url={props.data.link1} height={height/2} width={width/2} filters={props.filters} type={props.data.graph_type} />
+                    <Treemap url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} />
                 );
             case "line-chart":
                 return(
-                    <LineChart url={props.data.link1} height={height/2} width={width/2} filters={props.filters} type={props.data.graph_type} />
+                    <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} />
                 )    
             default:
                 return (
@@ -55,16 +55,16 @@ const CustomDashboard = (props) => {
         }
     }
 
-    console.log(UserSelectedGraphs);
+    //console.log(UserSelectedGraphs);
 
     const deleteFromDashboard = (graph) => {
         let index = 0;
-        if(data === graphs[0]){
+        if(graph === graphs[0]){
             graphs.shift();
             getCurrentData(graphs);
         } else {
             for(let i = 0; i < graphs.length; i++){
-                if((graphs[i].graph_type === data.graph_type) && (graphs[i].title === data.title) && (graphs[i].description === data.description) && (graphs[i].filters === data.filters)){
+                if((graphs[i].graph_type === graph.graph_type) && (graphs[i].title === graph.title) && (graphs[i].description === graph.description) && (graphs[i].filters === graph.filters)){
                     index = i;
                     break;
                 }
@@ -81,59 +81,70 @@ const CustomDashboard = (props) => {
             <Container>
                 {graphs !== null ? 
                     graphs.length > 0 ? 
-                        <Grid
-                            container sx={{ p:1, pt: 5, height: (height / 2) }}>
-                            <Grid item xs={12} md={8} lg={8}>
-                                <Box xs={{ display: 'inline-flex'}}>
-                                    {
-                                        data && <GraphType type={data.type} data={data} filters={data.filters}/> 
-                                    }
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} md={4} lg={4}>
-                                <Box>
-                                    
-                                    <Typography variant="h6" gutterBottom>
-                                        { data && data.title }
-                                    </Typography>
-                                    <Typography variant="subtitle2" gutterBottom>
-                                        { data && data.description}
-                                    </Typography>
-                                    <Button variant="outlined" onClick={() => deleteFromDashboard(data)}>Remove From Your Dashboard</Button>
-                                </Box>
-                            </Grid>
+                    <Grid
+                    container sx={{ p:1, pt: 5, height: (height / 2) }}>
+                    <Grid item xs={12} md={12} lg={12}>
+                        <Box xs={{ position: 'relative', overflow: 'auto'}}>
+                            {
+                                currentData ? <GraphType data={currentData}/>: (
+                                    <Box xs={{ display: 'flex', alignContent: 'center'}}>
+                                        <CircularProgress/>
+                                    </Box>
+                                )
+                            }
+                        </Box>
+                    </Grid>
 
-                            <Grid item sx={{ p: 2}} xs={12} md={12} lg={12}>
-                                <Box>
-                                    <Typography variant="h6">Other visuals available</Typography>
-                                </Box>
-                            </Grid>
+                    <Grid item xs={4} md={4} lg={4}>
+                        <Box sx={{ pt: 2}}>
+                            <Container>
+                                <Stack spacing={0.5}>
+                                    <Button variant="outlined" size="small" onClick={() => deleteFromDashboard(currentData)}>Remove from Your Dashboard</Button>
+                                </Stack>
+                            </Container>
+                        </Box>
+                    </Grid>
 
-                            <Grid item xs={12} md={12} sm={12}>
-                                <Grid sx={{ p: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                                {
-                                    graphs && graphs.map((item, i) => (
-                                        <Grid item xs={2} sm={4} md={4} key={i}>
-                                            <Card sx={{ height: '100%' }} onClick={() => updateChartData(item)}>
-                                                <CardActionArea>
-                                                <CardContent>
+                    <Grid item xs={8} md={8} lg={8}>
+                        <Box sx={{ pt: 2}}>
+                            <Container sx={{textAlign: 'end'}}>
+                                <Typography variant="h6" gutterBottom>
+                                    { currentData && currentData.title }
+                                </Typography>
+                                <Typography variant="subtitle2" gutterBottom>
+                                    { currentData && currentData.description}
+                                </Typography>
+                               
+                            </Container>
+                        </Box>
+                    </Grid>
 
-                                                    <Typography variant="subtitle1" component="div">
-                                                        {item.title}
-                                                    </Typography>
-                                                    <Typography variant="body2" sx={{ mb: 1.5 }} color="text.secondary">
-                                                        {item.type_desc + " : " + item.description}
-                                                    </Typography>
+                    <Grid item xs={12} md={12} sm={12}>
+                        <Typography variant="h5" sx={{ pt: 3}}>More visuals</Typography>
+                        <Grid sx={{ pt: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {
+                            graphs && graphs.map((item, i) => (
+                                <Grid item xs={2} sm={4} md={4} key={i}>
+                                    <Card sx={{ height: '100%' }} onClick={() => updateChartData(item)}>
+                                        <CardActionArea>
+                                        <CardContent>
 
-                                                </CardContent>
-                                                </CardActionArea>
-                                            </Card>
-                                        </Grid>
-                                    ))
-                                }
+                                            <Typography variant="subtitle1" component="div">
+                                                {item.title}
+                                            </Typography>
+                                            <Typography variant="body2" sx={{ mb: 1.5 }} color="text.secondary">
+                                                {item.graph_desc + " : " + item.description}
+                                            </Typography>
+
+                                        </CardContent>
+                                        </CardActionArea>
+                                    </Card>
                                 </Grid>
-                            </Grid>
+                            ))
+                        }
                         </Grid>
+                    </Grid>
+                </Grid>
                     :
                         <Grid 
                         container
