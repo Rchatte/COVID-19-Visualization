@@ -26,6 +26,7 @@ const CustomDashboard = (props) => {
         if(data){
            getCurrentData(JSON.parse(data));
         }
+        console.log(graphs);
     }, [])
 
     const getCurrentData = (data) => {

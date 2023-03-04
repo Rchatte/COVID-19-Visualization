@@ -41,7 +41,6 @@ function App() {
   const [currentRegion, setCurrentRegion] = useState(null);
   const [selectedGraphs, setSelectedGraphs] = useState([]);
 
-  window.localStorage.setItem('selected-graphs', JSON.stringify(selectedGraphs));
   return (
     <div className="app">
       <Navbar />
