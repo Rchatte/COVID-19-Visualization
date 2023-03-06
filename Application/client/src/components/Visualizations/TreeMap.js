@@ -159,6 +159,11 @@ export default function Treemap(props) {
                             .style("top", (coords[1] + 10) + "px")
                             .style("left", (coords[0] + 10) + "px");
                     });
+
+                // Width gathered from here.  
+                const width = d3.select("#vizFrame").node().offsetWidth;
+                props.setWidth(width);
+                
                 zoomin(root, group)
             })
         }

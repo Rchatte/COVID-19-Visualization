@@ -13,6 +13,7 @@ import './displayVisual.css';
 export default function DisplayVisual(props) {
     const { height, width } = useWindowDimensions();
     const { currentData, currentRegion } = useContext(DataContext); 
+    const [frameWidth, setFrameWidth] = useState(null);
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
@@ -44,11 +45,11 @@ export default function DisplayVisual(props) {
         switch(props.data.graph_type){
             case "tree-map":
                 return (
-                    <Treemap url={props.data.link_source} height={height/2} width={width}  filters={props.data.filters} type={props.data.graph_type} />
+                    <Treemap url={props.data.link_source} height={height/2} width={width/2}  filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
                 );
             case "line-chart":
                 return(
-                    <LineChart url={props.data.link_source} height={height/2} width={width} filters={props.data.filters} type={props.data.graph_type} />
+                    <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
                 )    
             default:
                 return (
