@@ -64,10 +64,16 @@ export default function Treemap(props) {
             .attr("height", height + margin.top + margin.bottom)
             //.select("#"+id).remove()
         //svg
-            .append("g")
-            .attr("id",id)
-            .attr("transform", `translate(${margin.left}, ${margin.top})`)
-            .style("font", "10px sans-serif");
+
+        if(! svg.select("#"+id).empty()){
+            svg.select("#"+id).remove()
+        }
+       
+        svg=svg.append("g")
+        .attr("id",id)
+        .attr("transform", `translate(${margin.left}, ${margin.top})`)
+        .style("font", "10px sans-serif");
+        
     
     
         //Tooltips to display text on hover
@@ -139,7 +145,7 @@ export default function Treemap(props) {
                     .paddingTop(.5)
                     .paddingRight(.5)
                     .padding(.1)
-                    .round(true)
+                    // .round(true)
                     (root)
     
     
@@ -161,8 +167,8 @@ export default function Treemap(props) {
                     });
 
                 // Width gathered from here.  
-                const width = d3.select("#vizFrame").node().offsetWidth;
-                props.setWidth(width);
+                //const width = d3.select("#vizFrame").node().offsetWidth;
+                //props.setWidth(width);
                 
                 zoomin(root, group)
             })
