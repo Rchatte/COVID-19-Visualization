@@ -200,7 +200,7 @@ const CustomDashboard = (props) => {
                                                     mb="25px"
                                                 >
                                                     <Stack spacing={0.5}>
-                                                        <Button variant="outlined" size="small" onClick={() => deleteFromDashboard(currentData)}>Remove from Your Dashboard</Button>
+                                                        <Button variant="outlined" size="small" onClick={() => deleteFromDashboard(item)}>Remove from Your Dashboard</Button>
                                                     </Stack>
                                                 </Typography>
                                             </Box>
