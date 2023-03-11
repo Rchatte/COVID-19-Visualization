@@ -20,7 +20,6 @@ const CustomDashboard = (props) => {
     const [currentVisual, setCurrentVisual] = useState(); // Current visual selected and show, also will update on click. 
     const [filtersTrigger, setFiltersTrigger] = useState(false);
 
-
     useEffect(() => {
         const data = window.localStorage.getItem('selected-graphs');
         if(data){
@@ -39,15 +38,14 @@ const CustomDashboard = (props) => {
     }
 
     const GraphType = (props) => {
-        console.log(props);
-        switch(props.data.graph_type){
-            case "tree-map":
+        switch(props.data.title){
+            case "US COVID-19 Deaths By State":
                 return (
-                    <Treemap url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} />
+                    <Treemap height={height / 2} width={width / 3} filters={props.data.filters}  />
                 );
-            case "line-chart":
+            case "US COVID-19 Deaths Over Time":
                 return(
-                    <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} />
+                    <LineChart url={props.data.link_source} height={height / 2} width={width / 2} filters={props.data.filters} />
                 )    
             default:
                 return (
@@ -55,8 +53,6 @@ const CustomDashboard = (props) => {
                 )
         }
     }
-
-    //console.log(UserSelectedGraphs);
 
     const deleteFromDashboard = (graph) => {
         let index = 0;
@@ -178,19 +174,20 @@ const CustomDashboard = (props) => {
                                 graphs && graphs.map((item, i) => (
                                     <Box 
                                         gridColumn="span 6"
-                                        gridRow="span 3"
+                                        gridRow="span 5"
                                     >
                                         <Box
                                             mt="50px"
                                             p="0 30px"
                                             justifyContent="space-between"
                                             alignItems="center"
+                                            sx={{borderRadius: '16px', border: 1}}
                                         >
                                             <Box>
                                                 <Typography
                                                     variant="h5"
                                                     fontWeight="600"
-                                                    mb="25px"
+                                                    mb="25px"                                                 
                                                 >
                                                     {item.title}
                                                 </Typography>
