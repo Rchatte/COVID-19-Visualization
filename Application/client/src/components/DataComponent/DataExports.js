@@ -7,12 +7,13 @@ import img1 from "../images/USAFacts.png"
 import img2 from "../images/WHO.png"
 import img3 from "../images/CDC.png"
 import img4 from "../images/CDPH.png"
+
+
 {
     /*
     Each 'type' value should be unique when updating a graph.
     */
 }
-
 
 export const DATA_UPDATE = {
     USA: [
@@ -23,6 +24,8 @@ export const DATA_UPDATE = {
             description: 'Deaths over time chart description..',
             image: '',
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv',
+
+
             filters: {
                 requires_dates: 'true',
                 end_date: '',

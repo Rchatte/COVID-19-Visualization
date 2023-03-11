@@ -45,7 +45,7 @@ export default function DisplayVisual(props) {
         switch(props.data.graph_type){
             case "tree-map":
                 return (
-                    <Treemap url={props.data.link_source} height={height/2} width={width/2}  filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
+                    <Treemap title={props.data.title} url={props.data.link_source} height={height/2} width={width/2}  filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
                 );
             case "line-chart":
                 return(

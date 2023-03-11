@@ -12,6 +12,9 @@ import * as d3 from 'd3';
 export default function Treemap(props) {
     const svgRef = useRef(null);
     const [data, setData] = useState();
+    const url_data = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv" //url_for_data.value
+    
+
 
     useEffect(() => {
         console.log(data)
@@ -65,14 +68,13 @@ export default function Treemap(props) {
             //.select("#"+id).remove()
         //svg
 
-        if(! svg.select("#"+id).empty()){
+        if(!svg.select("#"+id).empty()){
             svg.select("#"+id).remove()
         }
-       
         svg=svg.append("g")
-        .attr("id",id)
-        .attr("transform", `translate(${margin.left}, ${margin.top})`)
-        .style("font", "10px sans-serif");
+            .attr("id",id)
+            .attr("transform", `translate(${margin.left}, ${margin.top})`)
+            .style("font", "10px sans-serif");
         
     
     
@@ -89,14 +91,15 @@ export default function Treemap(props) {
         // set the dimensions and margins of the graph
         height = props.height - margin.top - margin.bottom;
         width = props.width - margin.left - margin.right
-        const url_data = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv" //url_for_data.value
 
         const x = d3.scaleLinear().rangeRound([0, width]);
         const y = d3.scaleLinear().rangeRound([0, height]);
-        DrawTreemap()
+        DrawTreemap();
+
 
         function DrawTreemap() {
             // read json data
+
             d3.csv(url_data).then(function (data) {
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 var State_County_Data_lists = {};
@@ -130,6 +133,7 @@ export default function Treemap(props) {
                 sorted_data.children.sort(function (a, b) {
                     return (State_County_Data_lists[b.name].total - State_County_Data_lists[a.name].total)
                 });
+
     
                 //DATA sorted from now on -----------------------------------------------------------------------------------------------
                 // Root is the data tree hierarchy
@@ -145,7 +149,7 @@ export default function Treemap(props) {
                     .paddingTop(.5)
                     .paddingRight(.5)
                     .padding(.1)
-                    // .round(true)
+                    .round(false)
                     (root)
     
     
@@ -171,7 +175,8 @@ export default function Treemap(props) {
                 //props.setWidth(width);
                 
                 zoomin(root, group)
-            })
+                })
+            
         }
     
 
