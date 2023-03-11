@@ -46,7 +46,11 @@ export default function LineChart(props) {
                 // checks if the filter prop has user selected dates to actually start filtering
                 // if the filters prop actually has user selected data, the filtered data will get sent
                 // else, the default data will
-                if (filters.hasOwnProperty("endDate") && filters.hasOwnProperty("startDate")) {
+
+                
+                if (filters.end_date !== '' && filters.start_date !== '') {
+                    console.log(filters.start_date); // 3/10/2023
+                    console.log(filters.end_date);// 3/10/2023
                     // filtered data from selected dates   
                     const filteredData = sorted_data.filter(function (entry) {
                         // formatted all the dates to be the same date format
@@ -242,7 +246,7 @@ export default function LineChart(props) {
 
     return (
         <>
-            <svg ref={svgRef}></svg>
+            <svg height="100%" width="100%" ref={svgRef}></svg>
         </>
 
     )

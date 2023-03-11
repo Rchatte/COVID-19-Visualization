@@ -13,7 +13,6 @@ import './displayVisual.css';
 export default function DisplayVisual(props) {
     const { height, width } = useWindowDimensions();
     const { currentData, currentRegion } = useContext(DataContext); 
-    const [frameWidth, setFrameWidth] = useState(null);
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
@@ -21,6 +20,10 @@ export default function DisplayVisual(props) {
     const [visuals, setVisuals] = useState(); // All Available graphs prev: graphData
     const [currentVisual, setCurrentVisual] = useState(); // Current visual selected and show, also will update on click. 
     const [filtersTrigger, setFiltersTrigger] = useState(false);
+
+
+    var container = document.getElementById("container");
+    
 
     useEffect(() => {
         if (!currentRegion) { navigate('/'); return; }
@@ -39,17 +42,19 @@ export default function DisplayVisual(props) {
     
     const updateChartData = (item) => {
         setCurrentVisual({ ...item});
+        setFilters(item.filters)
     }
 
     const GraphType = (props) => {
+        var containerWidth = container.clientWidth;
         switch(props.data.title){
             case "US COVID-19 Deaths By State":
                 return (
-                    <Treemap url={props.data.link_source} height={height/2} width={width/2}  filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
+                    <Treemap height={height/2} width={containerWidth} filters={props.data.filters}  />
                 );
             case "US COVID-19 Deaths Over Time":
                 return(
-                    <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
+                    <LineChart url={props.data.link_source} height={height/2} width={containerWidth} filters={props.data.filters} />
                 )    
             default:
                 return (
@@ -90,7 +95,7 @@ export default function DisplayVisual(props) {
                 <Grid
                     container sx={{ p:1, pt: 5, height: (height / 2) }}>
                     <Grid item xs={12} md={12} lg={12}>
-                        <Box xs={{ position: 'relative', overflow: 'auto'}}>
+                        <Box id="container" xs={{ position: 'relative', overflow: 'auto'}}>
                             {
                                 currentVisual ? <GraphType data={currentVisual}/>: (
                                     <Box xs={{ display: 'flex', alignContent: 'center'}}>
@@ -105,8 +110,8 @@ export default function DisplayVisual(props) {
                         <Box sx={{ pt: 2}}>
                             <Container>
                                 <Stack spacing={0.5}>
-                                    <Button variant="outlined" size="small" onClick={() => setFiltersTrigger(true)}>Filters</Button><br/>
-                                    <Button variant="outlined" size="small" onClick={() => addToCustomDashboard(currentVisual)}>Add to Your Dashboard</Button><br/>
+                                    <Button variant="outlined" size="small" onClick={() => setFiltersTrigger(true)}>Filters</Button>
+                                    <Button variant="outlined" size="small" onClick={() => addToCustomDashboard(currentVisual)}>Add to Your Dashboard</Button>
                                     <Button variant="outlined" size="small" onClick={() => navigate("/CustomDashboard")}>Go to Your Dashboard</Button>
                                 </Stack>
                             </Container>

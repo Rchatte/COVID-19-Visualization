@@ -24,17 +24,10 @@ export const DATA_UPDATE = {
             description: 'Deaths over time chart description..',
             image: '',
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv',
-
-
             filters: {
                 requires_dates: 'true',
                 end_date: '',
                 start_date: '',
-                color1: "#27b694",
-                color2: "#27b694",
-                color3: "#9B9B9B",
-                height: 400,
-                width: 800,
             },
         },
         {
@@ -46,8 +39,6 @@ export const DATA_UPDATE = {
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv', // Source for associated graph
             filters: {
                 requires_dates: 'true',
-                end_date: '',
-                start_date: '',
                 color1: "#27b694",
                 color2: "#27b694",
                 color3: "#9B9B9B",

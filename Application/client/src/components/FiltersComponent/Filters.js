@@ -29,24 +29,24 @@ export default function Filters(props) {
 
     const returnInputType = (title) => {
         switch (title) {
-            case "dateStart":
+            case "start_date":
                 return (
                     <>
                         <DesktopDatePicker
                             label="Start Date"
-                            value={filters.startDate}
-                            onChange={(e) => setFilters((prev) => ({ ...prev, startDate: moment(e) }))}
+                            value={filters.start_date}
+                            onChange={(e) => setFilters((prev) => ({ ...prev, start_date: moment(e).format("MM-DD-YYYY") }))}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </>
                 )
-            case "dateEnd":
+            case "end_date":
                 return (
                     <>
                         <DesktopDatePicker
                             label="End Date"
-                            value={filters.endDate}
-                            onChange={(e) => setFilters((prev) => ({ ...prev, endDate: moment(e) }))}
+                            value={filters.end_date}
+                            onChange={(e) => setFilters((prev) => ({ ...prev, end_date: moment(e).format("MM-DD-YYYY") }))}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </>
@@ -56,7 +56,7 @@ export default function Filters(props) {
                     <>
                         <Stack spacing={2}>
                             <Typography variant="subtitle1">
-                                Color 1:
+                                Primary Color:
                             </Typography>
                             <TwitterPicker color={filters.color1} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color1: e.hex }))} />
                         </Stack>
@@ -67,7 +67,7 @@ export default function Filters(props) {
                     <>
                         <Stack spacing={2}>
                             <Typography variant="subtitle1">
-                                Color 2:
+                                Secondary Color:
                             </Typography>
                             <TwitterPicker color={filters.color2} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color2: e.hex }))} />
                         </Stack>
@@ -78,7 +78,7 @@ export default function Filters(props) {
                     <>
                         <Stack spacing={2}>
                             <Typography variant="subtitle1">
-                                Color 3:
+                                Highlight:
                             </Typography>
                             <TwitterPicker color={filters.color3} onChangeComplete={(e) => setFilters((prev) => ({ ...prev, color3: e.hex }))} />
                         </Stack>
@@ -115,7 +115,7 @@ export default function Filters(props) {
                         This is basically a prototype of what I have in mind, but the next step with this method is to figure
                         out a way to pass the info into the visualization file*/}
                         <ListItem key={"FilterClick"}>
-                            <Button variant="contained" onClick={appendFilters}>Filter</Button>
+                            <Button variant="contained" onClick={appendFilters}>Append Changes</Button>
                         </ListItem>
                     </List>
                 </LocalizationProvider>

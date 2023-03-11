@@ -16,9 +16,7 @@ export default function Treemap(props) {
     
 
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
+    
 
     useEffect(() => { 
         console.log(props);
@@ -91,6 +89,7 @@ export default function Treemap(props) {
         // set the dimensions and margins of the graph
         height = props.height - margin.top - margin.bottom;
         width = props.width - margin.left - margin.right
+        console.log(width)
 
         const x = d3.scaleLinear().rangeRound([0, width]);
         const y = d3.scaleLinear().rangeRound([0, height]);
@@ -306,7 +305,7 @@ export default function Treemap(props) {
                 <h2 id="tooltip_name"></h2>
                 <p id="tooltip_value"></p>
             </div>
-            <svg ref={svgRef}></svg>
+            <svg height="100%" width="100%" ref={svgRef}></svg>
         </div>
     )
 }
