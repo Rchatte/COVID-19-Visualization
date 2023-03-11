@@ -21,14 +21,15 @@ const CustomDashboard = (props) => {
     const [filtersTrigger, setFiltersTrigger] = useState(false);
 
     useEffect(() => {
-        const data = window.localStorage.getItem('selected-graphs');
+        // const data = window.localStorage.getItem('selected-graphs');
+        const data = JSON.parse(sessionStorage.getItem('selected-graphs'));
         if(data){
-           getCurrentData(JSON.parse(data));
+           getCurrentData(data);
         }
-        console.log(graphs);
     }, [])
 
     const getCurrentData = (data) => {
+        console.log(data);
         setCurrentData(data[0]);
         setGraphs(data);
     }
@@ -55,6 +56,7 @@ const CustomDashboard = (props) => {
     }
 
     const deleteFromDashboard = (graph) => {
+        console.log(graph);
         let index = 0;
         if(graph === graphs[0]){
             graphs.shift();
@@ -69,7 +71,8 @@ const CustomDashboard = (props) => {
             getCurrentData(graphs.splice(0, index).concat(graphs.slice(index + 1)));
         }
 
-        window.localStorage.setItem('selected-graphs', JSON.stringify(data));
+        // window.localStorage.setItem('selected-graphs', JSON.stringify(data));
+        sessionStorage.setItem('selected-graphs', JSON.stringify(data));
     }
 
 
@@ -181,7 +184,7 @@ const CustomDashboard = (props) => {
                                             p="0 30px"
                                             justifyContent="space-between"
                                             alignItems="center"
-                                            sx={{borderRadius: '16px', border: 1}}
+                                            sx={{borderRadius: '16px', border: 1, bgcolor: '#e0e0e0'}}
                                         >
                                             <Box>
                                                 <Typography
