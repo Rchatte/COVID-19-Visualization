@@ -67,9 +67,11 @@ export default function DisplayVisual(props) {
     const addToCustomDashboard = (graphData) => {
         props.setSelectedGraphs(element => [...element, graphData]);
         UserSelectedGraphs.push(graphData);
+
+        console.log(UserSelectedGraphs);
         window.localStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs));
-        const data = JSON.parse(window.localStorage.getItem('selected-graphs')).concat(UserSelectedGraphs);
-        window.localStorage.setItem("selected-graphs", JSON.stringify(data));
+        // const data = JSON.parse(window.localStorage.getItem('selected-graphs')).concat(UserSelectedGraphs);
+        // window.localStorage.setItem("selected-graphs", JSON.stringify(data));
     }
 
 

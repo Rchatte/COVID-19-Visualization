@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer, setState, useContext } from "react";
-import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer,Paper , CircularProgress, Box, CardActionArea, Stack } from "@mui/material";
+import { Grid, Button, Container, Typography, Card, CardContent, CardActions, Drawer,Paper , CircularProgress, Box, CardActionArea, Stack, CardHeader } from "@mui/material";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import { DataContext } from "../../App";
 import { useNavigate } from "react-router-dom";
@@ -79,7 +79,7 @@ const CustomDashboard = (props) => {
 
   return (
     <>
-            <Container>
+            {/* <Container>
                 {graphs !== null ? 
                     graphs.length > 0 ? 
                     <Grid
@@ -164,7 +164,86 @@ const CustomDashboard = (props) => {
                 : 
                     <CircularProgress />
                 }
-            </Container>
+            </Container> */}
+            <Box m="20px">
+                { graphs !== null ?
+                    graphs.length > 0 ?
+                        <Box
+                            display="grid"
+                            gridTemplateColumns="repeat(12, 1fr)"
+                            gridAutoRows="140px"
+                            gap="20px"
+                        >   
+                            {
+                                graphs && graphs.map((item, i) => (
+                                    <Box 
+                                        gridColumn="span 6"
+                                        gridRow="span 3"
+                                    >
+                                        <Box
+                                            mt="50px"
+                                            p="0 30px"
+                                            justifyContent="space-between"
+                                            alignItems="center"
+                                        >
+                                            <Box>
+                                                <Typography
+                                                    variant="h5"
+                                                    fontWeight="600"
+                                                    mb="25px"
+                                                >
+                                                    {item.title}
+                                                </Typography>
+                                                <Typography
+                                                    variant="h5"
+                                                    fontWeight="600"
+                                                    mb="25px"
+                                                >
+                                                    <Stack spacing={0.5}>
+                                                        <Button variant="outlined" size="small" onClick={() => deleteFromDashboard(item)}>Remove from Your Dashboard</Button>
+                                                    </Stack>
+                                                </Typography>
+                                            </Box>
+                                            <Box>
+                                                <GraphType data={item}/>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                    
+                                ))
+                            }
+                        </Box>
+                        :
+                        <Grid 
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        style={{ minHeight: '100vh' }}
+                        >
+                            <Box xs={{ display: 'inline-flex'}}>
+                                There are currently no visualizations in Your Dashboard.
+                                Those you have selected will show up here.
+                            </Box>
+                        </Grid>
+
+                    :
+                    <Grid 
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        style={{ minHeight: '100vh' }}
+                    >
+                        <Box xs={{ display: 'inline-flex'}}>
+                            There are currently no visualizations in Your Dashboard.
+                            Those you have selected will show up here.
+                        </Box>
+                    </Grid>
+                }
+            </Box>
     </>
   )
 }
