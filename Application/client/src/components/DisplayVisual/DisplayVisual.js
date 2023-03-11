@@ -42,12 +42,12 @@ export default function DisplayVisual(props) {
     }
 
     const GraphType = (props) => {
-        switch(props.data.graph_type){
-            case "tree-map":
+        switch(props.data.title){
+            case "US COVID-19 Deaths By State":
                 return (
-                    <Treemap title={props.data.title} url={props.data.link_source} height={height/2} width={width/2}  filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
+                    <Treemap url={props.data.link_source} height={height/2} width={width/2}  filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
                 );
-            case "line-chart":
+            case "US COVID-19 Deaths Over Time":
                 return(
                     <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} setWidth={setFrameWidth} />
                 )    
