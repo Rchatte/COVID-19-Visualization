@@ -24,6 +24,7 @@ import "./row.css";
 import Filters from "../FiltersComponent/Filters.js"
 import World_Map_Death_Cases from "../Visualizations/World_Map_Death_Cases";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
+import TreemapPop from "../Visualizations/Percent_of_Pop_Over_60_and_COVID_death";
 
 
 
@@ -88,13 +89,15 @@ export default function GraphData(props) {
             case "line-chart-USA-FACTS-total-over-time":
                 return <LineChartUSAFACTSTotalOverTime ccccccccc />
             case "tree-map":
-                return <Treemap url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
+                return <Percent_of_Pop url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
             case "World_Map":
                 return <World_Map_Death_Cases url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
             case "CDC":
                 return <CDCData />
             case "California Department of Public Health":
                 return <CDPHData />
+            case "tree-map_percent_of_pop":
+                return <TreeMapPop url={url} height={400} width={400} filters={filters} loadingStatus={setLoading} />
             default:
                 return null
         }
