@@ -33,7 +33,7 @@ export const DATA_UPDATE = {
         {
             title: 'US COVID-19 Deaths By State', // Title to be shown
             graph_desc: 'Tree Map', // Graph type to be shown
-            graph_type: 'tree-map', // To differentiate from other graph types
+            graph_type: 'tree-map_percent_of_pop', // To differentiate from other graph types
             description: 'Deaths over time chart description..', // To be shown
             image: '', // If needed link to image 
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv', // Source for associated graph
@@ -50,8 +50,73 @@ export const DATA_UPDATE = {
     ],
     WORLDWIDE: [
         {
+            title: 'COVID-19 Deaths and Percent of Population Over 60',
+            graph_desc: 'Tree Map',
+            type: 'tree-map_percent_of_pop',
+            graph_type: 'tree-map_percent_of_pop',
+            description: 'Amount of Worldwide COVID-19 Deaths and Percent of Population Over 60 in said Country',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+                
+            },
             
-        }
+        },
+        {
+            title: 'COVID-19 Cases VS People Vaccinated Worldwide',
+            graph_desc: 'Tree Map',
+            description: 'Amount of Worldwide COVID-19 Cases and amount of vaccinations in said Country',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+                
+            },
+            
+        },
+        {
+            title: 'COVID-19 Deaths and People Fully Vaccinated',
+            graph_desc: 'Tree Map',
+            description: 'Amount of Worldwide COVID-19 Deaths and amount of people fully vaccinated said Country',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+                
+            },
+            
+        },
+        {
+            title: "Country's Freedom Score And Total COVID-19 Cases",
+            graph_desc: 'Tree Map',
+            description: "Country's quality of freedom and amount of COVID-19 cases in said Country",
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+                
+            },
+            
+        },
+        {
+            title: "Country's Freedom Score And Total COVID-19 Deaths",
+            graph_desc: 'Tree Map',
+            description: "Country's quality of freedom and amount of COVID-19 deaths in said Country",
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+                
+            },
+            
+        },
+                {
+            title: "Country's Median Age Vs COVID-19 Deaths",
+            graph_desc: 'Tree Map',
+            description: "Median Age of people in a Country and amount of COVID-19 deaths in said Country",
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+                
+            },
+            
+        },
     ]
 }
 
@@ -278,4 +343,5 @@ export const DATA = [
             }
         ]
     },
+    
 ]
