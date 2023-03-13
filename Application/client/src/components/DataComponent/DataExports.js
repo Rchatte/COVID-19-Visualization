@@ -50,7 +50,15 @@ export const DATA_UPDATE = {
     ],
     WORLDWIDE: [
         {
-            
+            title: "Country's Happiness Vs. Mortality",
+            graph_desc: 'Tree Map',
+            graph_type: 'tree-map',
+            description: 'Measure of Happiness in a Country and Mortality Rate in said Country',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
         }
     ]
 }

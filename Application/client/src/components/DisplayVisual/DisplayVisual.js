@@ -4,6 +4,7 @@ import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
 import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
+import TreemapHappinessMort from "../Visualizations/Happiness_vs_Mortality_Rate_Treemap";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../App";
 import UserSelectedGraphs from "../CustomDashboardComponent/UserSelectedGraphs";
@@ -55,7 +56,11 @@ export default function DisplayVisual(props) {
             case "US COVID-19 Deaths Over Time":
                 return(
                     <LineChart url={props.data.link_source} height={height/2} width={containerWidth} filters={props.data.filters} />
-                )    
+                );
+            case "Country's Happiness Vs. Mortality":
+                return (
+                    <TreemapHappinessMort height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
             default:
                 return (
                     <CircularProgress />
