@@ -10,7 +10,7 @@
 .carousel-item {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     height: 200px;
     background-color: blue;
     color: #fff;
@@ -24,3 +24,9 @@
 .indicators > button {
     margin: 5px;
 }
+
+/* Used to create a grid-like system */
+.carouselContainer {
+    display: flex;
+    align-items: center;
+  }

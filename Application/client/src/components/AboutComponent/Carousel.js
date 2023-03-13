@@ -18,23 +18,7 @@ const Carousel = ({children}) => {
         }
         setActiveIndex(newIndex);
     }
-
-    /*
-
-    This is to have the carousel cycle automatically but it is not working atm
-
-    useEffect (() => {
-        const interval = setInterval(() => {
-            updateIndex(activeIndex + 1);
-        }, 1000);
-        return () => {
-            if (interval) {
-                clearInterval(interval);
-            }
-        };
-    })
-    */
-
+    
     return (
         <div className='carousel'>
             <div className='inner' style={{transform: `translateX(-${activeIndex * 100}%)`}}>

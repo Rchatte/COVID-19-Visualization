@@ -1,7 +1,7 @@
 import { Typography, Container, Box } from "@mui/material";
 import React from "react";
 import Carousel, { CarouselItem } from "./Carousel";
-
+import blankPFP from "../images/blankprofilepicture.png"
 
 export default function AboutComponent(props) {
 
@@ -10,33 +10,83 @@ export default function AboutComponent(props) {
         <Box sx={{ flexGrow: 1 }}>
             <Container>
                 <Typography variant="h3" textAlign={"center"} paddingTop>About Us:</Typography>
-                <Typography variant="h6" textAlign={"center"}>We are a group 
+                <Typography variant="h6" textAlign={"center"} paddingBottom={3}>We are a group 
                 consisting of undergraduate, senior-level students 
                 whose primary goal is to observe all aspects of COVID-19 
                 cases to discover hidden correlations between 
                 medical/non-medical factors and their severity.</Typography>
 
-                {/* To-do: 
-                    Insert group Images and have them be clickable to showcase
-                    member and bio.
-                    Move buttons to be arrows on the sides of the display to make
-                    it look modern.
-                    
-
-                */}
                 <div className="Members">
                     <Carousel>
-                        <CarouselItem>Professor</CarouselItem>
-                        <CarouselItem>Group Member 1</CarouselItem>
-                        <CarouselItem>Group Member 2</CarouselItem>
-                        <CarouselItem>Group Member 3</CarouselItem>
-                        <CarouselItem>Group Member 4</CarouselItem>
-                        <CarouselItem>Group Member 5</CarouselItem>
-                        <CarouselItem>Group Member 6</CarouselItem>
-                        <CarouselItem>Group Member 7</CarouselItem>
-                        <CarouselItem>Group Member 8</CarouselItem>
-                        <CarouselItem>Group Member 9</CarouselItem>
-                        <CarouselItem>Group Member 10</CarouselItem>
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Navid Amini' class='margins'/>
+                        <Typography variant="h6">Doctor Navid Amini <br />
+                        Dr Navid Amini is our advisor for this project and we are grateful and thank him for 
+                        aiding us throughout the project.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Rohan Chatterjee' class='margins'/>
+                        <Typography variant="h6">Rohan Chatterjee (22), Project Lead <br />
+                        Plans After Graduation: Plans to get a PhD and work in research related to the use of 
+                        Computer Science in the Medical Field.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Juan Hernandez' class='margins'/>
+                        <Typography variant="h6">Juan Hernandez (25), Tableau/Machine Learning Teams <br />
+                        Plans After Graduation: Plans to work full-time as a back-end software engineer.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Francisco Contreras' class='margins'/>
+                        <Typography variant="h6">Francisco Contreras (21), JavaScript Application Team <br />
+                        Plans After Graduation: Plans to work full-time or part-time as a software engineer.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Jimuel Cedrick Julaton' class='margins'/>
+                        <Typography variant="h6">Jimuel Cedrick Julaton (22), Tableau/JavaScript Application Teams <br />
+                        Plans After Graduation: Plans to work full-time as a software engineer.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Chen-Ching Lin' class='margins'/>
+                        <Typography variant="h6">Chen-Ching Lin (25), Tableau/JavaScript Application Teams <br />
+                        Plans After Graduation: Plans to work full-time as a software engineer.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Carlos Alberto Hernandez' class='margins'/>
+                        <Typography variant="h6">Carlos Alberto Hernandez (24), JavaScript Application <br />
+                        Plans After Graduation: Plans to apply to the EMT course at USLA and eventually become A
+                        paramedic.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Riese Atianzar' class='margins'/>
+                        <Typography variant="h6">Riese Atianzar (23), JavaScript Application <br />
+                        Plans After Graduation: Plans to work full-time as a back-end software engineer.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Emily Gonzalez' class='margins'/>
+                        <Typography variant="h6">Emily Gonzalez (23), Project Lead <br />
+                        Plans After Graduation: Plans to work full-time as a software engineer.</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Luiz Gonzales' class='margins'/>
+                        <Typography variant="h6">Luiz Gonzales (--), -- <br />
+                        Plans After Graduation: --</Typography>
+                        </div></CarouselItem>
+
+                        <CarouselItem><div class='carouselContainer'>
+                        <img src={blankPFP} height="200" width="200" alt='Ting Fung Ha' class='margins'/>
+                        <Typography variant="h6">Ting Fung Ha (--), -- <br />
+                        Plans After Graduation: --</Typography>
+                        </div></CarouselItem>
+
                     </Carousel>
                 </div>
                 
@@ -54,17 +104,10 @@ export default function AboutComponent(props) {
                 such as the low accessibility and high data usage that Tableau requires.</Typography>
 
                 <Typography variant="h4" paddingTop>Machine Learning Information:</Typography>
-                <Typography variant="h6">Machine Learning was used to primarily focus on patients' comorbidity 
+                <Typography variant="h6" paddingBottom={3}>Machine Learning was used to primarily focus on patients' comorbidity 
                 and genetic factors in relation to their illness and severity of COVID-19. (I believe there was 
                 a discussion of using logistic regression to study these correlations so a note is left here 
                 to include later on) (Also include use of Boruta algorithm as being the main method of use)</Typography>
-
-                <Typography variant="h4" paddingTop textAlign={"center"}>About Our Sponsors:</Typography>
-                <Typography variant="h6" textAlign={"center"}>(Fill in)</Typography>
-
-                <Typography variant="h4" paddingTop textAlign={"center"}>Gathered Sources:</Typography>
-                <Typography variant="h6" textAlign={"center"}>(Fill in)</Typography>
-
             </Container>
         </Box>
         </>
