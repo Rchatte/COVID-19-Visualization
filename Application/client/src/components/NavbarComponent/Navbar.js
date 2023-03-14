@@ -52,7 +52,7 @@ export default function Navbar() {
                         Senior Design
           </Typography>
                 <Button color="inherit" onClick={() => window.location.href="/" } >Dashboard</Button>
-                <Button color="inherit" onClick={() => window.location.href="/About"} >About</Button>
+                <Button color="inherit" onClick={() => window.location.href="/About"} >About Us</Button>
                 <Button color="inherit" onClick={() => window.location.href="/Sources" }>Sources</Button>
                 <Button color="inherit" onClick={() => window.location.href="/Sponsors" }>Sponsors</Button>
                 <Button color="inherit" onClick={() => window.location.href="/CustomDashboard" }>Your Dashboard</Button>

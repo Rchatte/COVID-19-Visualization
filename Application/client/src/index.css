@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Used to buffer images in sources component */
+.margins {
+  margin-right: 2%;
+}
+
+/* Used to center images */
+.center {
+  text-align: center;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Used to create a grid-like system */
+.container {
+  display: flex;
+  align-items: center;
+  border-style: groove;
+}
