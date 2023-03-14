@@ -127,7 +127,8 @@ export default function TreemapHappinessMort(props) {
                         if(matchingObj){
                             const cases = matchingObj['total_cases_per_million'];
                             const deaths = matchingObj['total_deaths_per_million'];
-                            const mort = deaths/cases*100;
+                            const mortFull = deaths/cases*100;
+                            let mort = mortFull.toFixed(2);
 
                             console.log({name : matchingObj["location"], value: mort, Happiness : obj1["Happiness score"]})
 
@@ -151,7 +152,7 @@ export default function TreemapHappinessMort(props) {
 
 
                     //parent level
-                    sorted_data = { name: "Total", children: sorted_data }
+                    sorted_data = { name: "Total", children: sorted_data}
 
 
                     console.log("sorted_data")
@@ -170,6 +171,8 @@ export default function TreemapHappinessMort(props) {
                 root = root.sum(function (d) {
                     return d.value
                 })
+
+
                 var treemap = d3.treemap()
                     .size([width, height])
                     .paddingTop(.5)
