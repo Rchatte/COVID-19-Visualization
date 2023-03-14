@@ -37,7 +37,8 @@ export default function TreemapHappinessMort(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: "#FFFFFF", parentColor: filters.color2, childrenColor: filters.color3 };
+
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
 
         let height = 600;//Default values
@@ -192,8 +193,8 @@ export default function TreemapHappinessMort(props) {
                     .on("mousemove", function (event) {
                         var coords = d3.pointer(event);
                         d3.select("#tooltip")
-                           .style("top", (coords[1] + 10) + "px")
-                           .style("left", (coords[0] + 10) + "px");
+                           .style("top", (coords[1] - 50) + "px")
+                           .style("left", (coords[0] + 20) + "px");
                     });
 
                     // Width gathered from here.
@@ -248,7 +249,8 @@ export default function TreemapHappinessMort(props) {
                 .style("font", d => d === root ? "bold 10pt sans-serif " : "10px sans-serif")
                 .selectAll("tspan")
                 //top nav area links
-                .data(d => (d === root ? name(d) : d.data.name).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+                // .data(d => (d === root ? name(d) : getName(d)).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+                .data(d => (d === root ? name(d) : getName(d)).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
                 .join("tspan")
                 .attr("x", ".5em")
                 .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
@@ -307,6 +309,19 @@ export default function TreemapHappinessMort(props) {
 
         function name(d) {
             return d.ancestors().reverse().map(d => d.data.name).join("/")
+        }
+
+
+
+        function getName(d){
+
+            if((d.x1-d.x0)/5 <  d.data.name.length){
+                return "..."
+            }
+            else{
+                return d.data.name
+            }
+
         }
 
         var format = d3.format(",d");
