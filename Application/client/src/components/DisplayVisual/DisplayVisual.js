@@ -5,11 +5,17 @@ import Filters from "../FiltersComponent/Filters";
 import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
 import TreemapHappinessMort from "../Visualizations/Happiness_vs_Mortality_Rate_Treemap";
+import TreemapPop from "../Visualizations/Percent_of_Pop_Over_60_and_COVID_death";
+import TreemapVax from "../Visualizations/COVID_case_VS_people_Vaccinated";
+import TreemapFullVax from "../Visualizations/COVID_Death_VS_people_fully_Vaccinated";
+import TreemapFreedomCase from "../Visualizations/Freedom_Score_and_Total_Cases_Treemap";
+import TreemapFreedomDeath from "../Visualizations/Freedom_Score_and_Total_Deaths_Treemaps";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../App";
 import UserSelectedGraphs from "../CustomDashboardComponent/UserSelectedGraphs";
 import { DATA_UPDATE } from "../DataComponent/DataExports";
 import './displayVisual.css';
+import TreemapMedian from "../Visualizations/Median_Age_VS_COVID_Deaths";
 
 export default function DisplayVisual(props) {
     const { height, width } = useWindowDimensions();
@@ -60,6 +66,31 @@ export default function DisplayVisual(props) {
             case "Country's Happiness Vs. Mortality":
                 return (
                     <TreemapHappinessMort height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
+                )
+            case "COVID-19 Deaths and Percent of Population Over 60":
+                return (
+                    <TreemapPop height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
+            case "COVID-19 Cases VS People Vaccinated Worldwide":
+                return (
+                    <TreemapVax height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
+            case "COVID-19 Deaths and People Fully Vaccinated":
+                return (
+                    <TreemapFullVax height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
+            case "Country's Freedom Score And Total COVID-19 Cases":
+                return (
+                    <TreemapFreedomCase height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
+            case "Country's Freedom Score And Total COVID-19 Deaths":
+                return (
+                    <TreemapFreedomDeath height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
+            case "Country's Median Age Vs COVID-19 Deaths":
+                return (
+                    <TreemapMedian height={height/2} width={containerWidth} filters={props.data.filters}  />
                 );
             default:
                 return (
