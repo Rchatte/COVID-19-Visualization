@@ -67,7 +67,6 @@ export default function DisplayVisual(props) {
                 return (
                     <TreemapHappinessMort height={height/2} width={containerWidth} filters={props.data.filters}  />
                 );
-                )
             case "COVID-19 Deaths and Percent of Population Over 60":
                 return (
                     <TreemapPop height={height/2} width={containerWidth} filters={props.data.filters}  />

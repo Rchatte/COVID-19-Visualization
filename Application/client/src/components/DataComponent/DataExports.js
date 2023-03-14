@@ -59,7 +59,8 @@ export const DATA_UPDATE = {
             filters: {
 
             },
-        }
+        },
+        {
             title: 'COVID-19 Deaths and Percent of Population Over 60',
             graph_desc: 'Tree Map',
             type: 'tree-map_percent_of_pop',
