@@ -101,12 +101,22 @@ export default function DisplayVisual(props) {
     
     const addToCustomDashboard = (graphData) => {
         props.setSelectedGraphs(element => [...element, graphData]);
-        UserSelectedGraphs.push(graphData);
 
-        console.log(UserSelectedGraphs);
-        window.localStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs));
+        if(!UserSelectedGraphs.includes(graphData)){
+            UserSelectedGraphs.push(graphData);
+        }
+
+        // window.localStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs));
         // const data = JSON.parse(window.localStorage.getItem('selected-graphs')).concat(UserSelectedGraphs);
         // window.localStorage.setItem("selected-graphs", JSON.stringify(data));
+
+        try{
+            const data = JSON.parse(sessionStorage.getItem('selected-graphs')).concat(UserSelectedGraphs);
+            sessionStorage.setItem("selected-graphs", JSON.stringify(data)); 
+        } catch (e){
+            sessionStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs)); 
+        }
+        //sessionStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs));
     }
 
 

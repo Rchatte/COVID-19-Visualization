@@ -20,16 +20,16 @@ const CustomDashboard = (props) => {
     const [currentVisual, setCurrentVisual] = useState(); // Current visual selected and show, also will update on click. 
     const [filtersTrigger, setFiltersTrigger] = useState(false);
 
-
     useEffect(() => {
-        const data = window.localStorage.getItem('selected-graphs');
+        // const data = window.localStorage.getItem('selected-graphs');
+        const data = JSON.parse(sessionStorage.getItem('selected-graphs'));
         if(data){
-           getCurrentData(JSON.parse(data));
+           getCurrentData(data);
         }
-        console.log(graphs);
     }, [])
 
     const getCurrentData = (data) => {
+        console.log(data);
         setCurrentData(data[0]);
         setGraphs(data);
     }
@@ -39,15 +39,14 @@ const CustomDashboard = (props) => {
     }
 
     const GraphType = (props) => {
-        console.log(props);
-        switch(props.data.graph_type){
-            case "tree-map":
+        switch(props.data.title){
+            case "US COVID-19 Deaths By State":
                 return (
-                    <Treemap url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} />
+                    <Treemap height={height / 2} width={width / 3} filters={props.data.filters}  />
                 );
-            case "line-chart":
+            case "US COVID-19 Deaths Over Time":
                 return(
-                    <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} type={props.data.graph_type} />
+                    <LineChart url={props.data.link_source} height={height / 2} width={width / 2} filters={props.data.filters} />
                 )    
             default:
                 return (
@@ -56,9 +55,8 @@ const CustomDashboard = (props) => {
         }
     }
 
-    //console.log(UserSelectedGraphs);
-
     const deleteFromDashboard = (graph) => {
+        console.log(graph);
         let index = 0;
         if(graph === graphs[0]){
             graphs.shift();
@@ -73,7 +71,8 @@ const CustomDashboard = (props) => {
             getCurrentData(graphs.splice(0, index).concat(graphs.slice(index + 1)));
         }
 
-        window.localStorage.setItem('selected-graphs', JSON.stringify(data));
+        // window.localStorage.setItem('selected-graphs', JSON.stringify(data));
+        sessionStorage.setItem('selected-graphs', JSON.stringify(data));
     }
 
 
@@ -178,19 +177,20 @@ const CustomDashboard = (props) => {
                                 graphs && graphs.map((item, i) => (
                                     <Box 
                                         gridColumn="span 6"
-                                        gridRow="span 3"
+                                        gridRow="span 5"
                                     >
                                         <Box
                                             mt="50px"
                                             p="0 30px"
                                             justifyContent="space-between"
                                             alignItems="center"
+                                            sx={{borderRadius: '16px', border: 1, bgcolor: '#e0e0e0'}}
                                         >
                                             <Box>
                                                 <Typography
                                                     variant="h5"
                                                     fontWeight="600"
-                                                    mb="25px"
+                                                    mb="25px"                                                 
                                                 >
                                                     {item.title}
                                                 </Typography>
