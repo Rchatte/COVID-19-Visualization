@@ -163,7 +163,7 @@ function setUP(props) {
             .style("font", d => d === root ? "bold 10pt sans-serif " : "10px sans-serif")
             .selectAll("tspan")
             //top nav area links
-            .data(d => (d === root ? name(d) : d.data.name).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+            .data(d => (d === root ? name(d) : getName(d)).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
             .join("tspan")
             .attr("x", ".5em")
             .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
