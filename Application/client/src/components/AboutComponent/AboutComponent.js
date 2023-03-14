@@ -21,15 +21,15 @@ export default function AboutComponent(props) {
                         <CarouselItem><div class='carouselContainer'>
                         <img src={blankPFP} height="200" width="200" alt='Navid Amini' class='margins'/>
                         <Typography variant="h6">Doctor Navid Amini <br />
-                        Dr Navid Amini is our advisor for this project and we are grateful and thank him for 
-                        aiding us throughout the project.</Typography>
+                        Dr Navid Amini is our advisor for this project and we are grateful and thank him for aiding us <br />
+                        throughout the project.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
                         <img src={blankPFP} height="200" width="200" alt='Rohan Chatterjee' class='margins'/>
                         <Typography variant="h6">Rohan Chatterjee (22), Project Lead <br />
-                        Plans After Graduation: Plans to get a PhD and work in research related to the use of 
-                        Computer Science in the Medical Field.</Typography>
+                        Plans After Graduation: Plans to get a PhD and work in research related to the use of Computer <br />
+                        Science in the Medical Field.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
@@ -59,7 +59,7 @@ export default function AboutComponent(props) {
                         <CarouselItem><div class='carouselContainer'>
                         <img src={blankPFP} height="200" width="200" alt='Carlos Alberto Hernandez' class='margins'/>
                         <Typography variant="h6">Carlos Alberto Hernandez (24), JavaScript Application <br />
-                        Plans After Graduation: Plans to apply to the EMT course at USLA and eventually become A
+                        Plans After Graduation: Plans to apply to the EMT course at USLA and eventually become a <br />
                         paramedic.</Typography>
                         </div></CarouselItem>
 
@@ -71,14 +71,15 @@ export default function AboutComponent(props) {
 
                         <CarouselItem><div class='carouselContainer'>
                         <img src={blankPFP} height="200" width="200" alt='Emily Gonzalez' class='margins'/>
-                        <Typography variant="h6">Emily Gonzalez (23), Project Lead <br />
+                        <Typography variant="h6">Emily Gonzalez (23), Tableau/JavaScript Application <br />
                         Plans After Graduation: Plans to work full-time as a software engineer.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
                         <img src={blankPFP} height="200" width="200" alt='Luiz Gonzales' class='margins'/>
-                        <Typography variant="h6">Luiz Gonzales (--), -- <br />
-                        Plans After Graduation: --</Typography>
+                        <Typography variant="h6">Luiz Gonzales (26), JavaScript Application <br />
+                        Plans After Graduation: Plans to work full-time as a developer for his own online <br />
+                        business.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
