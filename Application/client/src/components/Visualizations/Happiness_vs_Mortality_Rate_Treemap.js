@@ -118,7 +118,6 @@ export default function TreemapHappinessMort(props) {
 
 
 
-
                     const filteredScores = data_input1;
 
 
@@ -128,8 +127,9 @@ export default function TreemapHappinessMort(props) {
                         if(matchingObj){
                             const cases = matchingObj['total_cases_per_million'];
                             const deaths = matchingObj['total_deaths_per_million'];
-                            const mortFull = deaths/cases*100;
-                            let mort = mortFull.toFixed(2);
+
+                            var mort = ((deaths / cases * 100));
+
 
                             console.log({name : matchingObj["location"], value: mort, Happiness : obj1["Happiness score"]})
 
@@ -172,6 +172,7 @@ export default function TreemapHappinessMort(props) {
                 root = root.sum(function (d) {
                     return d.value
                 })
+
 
 
                 var treemap = d3.treemap()
@@ -236,7 +237,7 @@ export default function TreemapHappinessMort(props) {
                 .attr("stroke", "#00ffc4")
                 .on("mouseover", function (event, d) {
                     tooltip_name.text(d.data.name)
-                    tooltip_value.text('Mortality Rate: ' +  d.value)
+                    tooltip_value.text('Mortality Rate: ' +  d.value.toFixed(2))
 
                 });
 

@@ -221,7 +221,7 @@ export default function TreemapVax(props) {
                 .attr("stroke", "#00ffc4")
                 .on("mouseover", function (event, d) {
                     tooltip_name.text(d.data.name)
-                    tooltip_value.text(d.value)
+                    tooltip_value.text(d.value.toFixed(2))
                 });
     
     
