@@ -117,7 +117,7 @@ export const DATA_UPDATE = {
             },
 
         },
-                {
+        {
             title: "Country's Median Age Vs COVID-19 Deaths",
             graph_desc: 'Tree Map',
             description: "Median Age of people in a Country and amount of COVID-19 deaths in said Country",
@@ -128,6 +128,94 @@ export const DATA_UPDATE = {
             },
 
         },
+        {
+            title: 'COVID-19 Cases Per Million Vs Gross Domestic Product',
+            graph_desc: 'Tree Map',
+            description: 'The amount of COVID-19 cases per million and the amount of Gross Domestic Product per Country',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+
+        },
+        {
+            title: 'Gross Domestic Product Vs COVID-19 Deaths',
+            graph_desc: 'Tree Map',
+            description: 'The amount of Gross Domestic Product per Country and the amount of COVID-19 deaths',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+
+        },
+        {
+            title: "Country's Gross Domestic Product Affect On COVID-19 Vaccinations Per Hundred",
+            graph_desc: 'Tree Map',
+            description: 'The amount of Gross Domestic Product per Country and the amount of COVID-19 Vaccinations per hundred',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+
+        },
+        {
+            title: 'Urban Population Vs Total COVID-19 Cases Per Million',
+            graph_desc: 'Tree Map',
+            description: 'The Urban Population in each country and the amount of COVID-19 cases per million',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+
+        },
+        {
+            title: 'Urban Population Vs Total COVID-19 Deaths Per Million',
+            graph_desc: 'Tree Map',
+            description: 'The Urban Population in each country and the amount of COVID-19 deaths per million',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+
+        },
+        {
+            title: 'Total COVID-19 Cases Vs Personal Freedom Score',
+            graph_desc: 'Tree Map',
+            description: 'The amount of COVID-19 cases and the Personal Freedom Score of each country',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+
+        },
+        {
+            title: 'Percent of Populations Using The Internet Vs COVID-19 Cases',
+            graph_desc: 'Tree Map',
+            description: 'The percent of population using the internet in 2020 and the amount of COVID-19 cases',
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+
+        },
+        {
+            title: "Country's Happiness Vs COVID-19 Cases",
+            graph_desc: 'Tree Map',
+            description: "Each country's happiness score and the amount of COVID-19 cases",
+            image: '',
+            link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
+            filters: {
+
+            },
+        },
+
     ]
 }
 
