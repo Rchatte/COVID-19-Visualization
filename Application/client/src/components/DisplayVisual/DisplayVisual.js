@@ -10,7 +10,7 @@ import TreemapVax from "../Visualizations/COVID_case_VS_people_Vaccinated";
 import TreemapFullVax from "../Visualizations/COVID_Death_VS_people_fully_Vaccinated";
 import TreemapFreedomCase from "../Visualizations/Freedom_Score_and_Total_Cases_Treemap";
 import TreemapFreedomDeath from "../Visualizations/Freedom_Score_and_Total_Deaths_Treemaps";
-//import TreemapGDPCases from "../Visualizations/CovidCasesPerMillionVsGDP";
+import TreemapGDPCases from "../Visualizations/CovidCasesPerMillionVsGDP";
 import TreemapGDPDeaths from "../Visualizations/GDPVsCovidDeaths";
 import TreemapGDPVaccinations from "../Visualizations/CountrysGDPAffectOnVaccinationsPerHundered";
 import TreemapUrbanPop from "../Visualizations/UrbanPopulationVsTotalCOVIDCasesPerMillion";
@@ -99,10 +99,10 @@ export default function DisplayVisual(props) {
                 return (
                     <TreemapMedian height={height/2} width={containerWidth} filters={props.data.filters}  />
                 );
-            // case "COVID-19 Cases Per Million Vs Gross Domestic Product":
-            //     return (
-            //         <TreemapGDPCases height={height/2} width={containerWidth} filters={props.data.filters}  />
-            //     );
+             case "COVID-19 Cases Per Million Vs Gross Domestic Product":
+                 return (
+                     <TreemapGDPCases height={height/2} width={containerWidth} filters={props.data.filters}  />
+                 );
             case "Gross Domestic Product Vs COVID-19 Deaths":
                 return (
                     <TreemapGDPDeaths height={height/2} width={containerWidth} filters={props.data.filters}  />
