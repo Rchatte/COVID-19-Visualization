@@ -3,6 +3,8 @@ import * as d3 from 'd3';
 import freedom_score_csv from "./human-freedom-index-2021-data-tables-figures.csv"
 
 
+
+
 {/* 
     To make this scalable we can try:
     props: url={props.data.link1} height={height/2.5} width={width/2.5} filters={props.filters} type={props.data.graph_type}
@@ -37,15 +39,15 @@ export default function TreemapTotalFreedom(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: "#FFFFFF", parentColor: filters.color2, childrenColor: filters.color3 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values
         let width = 800;
         let is_Interactive = true;
     
-        let id = "Freedom_Score_and_Total_Cases_Treemap"
-        let svgName = "Freedom_Score_and_Total_Cases_Treemap"
+        let id = "TotalCovidCasesVsFreedomScore"
+        let svgName = "TotalCovidCasesVsFreedomScore"
 
         if (props.hasOwnProperty("height")) {
             height = props.height
@@ -115,7 +117,7 @@ export default function TreemapTotalFreedom(props) {
 
                     let sorted_data = []
 
-                    let blacklist = []
+                    let blacklist = ["","NULL"]
 
 
 
@@ -128,6 +130,7 @@ export default function TreemapTotalFreedom(props) {
 
                         sorted_data.push({name : matchingObj["location"], value :matchingObj["new_cases"],PersonalFreedom:obj1['PERSONAL FREEDOM (SCORE)']})
                     });
+
 
 
 
@@ -162,18 +165,18 @@ export default function TreemapTotalFreedom(props) {
                 //Group is the svg itself that is being changed
                 var group = svg.append("g")
                 svg
-                    .on("mouseenter", (event) => {
+                   .on("mouseenter", (event) => {
                         d3.select("#tooltip").style("opacity", 1)
-                    })
-                    .on("mouseleave", (event) => {
+                   })
+                   .on("mouseleave", (event) => {
                         d3.select("#tooltip").style("opacity", 0)
-                    })    
+                   })
                 d3.select("#vizFrame") //Todo change to selecting the svg later
                     .on("mousemove", function (event) {
                         var coords = d3.pointer(event);
                         d3.select("#tooltip")
-                            .style("top", (coords[1] + 10) + "px")
-                            .style("left", (coords[0] + 10) + "px");
+                           .style("top", (coords[1] - 50) + "px")
+                           .style("left", (coords[0] + 20) + "px");
                     });
 
                 // Width gathered from here.  
@@ -203,12 +206,12 @@ export default function TreemapTotalFreedom(props) {
             node.append("title")
                 .attr("width", width)
                 .attr("dy", ".3")
-                .text(d => `${name(d)}\n${format(d.value)} `)
+                 .text(d => `${name(d)}\n${format(d.value)} `)
     
     
             node.append("rect")
                 .attr("id", d => (d.leafUid = uid("leaf")).id)
-                .attr("fill", d => d === root ? colors.barColor : d.children ? generateColor(d.data['Happiness']) : generateColor(d.data['Happiness']))
+                .attr("fill", d => d === root ? colors.barColor : d.children ? generateColor(d.data['PersonalFreedom']) : generateColor(d.data['PersonalFreedom']))
                 .attr("stroke", "#00ffc4")
                 .attr("stroke", "#00ffc4")
                 .on("mouseover", function (event, d) {
@@ -228,7 +231,7 @@ export default function TreemapTotalFreedom(props) {
                 .style("font", d => d === root ? "bold 10pt sans-serif " : "10px sans-serif")
                 .selectAll("tspan")
                 //top nav area links
-                .data(d => (d === root ? name(d) : d.data.name).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+                .data(d => (d === root ? name(d) : getName(d)).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
                 .join("tspan")
                 .attr("x", ".5em")
                 .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
@@ -287,6 +290,17 @@ export default function TreemapTotalFreedom(props) {
     
         function name(d) {
             return d.ancestors().reverse().map(d => d.data.name).join("/")
+        }
+
+        function getName(d){
+
+            if((d.x1-d.x0)/5 <  d.data.name.length){
+                return "..."
+            }
+            else{
+                return d.data.name
+            }
+
         }
     
         var format = d3.format(",d");

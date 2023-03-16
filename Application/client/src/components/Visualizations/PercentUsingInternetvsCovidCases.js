@@ -2,6 +2,8 @@ import React, { Component, useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import internet_csv from "./share-of-individuals-using-the-internet.csv"
 
+
+
 {/* 
     To make this scalable we can try:
     props: url={props.data.link1} height={height/2.5} width={width/2.5} filters={props.filters} type={props.data.graph_type}
@@ -36,7 +38,7 @@ export default function TreemapInternetCases(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: "#FFFFFF", parentColor: filters.color2, childrenColor: filters.color3 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values
@@ -131,7 +133,6 @@ export default function TreemapInternetCases(props) {
 
 
 
-
                     //parent level
                     sorted_data = { name: "Total", children: sorted_data }
 
@@ -163,18 +164,18 @@ export default function TreemapInternetCases(props) {
                 //Group is the svg itself that is being changed
                 var group = svg.append("g")
                 svg
-                    .on("mouseenter", (event) => {
+                   .on("mouseenter", (event) => {
                         d3.select("#tooltip").style("opacity", 1)
-                    })
-                    .on("mouseleave", (event) => {
+                   })
+                   .on("mouseleave", (event) => {
                         d3.select("#tooltip").style("opacity", 0)
-                    })    
+                   })
                 d3.select("#vizFrame") //Todo change to selecting the svg later
                     .on("mousemove", function (event) {
                         var coords = d3.pointer(event);
                         d3.select("#tooltip")
-                            .style("top", (coords[1] + 10) + "px")
-                            .style("left", (coords[0] + 10) + "px");
+                           .style("top", (coords[1] - 50) + "px")
+                           .style("left", (coords[0] + 20) + "px");
                     });
 
                 // Width gathered from here.  
@@ -204,7 +205,7 @@ export default function TreemapInternetCases(props) {
             node.append("title")
                 .attr("width", width)
                 .attr("dy", ".3")
-                .text(d => `${name(d)}\n${format(d.Internet)} `)
+                 .text(d => `${name(d)}\n${format(d.value)} `)
     
     
             node.append("rect")
@@ -229,7 +230,7 @@ export default function TreemapInternetCases(props) {
                 .style("font", d => d === root ? "bold 10pt sans-serif " : "10px sans-serif")
                 .selectAll("tspan")
                 //top nav area links
-                .data(d => (d === root ? name(d) : d.data.name).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+                .data(d => (d === root ? name(d) : getName(d)).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
                 .join("tspan")
                 .attr("x", ".5em")
                 .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
@@ -288,6 +289,17 @@ export default function TreemapInternetCases(props) {
     
         function name(d) {
             return d.ancestors().reverse().map(d => d.data.name).join("/")
+        }
+
+        function getName(d){
+
+            if((d.x1-d.x0)/5 <  d.data.name.length){
+                return "..."
+            }
+            else{
+                return d.data.name
+            }
+
         }
     
         var format = d3.format(",d");

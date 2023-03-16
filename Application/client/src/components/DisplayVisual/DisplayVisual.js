@@ -15,7 +15,7 @@ import TreemapGDPDeaths from "../Visualizations/GDPVsCovidDeaths";
 import TreemapGDPVaccinations from "../Visualizations/CountrysGDPAffectOnVaccinationsPerHundered";
 import TreemapUrbanPop from "../Visualizations/UrbanPopulationVsTotalCOVIDCasesPerMillion";
 import TreemapUrbanPopDeath from "../Visualizations/UrbanPopulationVsTotalCOVIDDeathsPerMillion";
-import TreemapTotalFreedom from "../Visualizations/CountrysFreedomImpactOnCovidCases";
+import TreemapTotalFreedom from "../Visualizations/TotalCovidCasesVsFreedomScore";
 import TreemapInternetCases from "../Visualizations/PercentUsingInternetvsCovidCases";
 import TreemapHappinessScore from "../Visualizations/CountrysHappinessVsCOVIDCase";
 import { useNavigate } from "react-router-dom";
@@ -99,7 +99,7 @@ export default function DisplayVisual(props) {
                 return (
                     <TreemapMedian height={height/2} width={containerWidth} filters={props.data.filters}  />
                 );
-             case "COVID-19 Cases Per Million Vs Gross Domestic Product":
+            case "COVID-19 Cases Per Million Vs Gross Domestic Product":
                  return (
                      <TreemapGDPCases height={height/2} width={containerWidth} filters={props.data.filters}  />
                  );
