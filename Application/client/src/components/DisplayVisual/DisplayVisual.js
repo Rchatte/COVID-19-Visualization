@@ -131,6 +131,10 @@ export default function DisplayVisual(props) {
                 return (
                     <TreemapHappinessScore height={height/2} width={containerWidth} filters={props.data.filters}  />
                 );
+            case "US COVID-19 Cases Over Time":
+                return (
+                    <LineChart url={props.data.link_source} height={height/2} width={containerWidth} filters={props.data.filters} />
+                );
             default:
                 return (
                     <CircularProgress />

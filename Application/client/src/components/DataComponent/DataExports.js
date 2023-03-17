@@ -45,8 +45,20 @@ export const DATA_UPDATE = {
                 height: 400,
                 width: 800,
             },
-
-        }
+        },
+        {
+            title: 'US COVID-19 Cases Over Time',
+            graph_desc: 'Line Chart',
+            graph_type: 'line-chart',
+            description: 'Cases over time chart description..',
+            image: '',
+            link_source: 'https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv',
+            filters: {
+                requires_dates: 'true',
+                end_date: '',
+                start_date: '',
+            },
+        },
     ],
     WORLDWIDE: [
         {
