@@ -39,7 +39,7 @@ export default function TreemapTotalFreedom(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values
@@ -70,7 +70,7 @@ export default function TreemapTotalFreedom(props) {
 
         var generateColor = d3.scaleLinear()
             .domain([2.60, 9.63])
-            .range(["#FF5733", "#228B22"])
+            .range(colors.parentColor && colors.childrenColor ? [colors.parentColor, colors.childrenColor] : ["#FF5733", "#228B22"])
             .clamp(true);
 
         if(!svg.select("#"+id).empty()){

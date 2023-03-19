@@ -39,7 +39,7 @@ export default function TreemapMedian(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values
@@ -70,7 +70,7 @@ export default function TreemapMedian(props) {
 
         var generateColor = d3.scaleLinear()
             .domain([15.10, 48.20])
-            .range(["#FFFFFF", "#3B3B3B"])
+            .range(colors.parentColor && colors.childrenColor ? [colors.parentColor, colors.childrenColor] : ["#FFFFFF", "#3B3B3B"])
             .clamp(true);
 
         if(!svg.select("#"+id).empty()){

@@ -38,7 +38,7 @@ export default function TreemapUrbanPopDeath(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values
@@ -69,7 +69,7 @@ export default function TreemapUrbanPopDeath(props) {
 
         var generateColor = d3.scaleLinear()
             .domain([3, 6443])
-            .range(["#BAB1A9", "#7A6D63"])
+            .range(colors.parentColor && colors.childrenColor ? [colors.parentColor, colors.childrenColor] : ["#BAB1A9", "#7A6D63"])
             .clamp(true);
 
         if(!svg.select("#"+id).empty()){
