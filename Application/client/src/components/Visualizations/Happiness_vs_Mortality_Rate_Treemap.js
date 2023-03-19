@@ -37,7 +37,7 @@ export default function TreemapHappinessMort(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
 
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
 
@@ -69,7 +69,8 @@ export default function TreemapHappinessMort(props) {
 
         var generateColor = d3.scaleLinear()
             .domain([2.404, 7.821])
-            .range(["#ff0000", "#00ff22"])
+            // if filter colors are detected, make those the range of colors instead of the default
+            .range(colors.parentColor && colors.childrenColor ? [colors.parentColor, colors.childrenColor] : ["#ff0000", "#00ff22"])
             .clamp(true);
 
         if(!svg.select("#"+id).empty()){
