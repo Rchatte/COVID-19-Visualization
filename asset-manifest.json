@@ -1,22 +1,30 @@
 {
   "files": {
-    "main.css": "/COVID-19-Visualization/static/css/main.4e333e15.css",
-    "main.js": "/COVID-19-Visualization/static/js/main.0f8944dc.js",
+    "main.css": "/COVID-19-Visualization/static/css/main.802f85dc.css",
+    "main.js": "/COVID-19-Visualization/static/js/main.7a4ae627.js",
     "static/js/787.c4e7f8f9.chunk.js": "/COVID-19-Visualization/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/USA.png": "/COVID-19-Visualization/static/media/USA.28d0578fda0e7951b257.png",
+    "static/media/WORLD.png": "/COVID-19-Visualization/static/media/WORLD.6b281c30c3fd8204c696.png",
     "static/media/CDC.png": "/COVID-19-Visualization/static/media/CDC.f011b1d4f35d632b365b.png",
+    "static/media/human-freedom-index-2021-data-tables-figures.csv": "/COVID-19-Visualization/static/media/human-freedom-index-2021-data-tables-figures.896af6ab0af517355d3c.csv",
+    "static/media/CSUPERBLogo.png": "/COVID-19-Visualization/static/media/CSUPERBLogo.c24baa1e2b8ba55d770c.png",
+    "static/media/share-of-individuals-using-the-internet.csv": "/COVID-19-Visualization/static/media/share-of-individuals-using-the-internet.6e5a49f88b7c772b6449.csv",
+    "static/media/API_NY.GDP.MKTP.CD_DS2_en_csv_v2_4701247.csv": "/COVID-19-Visualization/static/media/API_NY.GDP.MKTP.CD_DS2_en_csv_v2_4701247.018e6da72445734d3b64.csv",
+    "static/media/API_SP.URB.TOTL_DS2_en_csv_v2_4645910.csv": "/COVID-19-Visualization/static/media/API_SP.URB.TOTL_DS2_en_csv_v2_4645910.88a0e57023cd604b1275.csv",
     "static/media/USAFacts.png": "/COVID-19-Visualization/static/media/USAFacts.954ccdc1a524fab8de2d.png",
     "static/media/TreeMap.png": "/COVID-19-Visualization/static/media/TreeMap.0253dc9cf80facb9cea6.png",
     "static/media/WHO.png": "/COVID-19-Visualization/static/media/WHO.b58a65ee73ac4b919546.png",
     "static/media/CDPH.png": "/COVID-19-Visualization/static/media/CDPH.71de866834fd09727b22.png",
     "static/media/NoImg.png": "/COVID-19-Visualization/static/media/NoImg.fa1f50a379aa2fff63cd.png",
+    "static/media/happiness_data_Appendix_2_Data_for_Figure_2.1.csv": "/COVID-19-Visualization/static/media/happiness_data_Appendix_2_Data_for_Figure_2.1.302cd81a394089e1de7a.csv",
     "static/media/logo.svg": "/COVID-19-Visualization/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/COVID-19-Visualization/index.html",
-    "main.4e333e15.css.map": "/COVID-19-Visualization/static/css/main.4e333e15.css.map",
-    "main.0f8944dc.js.map": "/COVID-19-Visualization/static/js/main.0f8944dc.js.map",
+    "main.802f85dc.css.map": "/COVID-19-Visualization/static/css/main.802f85dc.css.map",
+    "main.7a4ae627.js.map": "/COVID-19-Visualization/static/js/main.7a4ae627.js.map",
     "787.c4e7f8f9.chunk.js.map": "/COVID-19-Visualization/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e333e15.css",
-    "static/js/main.0f8944dc.js"
+    "static/css/main.802f85dc.css",
+    "static/js/main.7a4ae627.js"
   ]
 }
