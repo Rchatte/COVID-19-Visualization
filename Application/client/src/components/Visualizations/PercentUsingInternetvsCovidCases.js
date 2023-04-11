@@ -125,9 +125,9 @@ export default function TreemapInternetCases(props) {
                     filteredScores.map(obj1 => {
                         let matchingObj = data.find(obj2 => obj1["Code"] === obj2["iso_code"]);
                         if(matchingObj){
-                            console.log({name : obj1["Entity"], value : matchingObj["new_cases_per_million"],Internet:obj1['Individuals using the Internet (% of population)']})
+                            console.log({name : obj1["Entity"], Internet:obj1['Individuals using the Internet (% of population)'],value : matchingObj["new_cases_per_million"]})
                         
-                            sorted_data.push({name : obj1["Entity"], value : matchingObj["new_cases_per_million"],Internet:obj1['Individuals using the Internet (% of population)']})
+                            sorted_data.push({name : obj1["Entity"], Internet:obj1['Individuals using the Internet (% of population)'],value : matchingObj["new_cases_per_million"]})
                         }
                         });
 
@@ -210,7 +210,7 @@ export default function TreemapInternetCases(props) {
     
             node.append("rect")
                 .attr("id", d => (d.leafUid = uid("leaf")).id)
-                .attr("fill", d => d === root ? colors.barColor : d.children ? generateColor(d.data['value']) : generateColor(d.data['value']))
+                .attr("fill", d => d === root ? colors.barColor : d.children ? generateColor(d.data['Internet']) : generateColor(d.data['Internet']))
                 .attr("stroke", "#00ffc4")
                 .attr("stroke", "#00ffc4")
                 .on("mouseover", function (event, d) {
