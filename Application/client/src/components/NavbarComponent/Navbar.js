@@ -7,6 +7,8 @@ import {
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import VizCardLayout from '../HomepageComponent/Components/VizCards/VizCardLayout';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Navbar() {
 
@@ -16,6 +18,7 @@ export default function Navbar() {
             Navbar that our app.js serves in our app.js
         */
     }
+    const navigate = useNavigate();
 
 
     return (
@@ -51,11 +54,11 @@ export default function Navbar() {
                     >
                         Senior Design
           </Typography>
-                <Button color="inherit" onClick={() => window.location.href="/" } >Dashboard</Button>
-                <Button color="inherit" onClick={() => window.location.href="/About"} >About Us</Button>
-                <Button color="inherit" onClick={() => window.location.href="/Sources" }>Sources</Button>
-                <Button color="inherit" onClick={() => window.location.href="/Sponsors" }>Sponsors</Button>
-                <Button color="inherit" onClick={() => window.location.href="/CustomDashboard" }>Your Dashboard</Button>
+                <Button color="inherit" onClick={() => navigate('/') } >Dashboard</Button>
+                <Button color="inherit" onClick={() => navigate('/About')} >About Us</Button>
+                <Button color="inherit" onClick={() => navigate('/Sources') }>Sources</Button>
+                <Button color="inherit" onClick={() => navigate('/Sponsors') }>Sponsors</Button>
+                <Button color="inherit" onClick={() => navigate('/CustomDashboard') }>Your Dashboard</Button>
             </Toolbar>
             </AppBar>
         </Box>

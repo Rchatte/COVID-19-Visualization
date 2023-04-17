@@ -43,9 +43,9 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar />
       <DataContext.Provider value={{ currentData, setCurrentData, currentRegion, setCurrentRegion }}>
       <Router>
+        <Navbar />
         <Routes>
             <Route exact path="/" element={<Homepage />}></Route>
             <Route exact path="/COVID-19-Visualization" element={<Homepage />}></Route>
