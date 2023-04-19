@@ -113,7 +113,7 @@ export default function TreemapGDPCases(props) {
                     data = data_.filter(obj => obj.continent === filters.continents) 
                 }
                 else{
-                    data = data_
+                    data = data_ // since the data variable is used underneath 
                 }
                 
                 console.log(data);
