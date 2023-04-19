@@ -26,6 +26,7 @@ export default function TreemapGDPCases(props) {
         // const appropriateData = func2() .. total deaths
         // const appropriateData = func3() .. total vacinations
         // setUP(appropriateData, svgRef) 
+        console.log(props.filters)
         setUP(props, svgRef)
     }, [props.filters])
 
@@ -107,6 +108,10 @@ export default function TreemapGDPCases(props) {
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
             d3.csv(temp_url).then(function (data) {
+                console.log(data);
+                
+                const d  = data.filter(obj => obj.continent === "")
+                console.log(d);
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 d3.csv(gdp_csv).then( function(data_input1) {
 
@@ -125,7 +130,7 @@ export default function TreemapGDPCases(props) {
                     filteredScores.map(obj1 => {
                         let matchingObj = data.find(obj2 => obj1["Country_Code"] === obj2["iso_code"]);
                         if (matchingObj){
-                            console.log({name : matchingObj["location"], value : matchingObj["total_cases_per_million"],GDP:obj1['2021']})
+                            //console.log({name : matchingObj["location"], value : matchingObj["total_cases_per_million"],GDP:obj1['2021']})
                             sorted_data.push({name : matchingObj["location"], value : matchingObj["total_cases_per_million"],GDP:obj1['2021']})
                     
 
@@ -138,7 +143,7 @@ export default function TreemapGDPCases(props) {
 
 
                     console.log("sorted_data")
-                    console.log(sorted_data)
+                    //console.log(sorted_data)
 
                 
 
@@ -244,7 +249,7 @@ export default function TreemapGDPCases(props) {
     
         // When zooming in, draw the new nodes on top, and fade them in.
         function zoomin(d, group) {
-            console.log(d);
+            //console.log(d);
             const group0 = group.attr("pointer-events", "none");
             const group1 = group = svg.append("g").call(drawTreeMap, d);
     
