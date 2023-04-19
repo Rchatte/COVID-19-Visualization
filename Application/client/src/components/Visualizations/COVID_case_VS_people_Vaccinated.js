@@ -17,7 +17,17 @@ export default function TreemapVax(props) {
     const url_data = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv" //url_for_data.value
     
 
-
+    const hexToRgb = (hex) => {
+        // Parse the HEX string by extracting the R, G, and B components
+        let r = parseInt(hex.substring(0, 2), 16);
+        let g = parseInt(hex.substring(2, 4), 16);
+        let b = parseInt(hex.substring(4, 6), 16);
+      
+        // Create an object with the RGB values
+        let rgb = { r, g, b };
+      
+        return rgb;
+      }
     
 
     useEffect(() => { 
@@ -39,7 +49,10 @@ export default function TreemapVax(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
+
+        
+
+        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values

@@ -39,7 +39,8 @@ export default function TreemapFreedomCase(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
+        
+        const colors = { barColor:filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values

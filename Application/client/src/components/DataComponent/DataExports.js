@@ -39,9 +39,9 @@ export const DATA_UPDATE = {
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv', // Source for associated graph
             filters: {
                 requires_dates: 'true',
-                color1: "#27b694",
-                color2: "#27b694",
-                color3: "#9B9B9B",
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
                 height: 400,
                 width: 800,
             },
@@ -69,7 +69,7 @@ export const DATA_UPDATE = {
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
+                color1: "#ff2200",
                 color2: '',
                 color3: '',
             },
@@ -85,6 +85,7 @@ export const DATA_UPDATE = {
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
             },
 
         },
@@ -95,9 +96,9 @@ export const DATA_UPDATE = {
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
-                color2: '',
-                color3: '',
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
             },
 
         },
@@ -108,9 +109,9 @@ export const DATA_UPDATE = {
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
-                color2: '',
-                color3: '',
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
 
             },
 
@@ -122,7 +123,7 @@ export const DATA_UPDATE = {
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
+                color1: "#ff2200",
                 color2: '',
                 color3: '',
 
@@ -150,9 +151,10 @@ export const DATA_UPDATE = {
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
-                color2: '',
-                color3: '',
+                color1: '#C0BFBF',
+                color2: '#696769',
+                color3: '#C0BFBF',
+                continents : '',
 
             },
 

@@ -107,12 +107,16 @@ export default function TreemapGDPCases(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data) {
-                console.log(data);
+            d3.csv(temp_url).then(function (data_) {
+                let data = null;
+                if (filters.continents){
+                    data = data_.filter(obj => obj.continent === filters.continents) 
+                }
+                else{
+                    data = data_
+                }
                 
-                const d  = data.filter(obj => obj.continent === "")
-
-                console.log(d);
+                console.log(data);
 
                 
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
