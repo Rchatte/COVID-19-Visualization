@@ -111,7 +111,10 @@ export default function TreemapGDPCases(props) {
                 console.log(data);
                 
                 const d  = data.filter(obj => obj.continent === "")
+
                 console.log(d);
+
+                
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 d3.csv(gdp_csv).then( function(data_input1) {
 
