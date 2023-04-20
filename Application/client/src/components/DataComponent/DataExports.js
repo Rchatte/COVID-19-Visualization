@@ -212,6 +212,8 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: ''
+
 
             },
 
@@ -226,6 +228,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: ''
 
             },
 

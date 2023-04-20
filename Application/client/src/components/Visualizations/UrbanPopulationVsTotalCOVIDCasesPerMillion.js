@@ -106,8 +106,17 @@ export default function TreemapUrbanPop(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data) {
+            d3.csv(temp_url).then(function (data_) {
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
+                let data = null; 
+                // Check if continents has a variable ex: 'North America'.
+                if (filters.continents){ // The value in DataExports being passed into. 
+                    data = data_.filter(obj => obj.continent === filters.continents) // Filter based on continents str/
+                }
+                else{
+                    data = data_ // otherwise no continent vvariable is present.
+                }
+                
                 d3.csv(urb_csv).then( function(data_input1) {
 
 
