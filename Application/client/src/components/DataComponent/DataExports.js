@@ -59,6 +59,22 @@ export const DATA_UPDATE = {
                 start_date: '',
             },
         },
+        {
+            title: 'US COVID-19 Cases By State', // Title to be shown
+            graph_desc: 'Tree Map', // Graph type to be shown
+            graph_type: 'tree-map_percent_of_pop', // To differentiate from other graph types
+            description: 'Cases over time chart description..', // To be shown
+            image: '', // If needed link to image 
+            link_source: 'https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv', // Source for associated graph
+            filters: {
+                requires_dates: 'true',
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
+                height: 400,
+                width: 800,
+            },
+        },
     ],
     WORLDWIDE: [
         {
@@ -72,6 +88,7 @@ export const DATA_UPDATE = {
                 color1: "#ff2200",
                 color2: '',
                 color3: '',
+                continents: ''
             },
         },
         {
@@ -184,6 +201,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: ''
 
             },
 
@@ -198,6 +216,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: ''
 
             },
 
@@ -257,6 +276,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: ''
 
             },
 
@@ -271,6 +291,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: ''
 
             },
         },

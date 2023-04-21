@@ -4,6 +4,7 @@ import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
 import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
+import TreemapCases from "../Visualizations/TreemapCases";
 import TreemapHappinessMort from "../Visualizations/Happiness_vs_Mortality_Rate_Treemap";
 import TreemapPop from "../Visualizations/Percent_of_Pop_Over_60_and_COVID_death";
 import TreemapVax from "../Visualizations/COVID_case_VS_people_Vaccinated";
@@ -61,6 +62,10 @@ const CustomDashboard = (props) => {
             case "US COVID-19 Deaths By State":
                 return (
                     <Treemap height={height/2} width={width/2} filters={props.data.filters}  />
+                );
+            case "US COVID-19 Cases By State":
+                return (
+                    <TreemapCases height={height/2} width={width/2} filters={props.data.filters}  />
                 );
             case "US COVID-19 Deaths Over Time":
                 return(

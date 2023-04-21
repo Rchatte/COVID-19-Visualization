@@ -71,7 +71,7 @@ export default function Homepage(){
                             sx={{ height: '300px'}}
                             image={US_IMAGE}
                             title="USA"
-                            children={<Typography variant="h5" color="white" sx={{ pt: 2, pl: 2}}>Unites States</Typography>}
+                            children={<Typography variant="h5" color="white" sx={{ pt: 2, pl: 2}}>United States</Typography>}
                         />
                         </CardActionArea>
 

@@ -15,7 +15,7 @@ import GraphData from "../DataComponent/GraphData";
 
 export default function Filters(props) {
     const [filters, setFilters] = useState(null);
-    const continent = ["Asia", "Europe", "North America", "South America", "Austraila", "Oceania", "Africa"];
+    const continent = ["Asia", "Europe", "North America", "South America", "Antarctica", "Oceania", "Africa"];
 
     // Depending on the filters associated with the chart click
     useEffect(() => {

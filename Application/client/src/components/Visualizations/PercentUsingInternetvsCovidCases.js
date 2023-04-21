@@ -106,7 +106,17 @@ export default function TreemapInternetCases(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data) {
+            d3.csv(temp_url).then(function (data_) {
+
+                let data = null;
+                if (filters.continents){
+                    data = data_.filter(obj => obj.continent === filters.continents) 
+                }
+                else{
+                    data = data_ // since the data variable is used underneath 
+                }
+                
+                console.log(data);
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 d3.csv(internet_csv).then( function(data_input1) {
 
