@@ -1,7 +1,18 @@
 import { Typography, Container, Box } from "@mui/material";
 import React from "react";
 import Carousel, { CarouselItem } from "./Carousel";
-import blankPFP from "../images/blankprofilepicture.png"
+
+import amini from "../images/Amini.png"
+import carlos from "../images/CarlosHernandez.png"
+import chen from "../images/Chen_Ching.png"
+import emily from "../images/Emily.png"
+import francisco from "../images/Francisco.png"
+import jimuel from "../images/Jimuel.png"
+import juan from "../images/Juan.png"
+import luis from "../images/Luis.png"
+import riese from "../images/Riese.png"
+import rohan from "../images/Rohan_Chatterjee.jpg"
+import ting from "../images/Ting_Fung.png"
 
 export default function AboutComponent(props) {
 
@@ -19,71 +30,71 @@ export default function AboutComponent(props) {
                 <div className="Members">
                     <Carousel>
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Navid Amini' class='margins'/>
+                        <img src={amini} height="200" width="200" alt='Navid Amini' class='margins'/>
                         <Typography variant="h6">Doctor Navid Amini <br />
                         Dr Navid Amini is our advisor for this project and we are grateful and thank him for aiding us <br />
                         throughout the project.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Rohan Chatterjee' class='margins'/>
+                        <img src={rohan} height="200" width="200" alt='Rohan Chatterjee' class='margins'/>
                         <Typography variant="h6">Rohan Chatterjee (22), Project Lead <br />
                         Plans After Graduation: Plans to get a PhD and work in research related to the use of Computer <br />
                         Science in the Medical Field.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Juan Hernandez' class='margins'/>
+                        <img src={juan} height="200" width="200" alt='Juan Hernandez' class='margins'/>
                         <Typography variant="h6">Juan Hernandez (25), Tableau/Machine Learning Teams <br />
                         Plans After Graduation: Plans to work full-time as a back-end software engineer.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Francisco Contreras' class='margins'/>
+                        <img src={francisco} height="200" width="200" alt='Francisco Contreras' class='margins'/>
                         <Typography variant="h6">Francisco Contreras (21), JavaScript Application Team <br />
                         Plans After Graduation: Plans to work full-time or part-time as a software engineer.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Jimuel Cedrick Julaton' class='margins'/>
+                        <img src={jimuel} height="200" width="200" alt='Jimuel Cedrick Julaton' class='margins'/>
                         <Typography variant="h6">Jimuel Cedrick Julaton (22), Tableau/JavaScript Application Teams <br />
                         Plans After Graduation: Plans to work full-time as a software engineer.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Chen-Ching Lin' class='margins'/>
+                        <img src={chen} height="200" width="200" alt='Chen-Ching Lin' class='margins'/>
                         <Typography variant="h6">Chen-Ching Lin (25), Tableau/JavaScript Application Teams <br />
                         Plans After Graduation: Plans to work full-time as a software engineer.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Carlos Alberto Hernandez' class='margins'/>
+                        <img src={carlos} height="200" width="200" alt='Carlos Alberto Hernandez' class='margins'/>
                         <Typography variant="h6">Carlos Alberto Hernandez (24), JavaScript Application <br />
                         Plans After Graduation: Plans to apply to the EMT course at USLA and eventually become a <br />
                         paramedic.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Riese Atianzar' class='margins'/>
+                        <img src={riese} height="200" width="200" alt='Riese Atianzar' class='margins'/>
                         <Typography variant="h6">Riese Atianzar (23), JavaScript Application <br />
                         Plans After Graduation: Plans to work full-time as a back-end software engineer.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Emily Gonzalez' class='margins'/>
+                        <img src={emily} height="200" width="200" alt='Emily Gonzalez' class='margins'/>
                         <Typography variant="h6">Emily Gonzalez (23), Tableau/JavaScript Application <br />
                         Plans After Graduation: Plans to work full-time as a software engineer.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Luiz Gonzales' class='margins'/>
+                        <img src={luis} height="200" width="200" alt='Luis Gonzales' class='margins'/>
                         <Typography variant="h6">Luiz Gonzales (26), JavaScript Application <br />
                         Plans After Graduation: Plans to work full-time as a developer for his own online <br />
                         business.</Typography>
                         </div></CarouselItem>
 
                         <CarouselItem><div class='carouselContainer'>
-                        <img src={blankPFP} height="200" width="200" alt='Ting Fung Ha' class='margins'/>
+                        <img src={ting} height="200" width="200" alt='Ting Fung Ha' class='margins'/>
                         <Typography variant="h6">Ting Fung Ha (--), -- <br />
                         Plans After Graduation: --</Typography>
                         </div></CarouselItem>
