@@ -107,7 +107,7 @@ export default function TreemapTotalFreedom(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data_) {
+             d3.csv(temp_url).then(function (data_) {
 
                 let data = null;
                 if (filters.continents){
@@ -135,10 +135,11 @@ export default function TreemapTotalFreedom(props) {
 
                     filteredScores.map(obj1 => {
                         let matchingObj = data.find(obj2 => obj1["ISO"] === obj2["iso_code"]);
-                        console.log({name : matchingObj["location"], value :matchingObj["new_cases"],PersonalFreedom:obj1['PERSONAL FREEDOM (SCORE)']})
 
-
-                        sorted_data.push({name : matchingObj["location"], value :matchingObj["new_cases"],PersonalFreedom:obj1['PERSONAL FREEDOM (SCORE)']})
+                        if (matchingObj){
+                            console.log({name : matchingObj["location"], vvalue :matchingObj["new_cases"],PersonalFreedom:obj1['PERSONAL FREEDOM (SCORE)']})
+                            sorted_data.push({name : matchingObj["location"], value :matchingObj["new_cases"],PersonalFreedom:obj1['PERSONAL FREEDOM (SCORE)']})
+                        }
                     });
 
 

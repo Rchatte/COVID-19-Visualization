@@ -103,6 +103,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: '',
             },
 
         },
@@ -116,6 +117,7 @@ export const DATA_UPDATE = {
                 color1: '#014f86',
                 color2: '#468faf',
                 color3: '#013a63',
+                continents: ''
             },
 
         },
@@ -129,6 +131,7 @@ export const DATA_UPDATE = {
                 color1: '#014f86',
                 color2: '#468faf',
                 color3: '#013a63',
+                continents: ''
 
             },
 
@@ -143,6 +146,7 @@ export const DATA_UPDATE = {
                 color1: "#ff2200",
                 color2: '',
                 color3: '',
+                continents: '',
 
             },
 
@@ -157,6 +161,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: '',
 
             },
 
@@ -262,6 +267,7 @@ export const DATA_UPDATE = {
                 color1: '',
                 color2: '',
                 color3: '',
+                continents: ''
 
             },
 
