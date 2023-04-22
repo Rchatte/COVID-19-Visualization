@@ -107,7 +107,17 @@ export default function TreemapFreedomDeath(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data) {
+             d3.csv(temp_url).then(function (data_) {
+
+                let data = null;
+                if (filters.continents){
+                    data = data_.filter(obj => obj.continent === filters.continents) 
+                }
+                else{
+                    data = data_ // since the data variable is used underneath 
+                }
+                
+                console.log(data);
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 d3.csv(freedom_score_csv).then( function(data_input1) {
 
@@ -125,10 +135,11 @@ export default function TreemapFreedomDeath(props) {
 
                     filteredScores.map(obj1 => {
                         let matchingObj = data.find(obj2 => obj1["ISO"] === obj2["iso_code"]);
-                        console.log({name : matchingObj["location"], value :matchingObj["total_deaths_per_million"],Old:obj1['HUMAN FREEDOM']})
-
-
-                        sorted_data.push({name : matchingObj["location"], value :matchingObj["total_deaths_per_million"],Old:obj1['HUMAN FREEDOM']})
+                        
+                        if (matchingObj){
+                            console.log({name : matchingObj["location"], value :matchingObj["total_deaths_per_million"],Old:obj1['HUMAN FREEDOM']})
+                            sorted_data.push({name : matchingObj["location"], value :matchingObj["total_deaths_per_million"],Old:obj1['HUMAN FREEDOM']})
+                        }
                     });
 
 

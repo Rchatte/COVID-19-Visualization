@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { styled, useTheme } from '@mui/material/styles';
 import {
     Button, Container , CardActionArea, Typography, Box, Card,
-    CardMedia, Grid
+    CardMedia, Grid, Paper
 } from "@mui/material";
+import "./Homepage.css";
 import { useNavigate } from "react-router-dom";
 import US_IMAGE from "../images/USA.png"
 import WORLD_IMGAGE from "../images/WORLD.png";
@@ -52,14 +53,16 @@ export default function Homepage(){
 
         <Container sx={{ mt: 3 } }>
 
-            <Container sx={{ pb: 5}}>
-                <Typography variant="h4">Data Driven Documents</Typography>
-                <Typography variant="subtitle2">
-                    Select from the following sources.
-                </Typography>
+            <Container sx={{ pb: 5, width: '100%'}}>
+                <Paper sx={{ p: 2}}>
+                    <Typography variant="h4">Data Driven Documents</Typography>
+                    <Typography variant="subtitle2">
+                        Select from the following sources.
+                    </Typography>
+                </Paper>
 
             </Container>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx ={{ width: '100%', height: '100%', paddingInlineStart: '24px'}}>
                 <Grid item xs={6} md={8}>
                     <Card sx={{ height: '100%' }} id="USA" onClick={handleRegionChange}>
                     <CardActionArea>
@@ -68,17 +71,19 @@ export default function Homepage(){
                             sx={{ height: '300px'}}
                             image={US_IMAGE}
                             title="USA"
-                            children={<Typography variant="h5" color="white" sx={{ pt: 2, pl: 2}}>Unites States</Typography>}
+                            children={<Typography variant="h5" color="white" sx={{ pt: 2, pl: 2}}>United States</Typography>}
                         />
                         </CardActionArea>
 
                     </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                <Container sx={{ pt: 2}}>
+                    <Paper>
+                    <Container sx={{ pt: 2, height: '300px'}}>
                         <Typography variant="subtitle2">Contains all visualizations within the united states given all local sources. </Typography>
 
                     </Container>
+                    </Paper>
                 </Grid>
                 <Grid item xs={6} md={8}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }} boxShadow="initial">
@@ -92,14 +97,16 @@ export default function Homepage(){
                                 children={<Typography variant="h5" color="white" sx={{pt: 2, pl: 2}}>World Map</Typography>}
                             />                        
                         </CardActionArea>
+
                     </Card>
                 </Box>
                 </Grid>
-                <Grid item xs={6} md={4}>
-                    <Container sx={{ pt: 2}}>
-                        <Typography variant="h6" color="white">World Map</Typography>
-                        <Typography variant="subtitle2">Contains all visualizations across the world given all world wide sources. </Typography>
+                <Grid item xs={6} md={4} sx={{height: '100%'}}>
+                    <Paper>
+                    <Container sx={{ pt: 2, height: '300px'}}>
+                        <Typography variant="subtitle2">Contains all visualizations across the world given all world wide sources. </Typography>    
                     </Container>
+                    </Paper>
                 </Grid>
             </Grid>
             

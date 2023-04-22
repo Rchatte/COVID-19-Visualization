@@ -37,7 +37,7 @@ export default function TreemapHappinessMort(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
+        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
 
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
 
@@ -107,7 +107,17 @@ export default function TreemapHappinessMort(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data) {
+            d3.csv(temp_url).then(function (data_) {
+
+                let data = null;
+                if (filters.continents){
+                    data = data_.filter(obj => obj.continent === filters.continents) 
+                }
+                else{
+                    data = data_ // since the data variable is used underneath 
+                }
+                
+                console.log(data);
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 d3.csv(happiness_csv).then( function(data_input1) {
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     Box, List, Drawer, Divider, ListItemText,
-    ListItemButton, ListItemIcon, ListItem, Typography, TextField, Stack, Button
+    ListItemButton, ListItemIcon, ListItem, Typography, TextField, Stack, Button, FormControl, InputLabel, MenuItem, Select
 } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -15,6 +15,7 @@ import GraphData from "../DataComponent/GraphData";
 
 export default function Filters(props) {
     const [filters, setFilters] = useState(null);
+    const continent = ["Asia", "Europe", "North America", "South America", "Antarctica", "Oceania", "Africa"];
 
     // Depending on the filters associated with the chart click
     useEffect(() => {
@@ -25,6 +26,10 @@ export default function Filters(props) {
         console.log(filters);
         props.setNewFilters(filters)
         props.closeFilters(false); // Close filters to show new visual.
+    }
+
+    const onContinentChange = (e) => {
+        setFilters((prev) => ({ ...prev, continents: e.target.value }))
     }
 
     const returnInputType = (title) => {
@@ -84,6 +89,33 @@ export default function Filters(props) {
                         </Stack>
                     </>
                 )
+            
+            case "continents":
+                return(
+                    <>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Continents</InputLabel>
+                        <Select
+                            labelId="Continents"
+                            id="Continents"
+                            value={filters.continents}
+                            label="Continent"
+                            onChange={onContinentChange}
+                        >
+                            {
+                                continent.map((item) => {
+                                    return (
+                                        
+                                            <MenuItem value={item}>{item}</MenuItem>
+                                        
+                                    )
+                                })
+                            }
+                        </Select>
+                        </FormControl>
+                    
+                    </>
+                )
 
         }
     }
@@ -115,7 +147,7 @@ export default function Filters(props) {
                         This is basically a prototype of what I have in mind, but the next step with this method is to figure
                         out a way to pass the info into the visualization file*/}
                         <ListItem key={"FilterClick"}>
-                            <Button variant="contained" onClick={appendFilters}>Append Changes</Button>
+                            <Button variant="contained" onClick={appendFilters}>Update</Button>
                         </ListItem>
                     </List>
                 </LocalizationProvider>

@@ -106,7 +106,17 @@ export default function TreemapInternetCases(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data) {
+            d3.csv(temp_url).then(function (data_) {
+
+                let data = null;
+                if (filters.continents){
+                    data = data_.filter(obj => obj.continent === filters.continents) 
+                }
+                else{
+                    data = data_ // since the data variable is used underneath 
+                }
+                
+                console.log(data);
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 d3.csv(internet_csv).then( function(data_input1) {
 
@@ -125,9 +135,9 @@ export default function TreemapInternetCases(props) {
                     filteredScores.map(obj1 => {
                         let matchingObj = data.find(obj2 => obj1["Code"] === obj2["iso_code"]);
                         if(matchingObj){
-                            console.log({name : obj1["Entity"], value : matchingObj["new_cases_per_million"],Internet:obj1['Individuals using the Internet (% of population)']})
+                            console.log({name : obj1["Entity"], Internet:obj1['Individuals using the Internet (% of population)'],value : matchingObj["new_cases_per_million"]})
                         
-                            sorted_data.push({name : obj1["Entity"], value : matchingObj["new_cases_per_million"],Internet:obj1['Individuals using the Internet (% of population)']})
+                            sorted_data.push({name : obj1["Entity"], Internet:obj1['Individuals using the Internet (% of population)'],value : matchingObj["new_cases_per_million"]})
                         }
                         });
 
@@ -210,7 +220,7 @@ export default function TreemapInternetCases(props) {
     
             node.append("rect")
                 .attr("id", d => (d.leafUid = uid("leaf")).id)
-                .attr("fill", d => d === root ? colors.barColor : d.children ? generateColor(d.data['value']) : generateColor(d.data['value']))
+                .attr("fill", d => d === root ? colors.barColor : d.children ? generateColor(d.data['Internet']) : generateColor(d.data['Internet']))
                 .attr("stroke", "#00ffc4")
                 .attr("stroke", "#00ffc4")
                 .on("mouseover", function (event, d) {

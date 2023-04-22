@@ -1,7 +1,5 @@
 import React, { Component, useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import freedom_score_csv from "./human-freedom-index-2021-data-tables-figures.csv"
-
 
 
 
@@ -11,10 +9,10 @@ import freedom_score_csv from "./human-freedom-index-2021-data-tables-figures.cs
 */}
 
 
-export default function TreemapFreedomCase(props) {
+export default function TreemapCases(props) {
     const svgRef = useRef(null);
     const [data, setData] = useState();
-    const url_data = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv" //url_for_data.value
+    const url_data = "https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv" //url_for_data.value
     
 
 
@@ -39,16 +37,15 @@ export default function TreemapFreedomCase(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        
-        const colors = { barColor:filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
+        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values
         let width = 800;
         let is_Interactive = true;
     
-        let id = "Freedom_Score_and_Total_Cases_Treemap"
-        let svgName = "Freedom_Score_and_Total_Cases_Treemap"
+        let id = "treemapID"
+        let svgName = "my_dataviz_tree_map"
 
         if (props.hasOwnProperty("height")) {
             height = props.height
@@ -68,11 +65,6 @@ export default function TreemapFreedomCase(props) {
             .attr("height", height + margin.top + margin.bottom)
             //.select("#"+id).remove()
         //svg
-
-        var generateColor = d3.scaleLinear()
-            .domain([3.49, 9.15])
-            .range(colors.parentColor && colors.childrenColor ? [colors.parentColor, colors.childrenColor] : ["#ff0000", "#00ff22"])
-            .clamp(true);
 
         if(!svg.select("#"+id).empty()){
             svg.select("#"+id).remove()
@@ -106,59 +98,40 @@ export default function TreemapFreedomCase(props) {
 
         function DrawTreemap() {
             // read json data
-            let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-             d3.csv(temp_url).then(function (data_) {
-
-                let data = null;
-                if (filters.continents){
-                    data = data_.filter(obj => obj.continent === filters.continents) 
-                }
-                else{
-                    data = data_ // since the data variable is used underneath 
-                }
-                
-                console.log(data);
+            d3.csv(url_data).then(function (data) {
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
-                d3.csv(freedom_score_csv).then( function(data_input1) {
+                var State_County_Data_lists = {};
+                const latest_date = data.columns[data.columns.length - 1]
+                var sorted_data = [];
+                var stateNames = []
+                for (var i = 0; i < data.length; i++) {
+                    var x = { name: data[i]['County Name'], value: data[i][latest_date] }
+    
+                    if (data[i][latest_date] == 0) {
+                        continue;
+                    }
+                    if (State_County_Data_lists[data[i]['State']] == null) {
+    
+                        State_County_Data_lists[data[i]['State']] = [x]
+                        State_County_Data_lists[data[i]['State']].total = parseInt(x.value)
+                        stateNames.push(data[i]['State'])
+                        sorted_data.push({ name: data[i]['State'], children: State_County_Data_lists[data[i]['State']] })
+                    } else {
+                        State_County_Data_lists[data[i]['State']].push(x)
+                        State_County_Data_lists[data[i]['State']].total = parseInt(State_County_Data_lists[data[i]['State']].total) + parseInt(x.value)
+                    }
+                }
+    
+                //parent level
+                sorted_data = { name: "USA", children: sorted_data }    
+                console.log("Sorted Data")
 
-
-                    //DATA SETUP May need to be changes -----------------------------------------------------------------------------
-
-
-                    let sorted_data = []
-
-                    let blacklist = []
-
-
-
-                    const filteredScores = data_input1.filter(obj => obj.Year === "2019" && !blacklist.includes(obj.ISO));
-
-                    filteredScores.map(obj1 => {
-                        let matchingObj = data.find(obj2 => obj1["ISO"] === obj2["iso_code"]);
-                    
-                        if (matchingObj){
-                            console.log({name : matchingObj["location"], value :matchingObj["total_cases_per_million"],Old:obj1['HUMAN FREEDOM']})
-                            sorted_data.push({name : matchingObj["location"], value :matchingObj["total_cases_per_million"],Old:obj1['HUMAN FREEDOM']})
-                        }
-                    });
-
-
-
-
-
-
-
-
-
-                    //parent level
-                    sorted_data = { name: "Total", children: sorted_data }
-
-
-                    console.log("sorted_data")
-                    console.log(sorted_data)
-
-                
+                console.log(sorted_data)
+                //sorting states / middle layer
+                sorted_data.children.sort(function (a, b) {
+                    return (State_County_Data_lists[b.name].total - State_County_Data_lists[a.name].total)
+                });
 
     
                 //DATA sorted from now on -----------------------------------------------------------------------------------------------
@@ -202,8 +175,6 @@ export default function TreemapFreedomCase(props) {
                 
                 zoomin(root, group)
                 })
-
-            });
             
         }
     
@@ -228,12 +199,11 @@ export default function TreemapFreedomCase(props) {
     
             node.append("rect")
                 .attr("id", d => (d.leafUid = uid("leaf")).id)
-                .attr("fill", d => d === root ? colors.barColor : d.children ? generateColor(d.data['Old']) : generateColor(d.data['Old']))
-                .attr("stroke", "#00ffc4")
+                .attr("fill", d => d === root ? colors.barColor : d.children ? colors.parentColor : colors.childrenColor)
                 .attr("stroke", "#00ffc4")
                 .on("mouseover", function (event, d) {
                     tooltip_name.text(d.data.name)
-                    tooltip_value.text(d.value.toFixed(2))
+                    tooltip_value.text(d.value)
                 });
     
     
@@ -350,3 +320,7 @@ export default function TreemapFreedomCase(props) {
         </div>
     )
 }
+
+
+
+

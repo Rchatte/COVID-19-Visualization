@@ -39,9 +39,9 @@ export const DATA_UPDATE = {
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv', // Source for associated graph
             filters: {
                 requires_dates: 'true',
-                color1: "#27b694",
-                color2: "#27b694",
-                color3: "#9B9B9B",
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
                 height: 400,
                 width: 800,
             },
@@ -59,18 +59,36 @@ export const DATA_UPDATE = {
                 start_date: '',
             },
         },
+        {
+            title: 'US COVID-19 Cases By State', // Title to be shown
+            graph_desc: 'Tree Map', // Graph type to be shown
+            graph_type: 'tree-map_percent_of_pop', // To differentiate from other graph types
+            description: 'Cases over time chart description..', // To be shown
+            image: '', // If needed link to image 
+            link_source: 'https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv', // Source for associated graph
+            filters: {
+                requires_dates: 'true',
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
+                height: 400,
+                width: 800,
+            },
+        },
     ],
     WORLDWIDE: [
         {
             title: "Country's Happiness Vs. Mortality",
             graph_desc: 'Tree Map',
             graph_type: 'tree-map',
-            description: 'Measure of Happiness in a Country and Mortality Rate in said Country',
+            description: 'Measure of Happiness in a Country and Mortality Rate in said Country. \nSource: World Happiness Report.',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
+                color1: "#ff2200",
                 color2: '',
+                color3: '',
+                continents: ''
             },
         },
         {
@@ -78,168 +96,209 @@ export const DATA_UPDATE = {
             graph_desc: 'Tree Map',
             type: 'tree-map_percent_of_pop',
             graph_type: 'tree-map_percent_of_pop',
-            description: 'Amount of Worldwide COVID-19 Deaths and Percent of Population Over 60 in said Country',
+            description: 'Amount of Worldwide COVID-19 Deaths and Percent of Population Over 60 in said Country Source: Our World In Data',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: '',
             },
 
         },
         {
             title: 'COVID-19 Cases VS People Vaccinated Worldwide',
             graph_desc: 'Tree Map',
-            description: 'Amount of Worldwide COVID-19 Cases and amount of vaccinations in said Country',
+            description: 'Amount of Worldwide COVID-19 Cases and amount of vaccinations in said Country. Source: Our World In Data',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
-                color2: '',
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
+                continents: ''
             },
 
         },
         {
             title: 'COVID-19 Deaths and People Fully Vaccinated',
             graph_desc: 'Tree Map',
-            description: 'Amount of Worldwide COVID-19 Deaths and amount of people fully vaccinated said Country',
+            description: 'Amount of Worldwide COVID-19 Deaths and amount of people fully vaccinated said Country. Source: Our World In Data',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
-                color2: '',
+                color1: '#014f86',
+                color2: '#468faf',
+                color3: '#013a63',
+                continents: ''
+
             },
 
         },
         {
             title: "Country's Freedom Score And Total COVID-19 Cases",
             graph_desc: 'Tree Map',
-            description: "Country's quality of freedom and amount of COVID-19 cases in said Country",
+            description: "Country's quality of freedom and amount of COVID-19 cases in said Country. Source: Fraser Institute",
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
+                color1: "#ff2200",
                 color2: '',
+                color3: '',
+                continents: '',
+
             },
 
         },
         {
             title: "Country's Freedom Score And Total COVID-19 Deaths",
             graph_desc: 'Tree Map',
-            description: "Country's quality of freedom and amount of COVID-19 deaths in said Country",
+            description: "Country's quality of freedom and amount of COVID-19 deaths in said Country. Source: Fraser Institute",
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: '',
+
             },
 
         },
         {
             title: "Country's Median Age Vs COVID-19 Deaths",
             graph_desc: 'Tree Map',
-            description: "Median Age of people in a Country and amount of COVID-19 deaths in said Country",
+            description: "Median Age of people in a Country and amount of COVID-19 deaths in said Country. Source: Our World In Data",
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
-                color1: '',
-                color2: '',
+                color1: '#C0BFBF',
+                color2: '#696769',
+                color3: '#C0BFBF',
+                continents : '',
+
             },
 
         },
         {
             title: 'COVID-19 Cases Per Million Vs Gross Domestic Product',
             graph_desc: 'Tree Map',
-            description: 'The amount of COVID-19 cases per million and the amount of Gross Domestic Product per Country',
+            description: 'The amount of COVID-19 cases per million and the amount of Gross Domestic Product per Country. Source: World Bank Group',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents : '',
+
             },
 
         },
         {
             title: 'Gross Domestic Product Vs COVID-19 Deaths',
             graph_desc: 'Tree Map',
-            description: 'The amount of Gross Domestic Product per Country and the amount of COVID-19 deaths',
+            description: 'The amount of Gross Domestic Product per Country and the amount of COVID-19 deaths. Source: World Bank Group',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: ''
+
             },
 
         },
         {
             title: "Country's Gross Domestic Product Affect On COVID-19 Vaccinations Per Hundred",
             graph_desc: 'Tree Map',
-            description: 'The amount of Gross Domestic Product per Country and the amount of COVID-19 Vaccinations per hundred',
+            description: 'The amount of Gross Domestic Product per Country and the amount of COVID-19 Vaccinations per hundred. Source: World Bank Group',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: ''
+
             },
 
         },
         {
             title: 'Urban Population Vs Total COVID-19 Cases Per Million',
             graph_desc: 'Tree Map',
-            description: 'The Urban Population in each country and the amount of COVID-19 cases per million',
+            description: 'The Urban Population in each country and the amount of COVID-19 cases per million. Source: World Bank Group',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: ''
+
+
             },
 
         },
         {
             title: 'Urban Population Vs Total COVID-19 Deaths Per Million',
             graph_desc: 'Tree Map',
-            description: 'The Urban Population in each country and the amount of COVID-19 deaths per million',
+            description: 'The Urban Population in each country and the amount of COVID-19 deaths per million. Source: World Bank Group',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: ''
+
             },
 
         },
         {
             title: 'Total COVID-19 Cases Vs Personal Freedom Score',
             graph_desc: 'Tree Map',
-            description: 'The amount of COVID-19 cases and the Personal Freedom Score of each country',
+            description: 'The amount of COVID-19 cases and the Personal Freedom Score of each country. Source: Fraser Institute ',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: ''
+
             },
 
         },
         {
             title: 'Percent of Populations Using The Internet Vs COVID-19 Cases',
             graph_desc: 'Tree Map',
-            description: 'The percent of population using the internet in 2020 and the amount of COVID-19 cases',
+            description: 'The percent of population using the internet in 2020 and the amount of COVID-19 cases. Source: Our World In Data',
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: ''
+
             },
 
         },
         {
             title: "Country's Happiness Vs COVID-19 Cases",
             graph_desc: 'Tree Map',
-            description: "Each country's happiness score and the amount of COVID-19 cases",
+            description: "Each country's happiness score and the amount of COVID-19 cases. Source: World Happiness Report. ",
             image: '',
             link_source: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv',
             filters: {
                 color1: '',
                 color2: '',
+                color3: '',
+                continents: ''
+
             },
         },
 

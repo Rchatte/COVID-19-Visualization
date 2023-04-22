@@ -4,6 +4,7 @@ import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
 import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
+import TreemapCases from "../Visualizations/TreemapCases";
 import TreemapHappinessMort from "../Visualizations/Happiness_vs_Mortality_Rate_Treemap";
 import TreemapPop from "../Visualizations/Percent_of_Pop_Over_60_and_COVID_death";
 import TreemapVax from "../Visualizations/COVID_case_VS_people_Vaccinated";
@@ -66,6 +67,10 @@ export default function DisplayVisual(props) {
             case "US COVID-19 Deaths By State":
                 return (
                     <Treemap height={height/2} width={containerWidth} filters={props.data.filters}  />
+                );
+            case "US COVID-19 Cases By State":
+                return(
+                        <TreemapCases height={height/2} width={containerWidth} filters={props.data.filters} />
                 );
             case "US COVID-19 Deaths Over Time":
                 return(
@@ -181,48 +186,55 @@ export default function DisplayVisual(props) {
                     <Filters open={filtersTrigger} close={filtersTrigger} closeFilters={setFiltersTrigger} setNewFilters={setNewFilters} data={filters} />
                 </Drawer>
 
-                <Grid
-                    container sx={{ p:1, pt: 5, height: (height / 2) }}>
-                    <Grid item xs={12} md={12} lg={12}>
-                        <Box id="container" xs={{ position: 'relative', overflow: 'auto'}}>
-                            {
-                                currentVisual ? <GraphType data={currentVisual}/>: (
-                                    <Box xs={{ display: 'flex', alignContent: 'center'}}>
-                                        <CircularProgress/>
-                                    </Box>
-                                )
-                            }
-                        </Box>
-                    </Grid>
 
-                    <Grid item xs={4} md={4} lg={4}>
-                        <Box sx={{ pt: 2}}>
-                            <Container>
+                <Container sx={{pt: 2}}>
+                    <Box id="container" xs={{ position: 'relative', overflow: 'auto'}}>
+                        {
+                            loading ? (<Box xs={{ display: 'flex', alignContent: 'center'}}>
+                                <CircularProgress/>
+                            </Box>): null 
+                        }
+                        {
+                            currentVisual && <GraphType data={currentVisual}/>
+                        }
+                    </Box>
+                </Container>
+                
+                    <Grid 
+                    container 
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="stretch"
+                    spacing={1}
+                    
+                    >
+                        <Grid item xs={4} md={4} lg={4} id="FIRST">
+                            <Card sx={{ height: '100%', p: 2 }}>
                                 <Stack spacing={0.5}>
                                     <Button variant="outlined" size="small" onClick={() => setFiltersTrigger(true)}>Filters</Button>
                                     <Button variant="outlined" size="small" onClick={() => addToCustomDashboard(currentVisual)}>Add to Your Dashboard</Button>
                                     <Button variant="outlined" size="small" onClick={() => navigate("/CustomDashboard")}>Go to Your Dashboard</Button>
                                 </Stack>
-                            </Container>
-                        </Box>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={8} md={8} lg={8} >
+                            <Card sx={{ height: '100%', p: 2 }}>
+                                <Container sx={{textAlign: 'end'}}>
+                                    <Typography variant="h6" gutterBottom>
+                                        { currentVisual && currentVisual.title }
+                                    </Typography>
+                                    <Typography variant="subtitle2" gutterBottom>
+                                        { currentVisual && currentVisual.description}
+                                    </Typography>
+                                </Container>
+                            </Card>
+                        </Grid>
                     </Grid>
-
-                    <Grid item xs={8} md={8} lg={8}>
-                        <Box sx={{ pt: 2}}>
-                            <Container sx={{textAlign: 'end'}}>
-                                <Typography variant="h6" gutterBottom>
-                                    { currentVisual && currentVisual.title }
-                                </Typography>
-                                <Typography variant="subtitle2" gutterBottom>
-                                    { currentVisual && currentVisual.description}
-                                </Typography>
-                               
-                            </Container>
-                        </Box>
-                    </Grid>
-
+                    
+                <Grid
+                    container sx={{ p:1, height: (height / 2) }}>
                     <Grid item xs={12} md={12} sm={12}>
-                        <Typography variant="h5" sx={{ pt: 3}}>More visuals</Typography>
+                        <Typography variant="h5" sx={{ pt: 4}}>More visuals</Typography>
                         <Grid sx={{ pt: 2}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {
                             visuals && visuals.map((item, i) => (

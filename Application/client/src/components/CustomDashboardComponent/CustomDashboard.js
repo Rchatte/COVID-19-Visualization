@@ -4,12 +4,21 @@ import useWindowDimensions from "../Hooks/useWindowDimensions";
 import Filters from "../FiltersComponent/Filters";
 import LineChart from "../Visualizations/LineChart";
 import Treemap from "../Visualizations/TreeMap";
+import TreemapCases from "../Visualizations/TreemapCases";
 import TreemapHappinessMort from "../Visualizations/Happiness_vs_Mortality_Rate_Treemap";
 import TreemapPop from "../Visualizations/Percent_of_Pop_Over_60_and_COVID_death";
 import TreemapVax from "../Visualizations/COVID_case_VS_people_Vaccinated";
 import TreemapFullVax from "../Visualizations/COVID_Death_VS_people_fully_Vaccinated";
 import TreemapFreedomCase from "../Visualizations/Freedom_Score_and_Total_Cases_Treemap";
 import TreemapFreedomDeath from "../Visualizations/Freedom_Score_and_Total_Deaths_Treemaps";
+import TreemapGDPCases from "../Visualizations/CovidCasesPerMillionVsGDP";
+import TreemapGDPDeaths from "../Visualizations/GDPVsCovidDeaths";
+import TreemapGDPVaccinations from "../Visualizations/CountrysGDPAffectOnVaccinationsPerHundered";
+import TreemapUrbanPop from "../Visualizations/UrbanPopulationVsTotalCOVIDCasesPerMillion";
+import TreemapUrbanPopDeath from "../Visualizations/UrbanPopulationVsTotalCOVIDDeathsPerMillion";
+import TreemapTotalFreedom from "../Visualizations/TotalCovidCasesVsFreedomScore";
+import TreemapInternetCases from "../Visualizations/PercentUsingInternetvsCovidCases";
+import TreemapHappinessScore from "../Visualizations/CountrysHappinessVsCOVIDCase";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../App";
 import UserSelectedGraphs from "../CustomDashboardComponent/UserSelectedGraphs";
@@ -54,6 +63,10 @@ const CustomDashboard = (props) => {
                 return (
                     <Treemap height={height/2} width={width/2} filters={props.data.filters}  />
                 );
+            case "US COVID-19 Cases By State":
+                return (
+                    <TreemapCases height={height/2} width={width/2} filters={props.data.filters}  />
+                );
             case "US COVID-19 Deaths Over Time":
                 return(
                     <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters} />
@@ -85,6 +98,42 @@ const CustomDashboard = (props) => {
             case "Country's Median Age Vs COVID-19 Deaths":
                 return (
                     <TreemapMedian height={height/2} width={width/2} filters={props.data.filters}  />
+                );
+            case "COVID-19 Cases Per Million Vs Gross Domestic Product":
+                return (
+                    <TreemapGDPCases height={height/2} width={width/2} filters={props.data.filters}  />
+                );
+            case "Gross Domestic Product Vs COVID-19 Deaths":
+                return (
+                    <TreemapGDPDeaths height={height/2} width={width/2} filters={props.data.filters}   />
+                );
+            case "Country's Gross Domestic Product Affect On COVID-19 Vaccinations Per Hundred":
+                return (
+                    <TreemapGDPVaccinations height={height/2} width={width/2} filters={props.data.filters}   />
+                );
+            case "Urban Population Vs Total COVID-19 Cases Per Million":
+                return (
+                    <TreemapUrbanPop height={height/2} width={width/2} filters={props.data.filters}   />
+                );
+            case "Urban Population Vs Total COVID-19 Deaths Per Million":
+                return (
+                    <TreemapUrbanPopDeath height={height/2} width={width/2} filters={props.data.filters}   />
+                );
+            case "Total COVID-19 Cases Vs Personal Freedom Score":
+                return (
+                    <TreemapTotalFreedom height={height/2} width={width/2} filters={props.data.filters}   />
+                );
+            case "Percent of Populations Using The Internet Vs COVID-19 Cases":
+                return (
+                    <TreemapInternetCases height={height/2} width={width/2} filters={props.data.filters}   />
+                );
+            case "Country's Happiness Vs COVID-19 Cases":
+                return (
+                    <TreemapHappinessScore height={height/2} width={width/2} filters={props.data.filters}   />
+                );
+            case "US COVID-19 Cases Over Time":
+                return (
+                    <LineChart url={props.data.link_source} height={height/2} width={width/2} filters={props.data.filters}  />
                 );
             default:
                 return (

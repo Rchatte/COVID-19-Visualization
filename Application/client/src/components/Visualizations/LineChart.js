@@ -21,8 +21,9 @@ export default function LineChart(props) {
         //console.log(props);
         //console.log(props.filters.endDate);
         console.log(props.width);
+        console.log(props.filters);
         createLineGraph(props.url,  props.width, props.height, props.filters)
-    }, [props.filters])
+    }, [props.filters.start_date, props.filters.start_date])
 
 
 
@@ -55,8 +56,8 @@ export default function LineChart(props) {
                     const filteredData = sorted_data.filter(function (entry) {
                         // formatted all the dates to be the same date format
                         const formattedEntry = moment(entry.date).format('MM-DD-YYYY');
-                        const startDate = moment(filters.startDate).format('MM-DD-YYYY');
-                        const endDate = moment(filters.endDate).format('MM-DD-YYYY');
+                        const startDate = moment(filters.start_date).format('MM-DD-YYYY');
+                        const endDate = moment(filters.end_date).format('MM-DD-YYYY');
                         return (formattedEntry >= startDate) && (formattedEntry <= endDate);
                     });
                     console.log(filteredData);

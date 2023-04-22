@@ -17,7 +17,17 @@ export default function TreemapVax(props) {
     const url_data = "https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv" //url_for_data.value
     
 
-
+    const hexToRgb = (hex) => {
+        // Parse the HEX string by extracting the R, G, and B components
+        let r = parseInt(hex.substring(0, 2), 16);
+        let g = parseInt(hex.substring(2, 4), 16);
+        let b = parseInt(hex.substring(4, 6), 16);
+      
+        // Create an object with the RGB values
+        let rgb = { r, g, b };
+      
+        return rgb;
+      }
     
 
     useEffect(() => { 
@@ -39,7 +49,10 @@ export default function TreemapVax(props) {
     function setUP(props, svgRef) {
         const filters = props.filters;
         console.log(filters);
-        const colors = { barColor: "#FFFFFF", parentColor: filters.color1, childrenColor: filters.color2 };
+
+        
+
+        const colors = { barColor: filters.color1, parentColor: filters.color2, childrenColor: filters.color3 };
         const margin = { top: 100, right: 5, bottom: 5, left: 5 }
     
         let height = 600;//Default values
@@ -107,7 +120,17 @@ export default function TreemapVax(props) {
             // read json data
             let temp_url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
 
-            d3.csv(temp_url).then(function (data) {
+            d3.csv(temp_url).then(function (data_) {
+
+                let data = null;
+                if (filters.continents){
+                    data = data_.filter(obj => obj.continent === filters.continents) 
+                }
+                else{
+                    data = data_ // since the data variable is used underneath 
+                }
+                
+                console.log(data);
                 //DATA SETUP May need to be changes -----------------------------------------------------------------------------
                 d3.csv(freedom_score_csv).then( function(data_input1) {
 
@@ -125,10 +148,11 @@ export default function TreemapVax(props) {
 
                     filteredScores.map(obj1 => {
                         let matchingObj = data.find(obj2 => obj1["ISO"] === obj2["iso_code"]);
-                        console.log({name : matchingObj["location"], value :matchingObj["people_vaccinated_per_hundred"],Old:matchingObj['total_cases_per_million']})
-
-
-                        sorted_data.push({name : matchingObj["location"], value :matchingObj["people_vaccinated_per_hundred"],Old:matchingObj['total_cases_per_million']})
+                        
+                        if (matchingObj){
+                            console.log({name : matchingObj["location"], value :matchingObj["people_vaccinated_per_hundred"],Old:matchingObj['total_cases_per_million']})
+                            sorted_data.push({name : matchingObj["location"], value :matchingObj["people_vaccinated_per_hundred"],Old:matchingObj['total_cases_per_million']})
+                        }
                     });
 
 
