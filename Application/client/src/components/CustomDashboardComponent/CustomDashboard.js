@@ -41,14 +41,18 @@ const CustomDashboard = (props) => {
 
     useEffect(() => {
         // const data = window.localStorage.getItem('selected-graphs');
-        const data = JSON.parse(sessionStorage.getItem('selected-graphs'));
-        if(data){
-           getCurrentData(data);
+        try{
+            const data = JSON.parse(sessionStorage.getItem('selected-graphs'));
+            console.log(data);
+            if(data){
+               getCurrentData(data);
+            }
+        } catch (error){
+            setGraphs(null);
         }
     }, [])
 
     const getCurrentData = (data) => {
-        console.log(data);
         setCurrentData(data[0]);
         setGraphs(data);
     }
@@ -143,7 +147,7 @@ const CustomDashboard = (props) => {
     }
 
     const deleteFromDashboard = (graph) => {
-        console.log(graph);
+        //console.log(graph);
         let index = 0;
         if(graph === graphs[0]){
             graphs.shift();
@@ -158,8 +162,12 @@ const CustomDashboard = (props) => {
             getCurrentData(graphs.splice(0, index).concat(graphs.slice(index + 1)));
         }
 
-        // window.localStorage.setItem('selected-graphs', JSON.stringify(data));
-        sessionStorage.setItem('selected-graphs', JSON.stringify(data));
+        if(graphs.length === 0){
+            sessionStorage.removeItem('selected-graphs');
+        } else{
+            sessionStorage.setItem('selected-graphs', JSON.stringify(data));
+        }
+        //sessionStorage.setItem('selected-graphs', JSON.stringify(graphs));
     }
 
 

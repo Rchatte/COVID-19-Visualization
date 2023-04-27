@@ -154,23 +154,19 @@ export default function DisplayVisual(props) {
 
     
     const addToCustomDashboard = (graphData) => {
-        props.setSelectedGraphs(element => [...element, graphData]);
+        // ----- Commented out for now and kept just in case
+        // props.setSelectedGraphs(element => [...element, graphData]);
+        // if(!UserSelectedGraphs.includes(graphData)){
+        //     UserSelectedGraphs.push(graphData);
+        // }
 
-        if(!UserSelectedGraphs.includes(graphData)){
-            UserSelectedGraphs.push(graphData);
-        }
-
-        // window.localStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs));
-        // const data = JSON.parse(window.localStorage.getItem('selected-graphs')).concat(UserSelectedGraphs);
-        // window.localStorage.setItem("selected-graphs", JSON.stringify(data));
 
         try{
-            const data = JSON.parse(sessionStorage.getItem('selected-graphs')).concat(UserSelectedGraphs);
+            const data = JSON.parse(sessionStorage.getItem('selected-graphs')).concat(graphData);
             sessionStorage.setItem("selected-graphs", JSON.stringify(data)); 
         } catch (e){
-            sessionStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs)); 
+            sessionStorage.setItem("selected-graphs", JSON.stringify([graphData])); 
         }
-        //sessionStorage.setItem("selected-graphs", JSON.stringify(UserSelectedGraphs));
     }
 
 
@@ -213,7 +209,6 @@ export default function DisplayVisual(props) {
                                 <Stack spacing={0.5}>
                                     <Button variant="outlined" size="small" onClick={() => setFiltersTrigger(true)}>Filters</Button>
                                     <Button variant="outlined" size="small" onClick={() => addToCustomDashboard(currentVisual)}>Add to Your Dashboard</Button>
-                                    <Button variant="outlined" size="small" onClick={() => navigate("/CustomDashboard")}>Go to Your Dashboard</Button>
                                 </Stack>
                             </Card>
                         </Grid>
