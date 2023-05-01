@@ -117,9 +117,9 @@ export default function AboutComponent(props) {
 
                 <Typography variant="h4" paddingTop>Machine Learning Information:</Typography>
                 <Typography variant="h6" paddingBottom={3}>Machine Learning was used to primarily focus on patients' comorbidity 
-                and genetic factors in relation to their illness and severity of COVID-19. (I believe there was 
-                a discussion of using logistic regression to study these correlations so a note is left here 
-                to include later on) (Also include use of Boruta algorithm as being the main method of use)</Typography>
+                and genetic factors in relation to their illness and severity of COVID-19. The main method of testing for correlation 
+                was the Boruta Algorithm, supplemented with statistical testing to determine if there was an overlap between Boruta 
+                identified factors and the outcomes of the disease.</Typography>
             </Container>
         </Box>
         </>
