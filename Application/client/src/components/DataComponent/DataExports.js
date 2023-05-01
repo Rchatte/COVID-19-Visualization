@@ -21,7 +21,7 @@ export const DATA_UPDATE = {
             title: 'US COVID-19 Deaths Over Time',
             graph_desc: 'Line Chart',
             graph_type: 'line-chart',
-            description: 'Deaths over time chart description..',
+            description: 'The amount of Deaths in the United States Source: USAFACTS Date Updated: May 5,2023',
             image: '',
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv',
             filters: {
@@ -34,7 +34,7 @@ export const DATA_UPDATE = {
             title: 'US COVID-19 Deaths By State', // Title to be shown
             graph_desc: 'Tree Map', // Graph type to be shown
             graph_type: 'tree-map_percent_of_pop', // To differentiate from other graph types
-            description: 'Deaths over time chart description..', // To be shown
+            description: 'The amount of Deaths by each state in the United States Source: USAFACTS Date Updated: May 5,2023', // To be shown
             image: '', // If needed link to image 
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_deaths_usafacts.csv', // Source for associated graph
             filters: {
@@ -50,7 +50,7 @@ export const DATA_UPDATE = {
             title: 'US COVID-19 Cases Over Time',
             graph_desc: 'Line Chart',
             graph_type: 'line-chart',
-            description: 'Cases over time chart description..',
+            description: 'The amount of Cases in the United States Source: USAFACTS Date Updated: May 5,2023',
             image: '',
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv',
             filters: {
@@ -63,7 +63,7 @@ export const DATA_UPDATE = {
             title: 'US COVID-19 Cases By State', // Title to be shown
             graph_desc: 'Tree Map', // Graph type to be shown
             graph_type: 'tree-map_percent_of_pop', // To differentiate from other graph types
-            description: 'Cases over time chart description..', // To be shown
+            description: 'The amount of Cases by each state in the United States Source: USAFACTS Date Updated: May 5,2023', // To be shown
             image: '', // If needed link to image 
             link_source: 'https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv', // Source for associated graph
             filters: {
