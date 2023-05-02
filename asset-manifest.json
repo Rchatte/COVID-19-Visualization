@@ -1,30 +1,41 @@
 {
   "files": {
-    "main.css": "/COVID-19-Visualization/static/css/main.802f85dc.css",
-    "main.js": "/COVID-19-Visualization/static/js/main.7a4ae627.js",
+    "main.css": "/COVID-19-Visualization/static/css/main.82714adc.css",
+    "main.js": "/COVID-19-Visualization/static/js/main.08e4bb1b.js",
     "static/js/787.c4e7f8f9.chunk.js": "/COVID-19-Visualization/static/js/787.c4e7f8f9.chunk.js",
     "static/media/USA.png": "/COVID-19-Visualization/static/media/USA.28d0578fda0e7951b257.png",
     "static/media/WORLD.png": "/COVID-19-Visualization/static/media/WORLD.6b281c30c3fd8204c696.png",
+    "static/media/Riese.png": "/COVID-19-Visualization/static/media/Riese.f02f6b1ad23a88f1ea73.png",
     "static/media/CDC.png": "/COVID-19-Visualization/static/media/CDC.f011b1d4f35d632b365b.png",
+    "static/media/Luis.png": "/COVID-19-Visualization/static/media/Luis.7d13877d97abd0525f12.png",
     "static/media/human-freedom-index-2021-data-tables-figures.csv": "/COVID-19-Visualization/static/media/human-freedom-index-2021-data-tables-figures.896af6ab0af517355d3c.csv",
+    "static/media/Ting_Fung.png": "/COVID-19-Visualization/static/media/Ting_Fung.f7f82f0dab01f6c747c7.png",
+    "static/media/Emily.png": "/COVID-19-Visualization/static/media/Emily.8f7b9d6e09fcfd256eb3.png",
+    "static/media/CarlosHernandez.png": "/COVID-19-Visualization/static/media/CarlosHernandez.5d4a7c923668aa78218a.png",
+    "static/media/Jimuel.png": "/COVID-19-Visualization/static/media/Jimuel.16264160e7e81ecc38b0.png",
     "static/media/CSUPERBLogo.png": "/COVID-19-Visualization/static/media/CSUPERBLogo.c24baa1e2b8ba55d770c.png",
+    "static/media/Chen_Ching.png": "/COVID-19-Visualization/static/media/Chen_Ching.75f92edaa7886fe6ffd0.png",
     "static/media/share-of-individuals-using-the-internet.csv": "/COVID-19-Visualization/static/media/share-of-individuals-using-the-internet.6e5a49f88b7c772b6449.csv",
     "static/media/API_NY.GDP.MKTP.CD_DS2_en_csv_v2_4701247.csv": "/COVID-19-Visualization/static/media/API_NY.GDP.MKTP.CD_DS2_en_csv_v2_4701247.018e6da72445734d3b64.csv",
+    "static/media/Juan.png": "/COVID-19-Visualization/static/media/Juan.e8625c8b5ad789624faf.png",
     "static/media/API_SP.URB.TOTL_DS2_en_csv_v2_4645910.csv": "/COVID-19-Visualization/static/media/API_SP.URB.TOTL_DS2_en_csv_v2_4645910.88a0e57023cd604b1275.csv",
+    "static/media/Rohan_Chatterjee.jpg": "/COVID-19-Visualization/static/media/Rohan_Chatterjee.3381f80afd7ed9e74b38.jpg",
     "static/media/USAFacts.png": "/COVID-19-Visualization/static/media/USAFacts.954ccdc1a524fab8de2d.png",
     "static/media/TreeMap.png": "/COVID-19-Visualization/static/media/TreeMap.0253dc9cf80facb9cea6.png",
+    "static/media/Amini.png": "/COVID-19-Visualization/static/media/Amini.44a96a412f54c0dde45e.png",
+    "static/media/Francisco.png": "/COVID-19-Visualization/static/media/Francisco.ec1da218e9a512e9f00c.png",
     "static/media/WHO.png": "/COVID-19-Visualization/static/media/WHO.b58a65ee73ac4b919546.png",
     "static/media/CDPH.png": "/COVID-19-Visualization/static/media/CDPH.71de866834fd09727b22.png",
     "static/media/NoImg.png": "/COVID-19-Visualization/static/media/NoImg.fa1f50a379aa2fff63cd.png",
     "static/media/happiness_data_Appendix_2_Data_for_Figure_2.1.csv": "/COVID-19-Visualization/static/media/happiness_data_Appendix_2_Data_for_Figure_2.1.302cd81a394089e1de7a.csv",
     "static/media/logo.svg": "/COVID-19-Visualization/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/COVID-19-Visualization/index.html",
-    "main.802f85dc.css.map": "/COVID-19-Visualization/static/css/main.802f85dc.css.map",
-    "main.7a4ae627.js.map": "/COVID-19-Visualization/static/js/main.7a4ae627.js.map",
+    "main.82714adc.css.map": "/COVID-19-Visualization/static/css/main.82714adc.css.map",
+    "main.08e4bb1b.js.map": "/COVID-19-Visualization/static/js/main.08e4bb1b.js.map",
     "787.c4e7f8f9.chunk.js.map": "/COVID-19-Visualization/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.802f85dc.css",
-    "static/js/main.7a4ae627.js"
+    "static/css/main.82714adc.css",
+    "static/js/main.08e4bb1b.js"
   ]
 }
