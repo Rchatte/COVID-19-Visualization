@@ -41,7 +41,7 @@ export default function Navbar() {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="/"
+                        
                         sx={{
                         mr: 2,
                         display: { xs: 'none', md: 'flex' },
@@ -54,7 +54,7 @@ export default function Navbar() {
                     >
                         Senior Design
           </Typography>
-                <Button color="inherit" onClick={() => navigate('/') } >Dashboard</Button>
+                <Button color="inherit" onClick={() => navigate('/') } >Home</Button>
                 <Button color="inherit" onClick={() => navigate('/About')} >About Us</Button>
                 <Button color="inherit" onClick={() => navigate('/Sources') }>Sources</Button>
                 <Button color="inherit" onClick={() => navigate('/Sponsors') }>Sponsors</Button>
